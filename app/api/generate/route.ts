@@ -169,7 +169,7 @@ function synthesizeMemesFromMaterials(args: {
 const DEFAULT_MODEL = "gpt-5.6-terra";
 const ON_VERCEL = Boolean(process.env.VERCEL);
 
-function compactMaterials(materials: ResearchMaterial[]) {
+function compactMaterials(materials: ResearchMaterial[]): ResearchMaterial[] {
   return materials.slice(0, ON_VERCEL ? 14 : 24).map((item) => ({
     id: item.id,
     type: item.type,
@@ -177,6 +177,7 @@ function compactMaterials(materials: ResearchMaterial[]) {
     text: item.text ? String(item.text).slice(0, ON_VERCEL ? 500 : 2000) : undefined,
     url: item.url,
     imageUrl: item.imageUrl && /^https?:\/\//i.test(item.imageUrl) ? item.imageUrl : undefined,
+    credit: item.credit,
     source: item.source,
   }));
 }
