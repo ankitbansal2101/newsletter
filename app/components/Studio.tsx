@@ -398,7 +398,7 @@ export default function Studio() {
               ? { ...item, imageUrl: undefined, text: [item.text, "(image kept locally; not uploaded to Vercel)"].filter(Boolean).join(" ") }
               : item
           )),
-          scrapeWeb,
+          scrapeWeb: false,
         }),
       });
       const result = await parseApiJson<GeneratedPayload>(response);

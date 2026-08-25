@@ -8,9 +8,9 @@ export async function parseApiJson<T>(response: Response): Promise<T> {
     return JSON.parse(text) as T;
   } catch {
     const snippet = text.replace(/\s+/g, " ").trim().slice(0, 220);
-    if (/^An error/i.test(snippet) || /FUNCTION_INVOCATION/i.test(snippet)) {
+    if (response.status === 504 || /^An error/i.test(snippet) || /FUNCTION_INVOCATION/i.test(snippet)) {
       throw new Error(
-        "Vercel killed this request before it could return JSON. Typical causes: missing OPENAI_API_KEY / OPENAI_MODEL in the Vercel project, a timeout, or a body over ~4.5MB. Check Vercel → Logs.",
+        "Vercel timed out forging the issue. Redeploy the latest code (Forge no longer web-searches). If it still times out, use a faster OPENAI_MODEL or a plan with a longer function limit.",
       );
     }
     throw new Error(`Server returned non-JSON (${response.status}): ${snippet}`);

@@ -167,6 +167,19 @@ function synthesizeMemesFromMaterials(args: {
 }
 
 const DEFAULT_MODEL = "gpt-5.6-terra";
+const ON_VERCEL = Boolean(process.env.VERCEL);
+
+function compactMaterials(materials: ResearchMaterial[]) {
+  return materials.slice(0, ON_VERCEL ? 14 : 24).map((item) => ({
+    id: item.id,
+    type: item.type,
+    title: String(item.title || "").slice(0, 160),
+    text: item.text ? String(item.text).slice(0, ON_VERCEL ? 500 : 2000) : undefined,
+    url: item.url,
+    imageUrl: item.imageUrl && /^https?:\/\//i.test(item.imageUrl) ? item.imageUrl : undefined,
+    source: item.source,
+  }));
+}
 
 function getOutputText(response: Record<string, unknown>) {
   if (typeof response.output_text === "string") return response.output_text;
@@ -373,7 +386,7 @@ async function generateIssue(request: Request) {
 
   const topicRaw = body.topic?.trim() || "";
   const document = body.document?.trim() || "";
-  const materials = Array.isArray(body.materials) ? body.materials.slice(0, 24) : [];
+  const materials = compactMaterials(Array.isArray(body.materials) ? body.materials : []);
   const components = Array.isArray(body.components) && body.components.length
     ? body.components
     : ["text", "images", "stats", "quotes", "memes"];
@@ -393,19 +406,21 @@ async function generateIssue(request: Request) {
     document,
   });
 
-  const model = process.env.OPENAI_MODEL || DEFAULT_MODEL;
+  const model = process.env.OPENAI_GENERATE_MODEL || process.env.OPENAI_MODEL || DEFAULT_MODEL;
   const hasManuscript = document.length > 200;
+  const docCap = ON_VERCEL ? 10_000 : 40_000;
   const prompt = [
+    "Build a complete Sunday Data newsletter from the manuscript and SELECTED LOOT only. Do not search the web. Forge already has research.",
     scrapeWeb
-      ? "Build a complete Sunday Data newsletter issue from the user's source materials AND the selected researched web materials."
-      : "Convert the user's SOURCE MANUSCRIPT into a complete Sunday Data visual newsletter. Do NOT invent live web news. Stay inside the document.",
+      ? "Loot may include earlier web finds — use those URLs/quotes, but do not browse again."
+      : "Convert the SOURCE MANUSCRIPT. Do NOT invent live web news.",
     "Compose it like thesundaydata.com archive issues (c6w3 / c6w6): long chapters with INTERLEAVED prose, memes, charts, argument callouts, and images — not an essay with visuals dumped at the end.",
     scrapeWeb ? "" : "MANUSCRIPT-ONLY MODE: no web scrape. Invent editorial memes, callouts, and charts from numbers/quotes already in the manuscript. Mark unresolved=true when a figure is illustrative rather than verified online.",
     `WORKING TITLE / TOPIC LABEL: ${topic}`,
     hasManuscript
       ? "STORY AUTHORITY: USER SOURCE MATERIALS are the manuscript. The working title is only a label. If the label is generic (e.g. \"sunday newsletter\") or conflicts with the manuscript, IGNORE the label and write the issue about the manuscript themes."
       : "",
-    document ? `USER SOURCE MATERIALS (extracted notes, Google Docs, websites, PDFs, Word, Excel):\n${document.slice(0, 40_000)}` : "",
+    document ? `USER SOURCE MATERIALS:\n${document.slice(0, docCap)}` : "",
     `REQUESTED COMPONENTS: ${components.join(", ")}`,
     "SELECTED MATERIALS (JSON):",
     JSON.stringify(materials, null, 2),
@@ -471,7 +486,9 @@ async function generateIssue(request: Request) {
 }`,
     "",
     "Rules:",
-    "- Write a rich issue: 4-6 English sections. Each section MUST include an ordered blocks array with 6-12 beats when text is combined with memes/stats/images/quotes.",
+    ON_VERCEL
+      ? "- Write 3 English sections. Each section needs an ordered blocks array with 5-7 beats (prose + one visual + callout). Japanese: 3 shorter matching chapters."
+      : "- Write a rich issue: 4-6 English sections. Each section MUST include an ordered blocks array with 6-12 beats when text is combined with memes/stats/images/quotes.",
     "- Archive rhythm per chapter: open stakes (prose) → early meme or stat-cluster → deeper prose → viz/table → callout that restates the argument → closing prose. Spread flourishes; do not dump all visuals after the essay.",
     "- Every memeId / flourishId referenced in blocks must exist in memes[] / flourishes[].",
     "- Include at least one callout block per section (argument card like 'visible ritual vs invisible mechanism').",
@@ -488,7 +505,9 @@ async function generateIssue(request: Request) {
     "- If selected materials include type meme, turn those caption ideas into finished memes with sharper punchlines and reference them from blocks.",
     "- If selected materials include type image with imageUrl, place them as image blocks inside the relevant chapter (not only in a gallery).",
     "- DATA VISUALIZATION IS REQUIRED whenever stats, numbers, percents, rankings, or time series appear in the document or selected materials.",
-    "- If stats are requested OR 3+ numeric facts exist, include at least 3 viz flourishes using different chart kinds (column, bar, line/area, donut, gauge) plus 1 stat-cluster and 1 trend.",
+    ON_VERCEL
+      ? "- If stats are requested, include 2 viz flourishes (different chart kinds) plus 1 stat-cluster."
+      : "- If stats are requested OR 3+ numeric facts exist, include at least 3 viz flourishes using different chart kinds (column, bar, line/area, donut, gauge) plus 1 stat-cluster and 1 trend.",
     "- Every viz must use real numbers from the materials/document. Caption must be a 1-2 sentence analysis of what the chart shows, not a restatement of the title.",
     scrapeWeb ? "" : "- Lean hard into visual storytelling: callouts, memes, stat rails, and interleaved blocks on every chapter so the manuscript feels like a Living field guide.",
     "- Do not use em dashes.",
@@ -497,15 +516,9 @@ async function generateIssue(request: Request) {
 
   const openAIBody: Record<string, unknown> = {
     model,
-    instructions: scrapeWeb
-      ? "You are a newsletter editor. Stay faithful to the user's source manuscript. Output only valid JSON for a complete bilingual issue."
-      : "You are a newsletter editor converting a manuscript into a visual Sunday Data issue. Do not browse or invent live web coverage. Output only valid JSON.",
+    instructions: "You are a newsletter editor. Use only the provided manuscript and loot. Never web-search. Output only valid JSON.",
     input: prompt,
   };
-  if (scrapeWeb) {
-    openAIBody.tools = [{ type: "web_search", search_context_size: "medium" }];
-    openAIBody.include = ["web_search_call.action.sources"];
-  }
 
   const openAIResponse = await fetch("https://api.openai.com/v1/responses", {
     method: "POST",
