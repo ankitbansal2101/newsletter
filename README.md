@@ -17,9 +17,10 @@ public/                 # meme bases + published archive assets
 
 ## Local
 
+From this folder (`~/Downloads/SundayData`):
+
 ```bash
 npm install
-cp .env.example .env.local
 npm run dev
 ```
 
