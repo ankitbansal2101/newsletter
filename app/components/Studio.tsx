@@ -493,7 +493,7 @@ export default function Studio() {
     <main className={`quest-shell ${viewMode === "preview" ? "is-previewing" : ""}`}>
       <header className="quest-topbar">
         <div className="brand-lockup">
-          <span className="ostrich-mark" aria-hidden="true">O</span>
+          <span className="ostrich-mark" aria-hidden="true">S</span>
           <div><strong>Sunday Data</strong><span>Issue forge</span></div>
         </div>
 

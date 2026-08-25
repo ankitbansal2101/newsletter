@@ -12,7 +12,7 @@ app/
   components/           # UI (Studio, memes, charts, templates)
   templates/            # print + living newsletter layouts
   lib/                  # extract, topic, blocks, flourishes
-public/                 # static memes + archive assets
+public/                 # meme bases + published archive assets
 ```
 
 ## Local

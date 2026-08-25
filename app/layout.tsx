@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Sunday Data Studio",
-  description: "A human-led research and newsletter studio powered by Ostrich signals.",
+  description: "Turn a brief or manuscript into a visual Sunday Data newsletter.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

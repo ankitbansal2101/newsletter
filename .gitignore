@@ -44,8 +44,5 @@ yarn-error.log*
 # local tooling
 .agents
 .netlify
-# Ostrich raw data (only summaries are needed for the API)
-data/weekly-latest/raw/
-data/weekly-latest/processed/
-data/weekly-latest/logs/
+*.tsbuildinfo
 deno.lock
