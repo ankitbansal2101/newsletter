@@ -1,8 +1,8 @@
 "use client";
 
 import { FlourishChart } from "./charts";
-import type { Flourish } from "./flourishes";
-import { flourishTypeLabels, trendGlyphs } from "./flourishes";
+import type { Flourish } from "../lib/flourishes";
+import { flourishTypeLabels, trendGlyphs } from "../lib/flourishes";
 
 type Props = {
   flourish: Flourish;

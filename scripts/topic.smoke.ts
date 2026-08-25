@@ -3,7 +3,7 @@
  * Run: node --experimental-strip-types app/lib/topic.smoke.ts
  * or: npx esbuild app/lib/topic.smoke.ts --bundle --platform=node --outfile=/tmp/topic-smoke.js && node /tmp/topic-smoke.js
  */
-import { headingFromDocument, isGenericTopicLabel, resolveStoryTopic } from "./topic";
+import { headingFromDocument, isGenericTopicLabel, resolveStoryTopic } from "../app/lib/topic";
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);

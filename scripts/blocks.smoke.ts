@@ -7,9 +7,9 @@ import {
   attachBlocksToSections,
   normalizeSectionBlocks,
   synthesizeSectionBlocks,
-} from "./blocks";
-import type { Flourish } from "../flourishes";
-import type { DraftSection, MemeAttachment } from "../templates/types";
+} from "../app/lib/blocks";
+import type { Flourish } from "../app/lib/flourishes";
+import type { DraftSection, MemeAttachment } from "../app/templates/types";
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);

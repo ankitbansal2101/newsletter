@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Studio from "../Studio";
+import Studio from "../components/Studio";
 
 export const metadata: Metadata = {
   title: "Sunday Data Studio",

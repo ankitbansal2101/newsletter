@@ -2,7 +2,7 @@
 
 import type { ComponentType } from "react";
 
-import NewsletterTemplate from "../NewsletterTemplate";
+import NewsletterTemplate from "../components/NewsletterTemplate";
 import InteractiveNewsletter from "./InteractiveNewsletter";
 import type { NewsletterTemplateProps, TemplateId } from "./types";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import type { Flourish } from "./flourishes";
+import type { Flourish } from "../lib/flourishes";
 
 export const CHART_INK = ["#c2497a", "#3d5a80", "#c45c26", "#1f6f5b", "#7a4d8d", "#b08d3a"];
 

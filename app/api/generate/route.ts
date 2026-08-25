@@ -3,7 +3,7 @@ import { headingFromDocument, isGenericTopicLabel, resolveStoryTopic } from "../
 import { parseJsonObject } from "../../lib/json";
 import type { ResearchMaterial } from "../../lib/research";
 import type { SectionBlock } from "../../templates/types";
-import { parseFlourishPayload, type Flourish } from "../../flourishes";
+import { parseFlourishPayload, type Flourish } from "../../lib/flourishes";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;

@@ -1,4 +1,4 @@
-import type { Flourish } from "../flourishes";
+import type { Flourish } from "./flourishes";
 import type { DraftSection, MemeAttachment, SectionBlock } from "../templates/types";
 
 const LOCAL_MEME_BASES = [

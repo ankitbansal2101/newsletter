@@ -2,10 +2,10 @@
 
 import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
 
-import MemeCard from "../MemeCard";
-import SectionBlocks from "../SectionBlocks";
-import { FlourishChart, formatChartValue } from "../charts";
-import type { Flourish } from "../flourishes";
+import MemeCard from "../components/MemeCard";
+import SectionBlocks from "../components/SectionBlocks";
+import { FlourishChart, formatChartValue } from "../components/charts";
+import type { Flourish } from "../lib/flourishes";
 import type { NewsletterTemplateProps, PublishedIssue } from "./types";
 
 function useReveal(enabled: boolean, rootRef: RefObject<HTMLElement | null>, deps: unknown[]) {

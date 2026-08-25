@@ -2,8 +2,8 @@
 
 import FlourishCard from "./FlourishCard";
 import MemeCard from "./MemeCard";
-import type { Flourish } from "./flourishes";
-import type { DraftSection, MemeAttachment, SectionBlock } from "./templates/types";
+import type { Flourish } from "../lib/flourishes";
+import type { DraftSection, MemeAttachment, SectionBlock } from "../templates/types";
 
 type Variant = "classic" | "living";
 

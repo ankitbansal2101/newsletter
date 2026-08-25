@@ -1,6 +1,6 @@
 "use client";
 
-import type { MemeAttachment } from "./templates/types";
+import type { MemeAttachment } from "../templates/types";
 
 type Props = {
   meme: MemeAttachment;

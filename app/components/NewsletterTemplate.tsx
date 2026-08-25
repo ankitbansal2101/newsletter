@@ -3,9 +3,9 @@
 import { useState } from "react";
 
 import SectionBlocks from "./SectionBlocks";
-import type { NewsletterTemplateProps, PublishedIssue } from "./templates/types";
+import type { NewsletterTemplateProps, PublishedIssue } from "../templates/types";
 
-export type { DraftSection, MemeAttachment, IssueCitation, PublishedIssue } from "./templates/types";
+export type { DraftSection, MemeAttachment, IssueCitation, PublishedIssue } from "../templates/types";
 
 export default function NewsletterTemplate({ issue, mode, initialLanguage = "EN", initialSize = "desktop" }: NewsletterTemplateProps) {
   const [language, setLanguage] = useState<"EN" | "JA">(initialLanguage);

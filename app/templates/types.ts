@@ -1,4 +1,4 @@
-import type { Flourish } from "../flourishes";
+import type { Flourish } from "../lib/flourishes";
 
 export type TemplateId = "classic" | "living";
 

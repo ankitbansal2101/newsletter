@@ -2,12 +2,12 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { NEWSLETTER_TEMPLATES, getTemplate, type TemplateId } from "./templates/registry";
-import type { PublishedIssue } from "./templates/types";
-import type { Flourish } from "./flourishes";
-import { isGenericTopicLabel, resolveStoryTopic } from "./lib/topic";
-import { materialsFromManuscript } from "./lib/manuscript";
-import type { ResearchMaterial } from "./lib/research";
+import { NEWSLETTER_TEMPLATES, getTemplate, type TemplateId } from "../templates/registry";
+import type { PublishedIssue } from "../templates/types";
+import type { Flourish } from "../lib/flourishes";
+import { isGenericTopicLabel, resolveStoryTopic } from "../lib/topic";
+import { materialsFromManuscript } from "../lib/manuscript";
+import type { ResearchMaterial } from "../lib/research";
 
 const FLOW_STEPS = [
   { id: 1 as const, label: "Brief", verb: "Set the mission" },
