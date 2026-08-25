@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { parseApiJson } from "../lib/http";
+
 export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -24,7 +26,7 @@ export default function LoginPage() {
         const params = new URLSearchParams(window.location.search);
         window.location.href = params.get("redirect") || "/studio";
       } else {
-        const data = (await response.json()) as { error?: string };
+        const data = await parseApiJson<{ error?: string }>(response);
         setError(data.error || "Incorrect password.");
       }
     } catch {

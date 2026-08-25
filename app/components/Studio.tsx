@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { NEWSLETTER_TEMPLATES, getTemplate, type TemplateId } from "../templates/registry";
 import type { PublishedIssue } from "../templates/types";
 import type { Flourish } from "../lib/flourishes";
+import { parseApiJson } from "../lib/http";
 import { isGenericTopicLabel, resolveStoryTopic } from "../lib/topic";
 import { materialsFromManuscript } from "../lib/manuscript";
 import type { ResearchMaterial } from "../lib/research";
@@ -241,14 +242,17 @@ export default function Studio() {
       form.set("topic", topicAsLink ? "" : topic.trim());
       form.set("links", JSON.stringify(effectiveLinks.map((item) => item.url)));
       for (const item of attachments) form.append("files", item.file, item.name);
-      const extracted = await fetch("/api/brief-read", { method: "POST", body: form }).then((response) => response.json()) as {
+      const extracted = await fetch("/api/brief-read", { method: "POST", body: form }).then((response) => parseApiJson<{
         document?: string;
         topic?: string;
         read?: number;
         total?: number;
         sources?: Array<{ title: string; ok: boolean; kind?: string; error?: string }>;
         error?: string;
-      };
+      }>(response));
+      if (extracted.error && !extracted.document?.trim()) {
+        throw new Error(extracted.error);
+      }
       const document = extracted.document?.trim() || briefContext;
       if (!document.trim()) {
         throw new Error("Could not read any manuscript text from the brief.");
@@ -297,12 +301,12 @@ export default function Studio() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ topic: storyTopic, document }),
         });
-        const result = await response.json() as {
+        const result = await parseApiJson<{
           materials?: ResearchMaterial[];
           summary?: string;
           topic?: string;
           error?: string;
-        };
+        }>(response);
         if (response.ok && result.materials?.length) {
           webMaterials = result.materials;
           researchSummary = result.summary || "";
@@ -389,11 +393,15 @@ export default function Studio() {
           }),
           document: sourceDocument,
           components,
-          materials: selectedMaterials,
+          materials: selectedMaterials.map((item) => (
+            item.imageUrl?.startsWith("data:")
+              ? { ...item, imageUrl: undefined, text: [item.text, "(image kept locally; not uploaded to Vercel)"].filter(Boolean).join(" ") }
+              : item
+          )),
           scrapeWeb,
         }),
       });
-      const result = await response.json() as GeneratedPayload;
+      const result = await parseApiJson<GeneratedPayload>(response);
       if (!response.ok || !result.issue) {
         throw new Error(result.error || "Generation failed.");
       }

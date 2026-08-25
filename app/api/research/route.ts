@@ -1,4 +1,5 @@
 import { headingFromDocument, isGenericTopicLabel, resolveStoryTopic } from "../../lib/topic";
+import { parseOpenAIJson } from "../../lib/http";
 import { parseJsonObject } from "../../lib/json";
 import type { ResearchMaterial } from "../../lib/research";
 
@@ -198,9 +199,21 @@ function normalizeMaterials(raw: unknown): ResearchMaterial[] {
 }
 
 export async function POST(request: Request) {
+  try {
+    return await runResearch(request);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Research failed.";
+    return Response.json({ error: message }, { status: 500 });
+  }
+}
+
+async function runResearch(request: Request) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
-    return Response.json({ error: "Add OPENAI_API_KEY to .env.local" }, { status: 503 });
+    return Response.json(
+      { error: "Add OPENAI_API_KEY (and OPENAI_MODEL) in Vercel → Settings → Environment Variables." },
+      { status: 503 },
+    );
   }
 
   let body: ResearchRequest;
@@ -292,7 +305,7 @@ export async function POST(request: Request) {
     }),
   });
 
-  const response = await openAIResponse.json() as Record<string, unknown>;
+  const response = await parseOpenAIJson(openAIResponse);
   if (!openAIResponse.ok) {
     const error = response.error && typeof response.error === "object"
       ? String((response.error as { message?: unknown }).message || "Research failed.")

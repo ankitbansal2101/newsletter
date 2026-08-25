@@ -1,5 +1,6 @@
 import { attachBlocksToSections, applyMemeAssetPriority, normalizeSectionBlocks, paragraphsFromBlocks } from "../../lib/blocks";
 import { headingFromDocument, isGenericTopicLabel, resolveStoryTopic } from "../../lib/topic";
+import { parseOpenAIJson } from "../../lib/http";
 import { parseJsonObject } from "../../lib/json";
 import type { ResearchMaterial } from "../../lib/research";
 import type { SectionBlock } from "../../templates/types";
@@ -346,10 +347,19 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  try {
+    return await generateIssue(request);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Generation failed.";
+    return Response.json({ error: message }, { status: 500 });
+  }
+}
+
+async function generateIssue(request: Request) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     return Response.json(
-      { error: "OpenAI is not configured on this server. Add OPENAI_API_KEY to .env.local." },
+      { error: "OpenAI is not configured. Add OPENAI_API_KEY (and OPENAI_MODEL) in Vercel → Settings → Environment Variables." },
       { status: 503 },
     );
   }
@@ -506,7 +516,7 @@ export async function POST(request: Request) {
     body: JSON.stringify(openAIBody),
   });
 
-  const response = await openAIResponse.json() as Record<string, unknown>;
+  const response = await parseOpenAIJson(openAIResponse);
   if (!openAIResponse.ok) {
     const error = response.error && typeof response.error === "object"
       ? String((response.error as { message?: unknown }).message || "OpenAI could not complete generation.")

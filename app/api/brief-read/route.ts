@@ -4,6 +4,15 @@ export const runtime = "nodejs";
 export const maxDuration = 60;
 
 export async function POST(request: Request) {
+  try {
+    return await readBrief(request);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Could not read the brief.";
+    return Response.json({ error: message }, { status: 500 });
+  }
+}
+
+async function readBrief(request: Request) {
   const form = await request.formData();
   const notes = String(form.get("notes") || "");
   const topicHint = String(form.get("topic") || "").trim();
