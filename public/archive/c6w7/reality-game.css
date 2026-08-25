@@ -1,0 +1,133 @@
+/* Reality is the co-author: an original point-and-click field case. */
+.reality-adventure{position:relative;max-width:1120px;margin:clamp(82px,10vw,118px) auto 0;overflow:hidden;border:1px solid #574b47;border-top:7px solid #e5aa56;border-radius:7px;color:#e7edf0;background:#0d1b2b;box-shadow:0 34px 80px rgba(0,0,0,.36);isolation:isolate}
+.reality-adventure button{font-family:ui-sans-serif,system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+.reality-adventure button:focus-visible{z-index:30;outline:3px solid #f2cb70;outline-offset:3px}
+.reality-adventure__title{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(270px,.8fr);gap:12px clamp(35px,7vw,82px);align-items:end;padding:clamp(29px,4.5vw,52px);background:radial-gradient(circle at 78% 0,rgba(226,158,78,.17),transparent 32%),repeating-linear-gradient(0deg,transparent 0 31px,rgba(255,255,255,.025) 32px),#0d1b2b}
+.reality-adventure__title .eyebrow{grid-column:1/-1;margin:0;color:#efbd69}
+.reality-adventure__title h2{max-width:10ch;margin:0;color:#fff1cd;font-size:clamp(46px,6vw,76px);line-height:.89;letter-spacing:-.05em}
+.reality-adventure__title>p:last-child{max-width:35ch;margin:0;color:#adc2cd;font:650 13px/1.6 ui-sans-serif,system-ui,sans-serif}
+
+.reality-quest{display:grid;grid-template-columns:repeat(4,1fr);margin:0;padding:0;border-block:1px solid #365063;background:#13283a;list-style:none}
+.reality-quest li{position:relative;display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:center;min-width:0;padding:14px 17px;border-right:1px solid #365063;transition:background .3s,color .3s}
+.reality-quest li:last-child{border-right:0}
+.reality-quest li:after{position:absolute;right:-6px;z-index:2;width:10px;aspect-ratio:1;border:solid #365063;border-width:1px 1px 0 0;background:#13283a;transform:rotate(45deg);content:""}
+.reality-quest li:last-child:after{display:none}
+.reality-quest li[aria-current=step]{background:#e4b35e}
+.reality-quest li[aria-current=step]:after{background:#e4b35e}
+.reality-quest span{grid-row:1/3;color:#6f8998;font:900 9px ui-monospace,SFMono-Regular,Menlo,monospace}
+.reality-quest strong{color:#dce7e9;font:850 10px ui-sans-serif,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.reality-quest small{overflow:hidden;color:#7995a3;font:700 8px ui-sans-serif,system-ui,sans-serif;white-space:nowrap}
+.reality-quest li[aria-current=step] :is(span,strong,small){color:#162737}
+
+.reality-scene{position:relative;min-height:clamp(430px,54vw,610px);overflow:hidden;border-bottom:1px solid #365063;background:#172b3c}
+.reality-backdrop{position:absolute;inset:0;width:100%;height:100%}
+.dock-water path{animation:realityDockWater 3.8s ease-in-out infinite alternate}
+.dock-water path:nth-child(2){animation-delay:-1.9s}
+.dock-rain{animation:realityDockRain .9s linear infinite}
+.dock-windows path{fill:#efbd69;filter:drop-shadow(0 0 11px rgba(239,189,105,.7));animation:realityDockWindows 2.7s ease-in-out infinite alternate}
+.dock-windows path:nth-child(2){animation-delay:-1.4s}
+.dock-lamps{animation:realityDockLamp 2.3s ease-in-out infinite alternate}
+.reality-puddle{animation:realityDockPuddle 3.2s ease-in-out infinite alternate}
+.reality-stop-line{filter:drop-shadow(0 0 8px rgba(242,198,95,.55))}
+
+.reality-cart{position:absolute;z-index:8;bottom:4%;left:8%;width:clamp(122px,21vw,218px);transform:translateX(-50%);filter:drop-shadow(8px 12px 8px rgba(2,11,20,.32));transition:left 1.6s cubic-bezier(.2,.78,.18,1),filter .35s}
+.reality-cart svg{display:block;width:100%;height:auto;overflow:visible}
+.reality-adventure[data-reality-state=deploying] .reality-cart,.reality-adventure[data-reality-state=incident] .reality-cart{left:56%}
+.reality-adventure[data-reality-state=rewind] .reality-cart{left:8%;transition-duration:.48s}
+.reality-adventure:is([data-reality-state=correcting],[data-reality-state=complete]) .reality-cart{left:70.5%}
+.reality-adventure:is([data-reality-state=deploying],[data-reality-state=correcting]) .reality-cart .cart-wheel{animation:realityCartRoll .43s linear infinite}
+.reality-adventure[data-reality-state=incident] .reality-cart{filter:drop-shadow(8px 12px 8px rgba(2,11,20,.32)) drop-shadow(0 0 16px rgba(223,91,84,.55))}
+.reality-adventure[data-reality-state=incident] .cart-wheel--left{stroke:#df5b54}
+.reality-adventure[data-reality-state=complete] .reality-cart{filter:drop-shadow(8px 12px 8px rgba(2,11,20,.32)) drop-shadow(0 0 17px rgba(112,212,164,.42))}
+
+.reality-marshal{position:absolute;z-index:9;right:2.5%;bottom:6%;width:clamp(78px,11vw,128px);filter:drop-shadow(6px 10px 5px rgba(4,12,21,.25));animation:realityMarshalIdle 3s ease-in-out infinite}
+.reality-marshal svg{display:block;width:100%;height:auto}
+.reality-marshal__bubble{position:absolute;right:58%;bottom:82%;width:clamp(150px,19vw,215px);padding:11px 13px;border:2px solid #172638;border-radius:14px 14px 3px 14px;color:#243041;background:#fff3d2;box-shadow:6px 7px rgba(4,12,21,.2);font:800 10px/1.4 ui-sans-serif,system-ui,sans-serif}
+.reality-marshal__bubble:after{position:absolute;right:13px;top:100%;border:9px solid transparent;border-top-color:#172638;content:""}
+
+.reality-target-label{position:absolute;z-index:10;right:2.5%;top:20px;display:flex;flex-direction:column;align-items:flex-end;padding:9px 11px;border:1px solid rgba(255,255,255,.2);color:#fff0c2;background:rgba(8,24,38,.84);box-shadow:4px 5px rgba(5,13,22,.2);font:850 8px ui-sans-serif,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(5px)}
+.reality-target-label strong{margin-top:3px;color:#8fcfb5;font-size:9px}
+.reality-adventure[data-reality-state=incident] .reality-target-label strong{color:#f28a7c}
+.reality-adventure[data-reality-state=complete] .reality-target-label strong{color:#9ee0b8}
+
+.reality-hotspot{position:absolute;z-index:20;display:flex;gap:7px;align-items:center;padding:0;border:0;color:#fff1c6;background:none;cursor:pointer;filter:drop-shadow(0 2px 2px rgba(4,12,21,.8));opacity:0;pointer-events:none;transform:scale(.72);transition:opacity .25s,transform .35s}
+.reality-hotspot span{display:grid;place-items:center;width:31px;aspect-ratio:1;border:2px solid #fff1c6;border-radius:50%;color:#18293a;background:#f1bf63;box-shadow:0 0 0 6px rgba(241,191,99,.17);font:950 14px ui-sans-serif,system-ui,sans-serif;animation:realityHotspotPulse 1.35s ease-in-out infinite}
+.reality-hotspot strong{padding:6px 8px;border:1px solid rgba(255,255,255,.19);border-radius:3px;background:rgba(8,24,38,.88);font:850 8px ui-sans-serif,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.reality-adventure[data-reality-state=incident] .reality-hotspot{opacity:1;pointer-events:auto;transform:none}
+.reality-adventure[data-reality-state=incident] .reality-hotspot:disabled{pointer-events:none}
+.reality-hotspot[aria-pressed=true]{opacity:.9}
+.reality-hotspot[aria-pressed=true] span{color:#10291e;border-color:#c9f0dc;background:#77c49e;box-shadow:none;animation:none}
+.reality-hotspot--puddle{left:56%;bottom:8%}
+.reality-hotspot--wheel{left:43%;bottom:19%}
+.reality-hotspot--marshal{right:1.5%;bottom:36%}
+
+.reality-casebook{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);background:#101f30}
+.reality-notes{position:relative;padding:28px clamp(24px,4vw,45px) 32px;color:#273342;background:repeating-linear-gradient(0deg,transparent 0 29px,rgba(52,85,103,.09) 30px),#f2ead7;box-shadow:inset -14px 0 22px rgba(43,30,24,.1)}
+.reality-notes:after{position:absolute;inset:12px auto 12px 17px;border-left:2px solid rgba(207,84,76,.31);content:""}
+.reality-notes>span{display:flex;justify-content:space-between;gap:15px;margin:0 0 16px;padding-left:9px;color:#7d6656;font:900 8px ui-sans-serif,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.reality-notes>span b{color:#c14f48}
+.reality-notes ol{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0;padding:0;list-style:none}
+.reality-notes li{display:grid;grid-template-columns:auto 1fr;gap:8px;min-width:0;padding:11px 9px 10px;border:1px dashed #baa995;background:rgba(255,255,255,.3);opacity:.56;transform:rotate(-.35deg);transition:.35s}
+.reality-notes li:nth-child(2){transform:rotate(.55deg)}
+.reality-notes li.is-found{border-style:solid;border-color:#9b8066;background:#fff9e9;box-shadow:4px 5px rgba(59,44,35,.1);opacity:1;transform:translateY(-2px) rotate(-.35deg)}
+.reality-notes li i{display:grid;place-items:center;width:22px;aspect-ratio:1;border:1px solid currentColor;border-radius:50%;color:#b38b5d;font:900 7px ui-monospace,SFMono-Regular,Menlo,monospace}
+.reality-notes li.is-found i{color:#39745a}
+.reality-notes li span{color:#756d66;font:650 8px/1.45 ui-sans-serif,system-ui,sans-serif}
+.reality-notes li strong{display:block;margin-bottom:3px;color:#273342;font-size:8px;text-transform:uppercase}
+
+.reality-briefing{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:28px clamp(24px,4vw,44px);border-left:1px solid #385066;background:radial-gradient(circle at 100% 0,rgba(229,170,86,.12),transparent 48%),#101f30}
+.reality-status-kicker{margin:0 0 9px;color:#e7b25e;font:900 8px ui-sans-serif,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.reality-briefing>strong{min-height:2.8em;color:#f0f3ed;font:800 clamp(17px,2vw,22px)/1.25 Georgia,serif}
+.reality-briefing>p:not(.reality-status-kicker){min-height:2.7em;margin:10px 0 18px;color:#94aebb;font:650 10px/1.5 ui-sans-serif,system-ui,sans-serif}
+.reality-actions{display:flex;flex-wrap:wrap;gap:8px}
+.reality-actions button{padding:11px 15px;border:1px solid #5d7485;border-radius:2px;color:#d9e5e6;background:#162d40;cursor:pointer;font:850 8px ui-sans-serif,system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;transition:.2s}
+.reality-actions #realityAction{color:#192b38;border-color:#f0c36b;background:#f0c36b;box-shadow:0 5px #88683b}
+.reality-actions button:hover:not(:disabled){transform:translateY(-2px)}
+.reality-actions button:disabled{cursor:not-allowed;filter:saturate(.4);opacity:.55;transform:none!important}
+.reality-adventure>footer{padding:15px clamp(24px,4vw,44px) 18px;border-top:1px solid #354d61;color:#7f99a7;background:#0b1928;font:650 9px/1.55 ui-sans-serif,system-ui,sans-serif}
+
+@keyframes realityDockRain{to{transform:translate(-14px,28px)}}
+@keyframes realityDockWater{to{transform:translateX(20px);opacity:.55}}
+@keyframes realityDockWindows{to{opacity:.72}}
+@keyframes realityDockLamp{to{opacity:.76}}
+@keyframes realityDockPuddle{to{transform:scaleX(.96);opacity:.45}}
+@keyframes realityCartRoll{to{transform:rotate(360deg)}}
+@keyframes realityMarshalIdle{50%{transform:translateY(-5px) rotate(.6deg)}}
+@keyframes realityHotspotPulse{50%{box-shadow:0 0 0 11px rgba(241,191,99,0);transform:translateY(-3px)}}
+
+@media(max-width:760px){
+  .reality-adventure__title,.reality-casebook{grid-template-columns:1fr}
+  .reality-adventure__title>*{grid-column:1}
+  .reality-scene{min-height:560px}
+  .reality-briefing{border-top:1px solid #385066;border-left:0}
+  .reality-notes ol{grid-template-columns:1fr}
+  .reality-notes li{transform:none!important}
+  .reality-hotspot--puddle{left:48%;bottom:7%}
+  .reality-hotspot--wheel{left:33%;bottom:19%}
+  .reality-marshal__bubble{right:24%;bottom:90%}
+}
+
+@media(max-width:680px){
+  .reality-adventure{margin-top:74px;border-radius:0}
+  .reality-adventure__title{padding:31px 22px}
+  .reality-adventure__title h2{font-size:clamp(47px,14vw,68px)}
+  .reality-quest{grid-template-columns:1fr 1fr}
+  .reality-quest li:nth-child(2){border-right:0}
+  .reality-quest li:nth-child(-n+2){border-bottom:1px solid #365063}
+  .reality-quest li:nth-child(2):after{display:none}
+  .reality-scene{min-height:540px}
+  .reality-backdrop{width:auto;min-width:990px;left:50%;transform:translateX(-56%)}
+  .reality-cart{width:150px}
+  .reality-marshal{right:0;width:90px}
+  .reality-marshal__bubble{right:10%;width:143px}
+  .reality-target-label{top:14px;right:14px}
+  .reality-hotspot strong{display:none}
+  .reality-hotspot--puddle{left:50%;bottom:5%}
+  .reality-hotspot--wheel{left:29%;bottom:19%}
+  .reality-hotspot--marshal{right:1%;bottom:28%}
+  .reality-notes,.reality-briefing{padding-inline:22px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .reality-adventure *,.reality-adventure *:before,.reality-adventure *:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}

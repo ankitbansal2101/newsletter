@@ -1,0 +1,4324 @@
+{
+  "version": 1,
+  "week": "2026-W32",
+  "profile": "easy_signal",
+  "summary_basis": "weekly_matches",
+  "window_start": "2026-08-03",
+  "window_end": "2026-08-09",
+  "generated_at": "2026-08-09",
+  "inputs": {
+    "source_roster": "data/weekly/2026-W32/source_roster.json",
+    "fetch_ledger": "data/weekly/2026-W32/fetch_ledger.json",
+    "corpus": "data/harmonized/corpus_clustered.parquet",
+    "weekly_matches": "data/weekly/2026-W32/processed/weekly_cluster_matches_easy_signal.parquet",
+    "dossiers": "data/harmonized/journalist_dossiers.json",
+    "profile": "easy_signal"
+  },
+  "corpus_stats": {
+    "week_records": 592,
+    "week_sources": 36,
+    "week_clusters": 152,
+    "source_counts": {
+      "arXiv cs.AI": 50,
+      "arXiv quant-ph": 49,
+      "arXiv cs.RO": 46,
+      "Hacker News": 42,
+      "arXiv cs.CE (Computational Engineering/Finance)": 42,
+      "arXiv eess.SP": 41,
+      "Nature News": 40,
+      "arXiv cs.LG": 38,
+      "Science Magazine": 27,
+      "The Register": 26,
+      "SEC EDGAR 8-K Filings": 23,
+      "AWS What's New": 21,
+      "Google Cloud Blog": 18,
+      "STAT News": 14,
+      "Ars Technica": 14,
+      "TechCrunch": 13,
+      "Wired": 12,
+      "OpenAI News": 10,
+      "GitHub Trending (Python/AI)": 9,
+      "MIT Technology Review": 9,
+      "Quantum Computing Report": 8,
+      "Crunchbase News": 8,
+      "VentureBeat": 7,
+      "Defense One": 5,
+      "The Sequence (Xavier Amatriain)": 3,
+      "Hugging Face Blog": 3,
+      "MIT News (AI/ML)": 3,
+      "Interconnects (Nathan Lambert)": 2,
+      "Breaking Defense": 2,
+      "The Verge": 1,
+      "Google DeepMind Blog": 1,
+      "Microsoft Azure Blog": 1,
+      "DARPA Open Opportunities": 1,
+      "DARPA News": 1,
+      "Import AI (Jack Clark)": 1,
+      "Last Week in AI": 1
+    }
+  },
+  "coverage_audit": {
+    "profile": "easy_signal",
+    "planned_sources": 94,
+    "planned_by_layer": {
+      "high_signal": 80,
+      "noise_layer": 13,
+      "manual_input": 1
+    },
+    "planned_by_type": {
+      "news": 28,
+      "government": 3,
+      "defense": 2,
+      "arxiv": 7,
+      "patent": 1,
+      "sec": 1,
+      "philanthropy_research": 2,
+      "niche_interface": 2,
+      "venture_thesis": 3,
+      "sports_tech": 4,
+      "youtube": 7,
+      "university_lab": 9,
+      "government_grant": 5,
+      "newsletter": 5,
+      "clinical": 1,
+      "accelerator": 3,
+      "community": 3,
+      "ml_community": 3,
+      "conference_preprint": 2,
+      "tech_transfer": 2,
+      "email_corpus": 1
+    },
+    "ledger_summary": {
+      "planned_sources": 94,
+      "fetched_sources": 36,
+      "partial_sources": 0,
+      "no_records_sources": 8,
+      "failed_sources": 11,
+      "needs_access_sources": 0,
+      "unsupported_sources": 0,
+      "not_attempted_sources": 39,
+      "raw_records": 795,
+      "updated_at": "2026-08-10T06:38:00.014213+00:00"
+    },
+    "ledger_fetched_sources": 36,
+    "ledger_failed_sources": 11,
+    "weekly_pull_coverage": {
+      "primary_docs": {
+        "fetched_sources": [
+          "SEC EDGAR 8-K Filings",
+          "DARPA Open Opportunities"
+        ],
+        "no_records_sources": [],
+        "failed_sources": [
+          "SBIR/STTR Awards",
+          "Defense Innovation Unit (DIU)",
+          "NATO DIANA (Defence Innovation Accelerator)"
+        ],
+        "needs_access_sources": [],
+        "unsupported_sources": [],
+        "not_attempted_sources": [
+          "Google Patents",
+          "NSF Award Search (AI/CS)",
+          "ClinicalTrials.gov RSS"
+        ]
+      },
+      "news_discourse": {
+        "fetched_sources": [
+          "TechCrunch",
+          "The Verge",
+          "Wired",
+          "MIT Technology Review",
+          "Ars Technica",
+          "VentureBeat",
+          "The Register",
+          "STAT News",
+          "Nature News",
+          "Science Magazine",
+          "DARPA News",
+          "Defense One",
+          "Breaking Defense",
+          "Crunchbase News",
+          "AWS What's New",
+          "Google Cloud Blog",
+          "Microsoft Azure Blog",
+          "OpenAI News",
+          "Google DeepMind Blog",
+          "Import AI (Jack Clark)",
+          "Interconnects (Nathan Lambert)",
+          "The Sequence (Xavier Amatriain)",
+          "Last Week in AI",
+          "Quantum Computing Report"
+        ],
+        "no_records_sources": [
+          "Fierce Biotech"
+        ],
+        "failed_sources": [
+          "White House Briefings",
+          "European Commission Digital",
+          "PitchBook News",
+          "Anthropic News",
+          "Meta AI Blog",
+          "Nvidia News",
+          "The Batch (Andrew Ng / DeepLearning.AI)"
+        ],
+        "needs_access_sources": [],
+        "unsupported_sources": [],
+        "not_attempted_sources": [
+          "Reuters Technology",
+          "Reuters Science",
+          "Financial Times Technology",
+          "The Information",
+          "Bloomberg Technology",
+          "Wall Street Journal Tech",
+          "Renaissance Philanthropy",
+          "Open Philanthropy",
+          "Voxon Photonics",
+          "Light Field Lab",
+          "Starship Ventures",
+          "a16z Blog",
+          "Sequoia Perspective",
+          "FIFA",
+          "SportTechie",
+          "YouTube - Two Minute Papers",
+          "YouTube - DeepMind",
+          "YouTube - OpenAI",
+          "YouTube - Lex Fridman",
+          "YouTube - Andrej Karpathy",
+          "YouTube - Yannic Kilcher",
+          "YouTube - AI Explained",
+          "Sports Innovation Lab",
+          "Hudl Blog"
+        ]
+      },
+      "research": {
+        "fetched_sources": [
+          "arXiv cs.AI",
+          "arXiv cs.LG",
+          "arXiv cs.RO",
+          "arXiv eess.SP",
+          "MIT News (AI/ML)",
+          "arXiv quant-ph",
+          "arXiv cs.CE (Computational Engineering/Finance)"
+        ],
+        "no_records_sources": [
+          "arXiv q-bio",
+          "MIT CSAIL News",
+          "Stanford AI Lab Blog",
+          "Carnegie Mellon ML Blog",
+          "UC Berkeley BAIR Blog",
+          "Columbia Data Science Institute"
+        ],
+        "failed_sources": [
+          "Stanford HAI"
+        ],
+        "needs_access_sources": [],
+        "unsupported_sources": [],
+        "not_attempted_sources": [
+          "Oxford Future of Humanity Institute",
+          "Cambridge Leverhulme Centre for the Future of Intelligence",
+          "OpenReview ICLR",
+          "OpenReview NeurIPS",
+          "MIT Technology Licensing Office",
+          "Stanford OTL (Office of Technology Licensing)"
+        ]
+      },
+      "code_models": {
+        "fetched_sources": [
+          "Hacker News",
+          "Hugging Face Blog",
+          "GitHub Trending (Python/AI)"
+        ],
+        "no_records_sources": [
+          "Hugging Face Papers"
+        ],
+        "failed_sources": [],
+        "needs_access_sources": [],
+        "unsupported_sources": [],
+        "not_attempted_sources": [
+          "Y Combinator Launches",
+          "Y Combinator News (HN Show)",
+          "Techstars Blog",
+          "Indie Hackers",
+          "Product Hunt"
+        ]
+      },
+      "manual_input": {
+        "fetched_sources": [],
+        "no_records_sources": [],
+        "failed_sources": [],
+        "needs_access_sources": [],
+        "unsupported_sources": [],
+        "not_attempted_sources": [
+          "Manual Email PDFs"
+        ]
+      },
+      "other": {
+        "fetched_sources": [],
+        "no_records_sources": [],
+        "failed_sources": [],
+        "needs_access_sources": [],
+        "unsupported_sources": [],
+        "not_attempted_sources": []
+      }
+    },
+    "weekly_documents_records": 776,
+    "weekly_cluster_matches": 769,
+    "confident_cluster_matches": 592,
+    "matched_clusters": 152,
+    "active_processed_sources": [
+      {
+        "source": "arXiv cs.AI",
+        "records": 50,
+        "signal_class": "research",
+        "evidence_role": "arxiv",
+        "authority_weight": 0.7199999999999999
+      },
+      {
+        "source": "arXiv quant-ph",
+        "records": 49,
+        "signal_class": "research",
+        "evidence_role": "arxiv",
+        "authority_weight": 0.7199999999999999
+      },
+      {
+        "source": "arXiv cs.RO",
+        "records": 46,
+        "signal_class": "research",
+        "evidence_role": "arxiv",
+        "authority_weight": 0.7199999999999998
+      },
+      {
+        "source": "Hacker News",
+        "records": 42,
+        "signal_class": "code_models",
+        "evidence_role": "community",
+        "authority_weight": 0.175
+      },
+      {
+        "source": "arXiv cs.CE (Computational Engineering/Finance)",
+        "records": 42,
+        "signal_class": "research",
+        "evidence_role": "arxiv",
+        "authority_weight": 0.7199999999999999
+      },
+      {
+        "source": "arXiv eess.SP",
+        "records": 41,
+        "signal_class": "research",
+        "evidence_role": "arxiv",
+        "authority_weight": 0.7199999999999999
+      },
+      {
+        "source": "Nature News",
+        "records": 40,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.82
+      },
+      {
+        "source": "arXiv cs.LG",
+        "records": 38,
+        "signal_class": "research",
+        "evidence_role": "arxiv",
+        "authority_weight": 0.7199999999999998
+      },
+      {
+        "source": "Science Magazine",
+        "records": 27,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.8200000000000001
+      },
+      {
+        "source": "The Register",
+        "records": 26,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.8200000000000001
+      },
+      {
+        "source": "SEC EDGAR 8-K Filings",
+        "records": 23,
+        "signal_class": "primary_docs",
+        "evidence_role": "sec",
+        "authority_weight": 1.0
+      },
+      {
+        "source": "AWS What's New",
+        "records": 21,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.82
+      },
+      {
+        "source": "Google Cloud Blog",
+        "records": 18,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.82
+      },
+      {
+        "source": "Ars Technica",
+        "records": 14,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.8200000000000001
+      },
+      {
+        "source": "STAT News",
+        "records": 14,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.8200000000000001
+      },
+      {
+        "source": "TechCrunch",
+        "records": 13,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.8200000000000001
+      },
+      {
+        "source": "Wired",
+        "records": 12,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.82
+      },
+      {
+        "source": "OpenAI News",
+        "records": 10,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.82
+      },
+      {
+        "source": "GitHub Trending (Python/AI)",
+        "records": 9,
+        "signal_class": "code_models",
+        "evidence_role": "ml_community",
+        "authority_weight": 0.364
+      },
+      {
+        "source": "MIT Technology Review",
+        "records": 9,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.82
+      },
+      {
+        "source": "Crunchbase News",
+        "records": 8,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.82
+      },
+      {
+        "source": "Quantum Computing Report",
+        "records": 8,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.82
+      },
+      {
+        "source": "VentureBeat",
+        "records": 7,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.8200000000000001
+      },
+      {
+        "source": "Defense One",
+        "records": 5,
+        "signal_class": "news_discourse",
+        "evidence_role": "defense",
+        "authority_weight": 0.85
+      },
+      {
+        "source": "Hugging Face Blog",
+        "records": 3,
+        "signal_class": "code_models",
+        "evidence_role": "ml_community",
+        "authority_weight": 0.36400000000000005
+      },
+      {
+        "source": "MIT News (AI/ML)",
+        "records": 3,
+        "signal_class": "research",
+        "evidence_role": "university_lab",
+        "authority_weight": 0.68
+      },
+      {
+        "source": "The Sequence (Xavier Amatriain)",
+        "records": 3,
+        "signal_class": "news_discourse",
+        "evidence_role": "newsletter",
+        "authority_weight": 0.5
+      },
+      {
+        "source": "Breaking Defense",
+        "records": 2,
+        "signal_class": "news_discourse",
+        "evidence_role": "defense",
+        "authority_weight": 0.85
+      },
+      {
+        "source": "Interconnects (Nathan Lambert)",
+        "records": 2,
+        "signal_class": "news_discourse",
+        "evidence_role": "newsletter",
+        "authority_weight": 0.5
+      },
+      {
+        "source": "DARPA News",
+        "records": 1,
+        "signal_class": "news_discourse",
+        "evidence_role": "government",
+        "authority_weight": 0.9
+      },
+      {
+        "source": "DARPA Open Opportunities",
+        "records": 1,
+        "signal_class": "primary_docs",
+        "evidence_role": "government_grant",
+        "authority_weight": 0.92
+      },
+      {
+        "source": "Google DeepMind Blog",
+        "records": 1,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.82
+      },
+      {
+        "source": "Import AI (Jack Clark)",
+        "records": 1,
+        "signal_class": "news_discourse",
+        "evidence_role": "newsletter",
+        "authority_weight": 0.5
+      },
+      {
+        "source": "Last Week in AI",
+        "records": 1,
+        "signal_class": "news_discourse",
+        "evidence_role": "newsletter",
+        "authority_weight": 0.5
+      },
+      {
+        "source": "Microsoft Azure Blog",
+        "records": 1,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.82
+      },
+      {
+        "source": "The Verge",
+        "records": 1,
+        "signal_class": "news_discourse",
+        "evidence_role": "news",
+        "authority_weight": 0.82
+      }
+    ],
+    "active_signal_classes": {
+      "research": 269,
+      "code_models": 54,
+      "news_discourse": 245,
+      "primary_docs": 24
+    },
+    "high_signal_reporting_planned": 38,
+    "high_signal_reporting_present": true,
+    "critical_gaps": [
+      "Tier-1 reporting is represented in the processed corpus.",
+      "Weekly pull fetched 795 raw source records from 36 sources; 11 failed; 0 need access; 39 not attempted."
+    ]
+  },
+  "leads": [
+    {
+      "cluster_id": 60,
+      "headline": "Ai Agent / Google / Llm may be a lead, but it needs independent corroboration",
+      "category": "AI / LLM",
+      "status": "Needs corroboration",
+      "weighted_score": 57.21,
+      "records": 66,
+      "sources": 15,
+      "source_mix": {
+        "Hacker News": 27,
+        "The Register": 13,
+        "MIT Technology Review": 5,
+        "Wired": 4,
+        "GitHub Trending (Python/AI)": 3,
+        "Google Cloud Blog": 3,
+        "SEC EDGAR 8-K Filings": 3,
+        "TechCrunch": 1,
+        "The Verge": 1,
+        "AWS What's New": 1,
+        "VentureBeat": 1,
+        "Ars Technica": 1,
+        "OpenAI News": 1,
+        "The Sequence (Xavier Amatriain)": 1,
+        "Defense One": 1
+      },
+      "source_classes": {
+        "news_discourse": 33,
+        "code_models": 30,
+        "primary_docs": 3
+      },
+      "evidence_roles": {
+        "news": 31,
+        "community": 27,
+        "ml_community": 3,
+        "sec": 3,
+        "newsletter": 1,
+        "defense": 1
+      },
+      "top_topics": "news / AI / python",
+      "summary": "66 records landed this week across 15 active sources. The strongest weighted evidence is SOUNDHOUND AI, INC. from SEC EDGAR 8-K Filings with weighted signal 39.7. Evidence mix: news_discourse=33, code_models=30, primary_docs=3.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-05",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 39.7,
+          "weighted_signal": 39.7,
+          "entity": "SOUNDHOUND AI, INC.",
+          "topic": "robotics_ai",
+          "text": "SOUNDHOUND AI, INC. SOUN 8-K. robotics_ai. 8-K"
+        },
+        {
+          "date": "2026-08-06",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 37.12,
+          "weighted_signal": 37.12,
+          "entity": "Serve Robotics Inc. /DE/",
+          "topic": "robotics_ai",
+          "text": "Serve Robotics Inc. /DE/ SERV 8-K. robotics_ai. 8-K"
+        },
+        {
+          "date": "2026-08-03",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 36.94,
+          "weighted_signal": 36.94,
+          "entity": "Palantir Technologies Inc.",
+          "topic": "robotics_ai",
+          "text": "Palantir Technologies Inc. PLTR 8-K. robotics_ai. 8-K"
+        },
+        {
+          "date": "2026-08-07",
+          "source": "The Register",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 42.86,
+          "weighted_signal": 35.15,
+          "entity": "theregister.com",
+          "topic": "news",
+          "text": "AI titans to tidy agent frontier with plugin prescription. Agent Plugins 1.0 defines a write-once-run-anywhere container for passing tools and skills across different agent platforms"
+        },
+        {
+          "date": "2026-08-06",
+          "source": "The Register",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 42.77,
+          "weighted_signal": 35.07,
+          "entity": "theregister.com",
+          "topic": "news",
+          "text": "Meta latest to tell world its AI agent wandered out of test pen. Another week, another firm explaining why one of its models reached somewhere it wasn't supposed to"
+        },
+        {
+          "date": "2026-08-03",
+          "source": "MIT Technology Review",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 42.22,
+          "weighted_signal": 34.62,
+          "entity": "technologyreview.com",
+          "topic": "news",
+          "text": "Here\u2019s why AI agents lie and cheat to reach their goals. MIT Technology Review Explains: Let our writers untangle the complex, messy world of technology to help you understand what\u2019s coming next. You can read more from the series here. When two OpenAI models hacked into the website Hugging Face in July, they weren\u2019t t..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Check repo/model history for maintainers, funders, dependencies, and sudden activity changes.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 191,
+      "headline": "Robotics / Computer Vision / Machine Learning activity is accelerating across 6 sources",
+      "category": "Robotics",
+      "status": "Investigate first",
+      "weighted_score": 53.02,
+      "records": 33,
+      "sources": 5,
+      "source_mix": {
+        "arXiv cs.RO": 28,
+        "arXiv cs.LG": 2,
+        "arXiv cs.AI": 1,
+        "arXiv cs.CE (Computational Engineering/Finance)": 1,
+        "arXiv eess.SP": 1
+      },
+      "source_classes": {
+        "research": 33
+      },
+      "evidence_roles": {
+        "arxiv": 33
+      },
+      "top_topics": "cs.RO / cs.LG / cs.AI",
+      "summary": "33 records landed this week across 5 active sources. The strongest weighted evidence is Chenghao Gu from arXiv cs.RO with weighted signal 43.71. Evidence mix: research=33.",
+      "reporting_value": "watch item",
+      "coverage_gap": "No tier-1 news/trade-press evidence is present in the processed corpus.",
+      "top_evidence": [
+        {
+          "date": "2026-08-06",
+          "source": "arXiv cs.RO",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 60.7,
+          "weighted_signal": 43.71,
+          "entity": "Chenghao Gu",
+          "topic": "cs.RO",
+          "text": "GeniWorld: A Generalizable Interactive World Model for Robotic Manipulation via Visual Actions. Generalist robot policies exhibit strong capabilities, but their robustness in complex and unseen environments remains limited. Scaling robot learning and evaluation in diverse real-world environments remains costly and cha..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "arXiv cs.RO",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 59.59,
+          "weighted_signal": 42.91,
+          "entity": "Junfeng Li",
+          "topic": "cs.RO",
+          "text": "DyPES-VLA: Learning Shared Dynamics Priors and Embodiment-Specific Control for Cross-Embodiment Manipulation. Vision-Language-Action (VLA) models have become a powerful paradigm for robot manipulation, but training a single generalist policy for heterogeneous robot embodiments remains an open problem. Existing methods..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "arXiv cs.RO",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 58.07,
+          "weighted_signal": 41.81,
+          "entity": "Zhe Li",
+          "topic": "cs.RO",
+          "text": "$\u03c9$-0: A Latent Predictive World Action Model for Concurrent Humanoid Loco-Manipulation. Humanoid household tasks often require concurrent loco-manipulation, where the robot must move, adjust posture, maintain balance, and manipulate objects as a single coordinated behavior. Yet existing humanoid policies typically de..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.RO",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 57.26,
+          "weighted_signal": 41.23,
+          "entity": "Xiangkai Ma",
+          "topic": "cs.RO",
+          "text": "Decoupling Intention from Trajectory: A Representational Deduction Framework for World Action Models. World Action Models (WAMs) aim to construct a unified architecture capable of understanding world state evolution and guiding to generative motion planning. However, existing visual branches focus on predicting static..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.RO",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 57.15,
+          "weighted_signal": 41.15,
+          "entity": "Yao Wang",
+          "topic": "cs.RO",
+          "text": "CrossTracer: Cross-Embodiment Navigation via VLA Model Reasoning and Trace Residuals Adapting. Vision-language-action (VLA) models provide strong semantic priors for robot navigation, but they often ignore embodiment-specific mobility constraints. A path that is semantically plausible for one robot may be physically i..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.RO",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 55.7,
+          "weighted_signal": 40.11,
+          "entity": "Haodong Yan",
+          "topic": "cs.RO",
+          "text": "Is Forward Prediction Enough? Physical State Grounding for JEPA World Models. Learning structured and control-relevant latent representations remains a key challenge for world models. Recent JEPA-based world models learn action-conditioned predictive latent dynamics from observation sequences. However, their forward-p..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Check repo/model history for maintainers, funders, dependencies, and sudden activity changes.",
+        "Search for deployment evidence: customers, pilots, contracts, factories, launch manifests, or field tests."
+      ]
+    },
+    {
+      "cluster_id": 224,
+      "headline": "Quantum Physics / Advanced Materials / Optics activity is accelerating across 4 sources",
+      "category": "Quantum",
+      "status": "Investigate first",
+      "weighted_score": 52.87,
+      "records": 19,
+      "sources": 5,
+      "source_mix": {
+        "arXiv quant-ph": 15,
+        "Science Magazine": 1,
+        "DARPA Open Opportunities": 1,
+        "DARPA News": 1,
+        "Nature News": 1
+      },
+      "source_classes": {
+        "research": 15,
+        "news_discourse": 3,
+        "primary_docs": 1
+      },
+      "evidence_roles": {
+        "arxiv": 15,
+        "news": 2,
+        "government_grant": 1,
+        "government": 1
+      },
+      "top_topics": "quant-ph / news / government_grant",
+      "summary": "19 records landed this week across 5 active sources. The strongest weighted evidence is Tiago Mendes-Santos from arXiv quant-ph with weighted signal 38.48. Evidence mix: research=15, news_discourse=3, primary_docs=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 53.44,
+          "weighted_signal": 38.48,
+          "entity": "Tiago Mendes-Santos",
+          "topic": "quant-ph",
+          "text": "Exploring the Relaxation Landscape of a 2D Quantum Magnet on a 256-Qubit Processor. How quantum matter relaxes far from equilibrium is a central open problem in many-body physics, and one for which analog quantum simulators are well positioned to move from confirming theory to discovering new physics. Here, we use a t..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 51.39,
+          "weighted_signal": 37.0,
+          "entity": "Richen Xiong",
+          "topic": "quant-ph",
+          "text": "Observation of metastable chiral domain walls in a topological magnet. The interplay between topology and correlation can give rise to exotic collective excitations. The integer and fractional quantum anomalous Hall (QAH) magnets recently discovered in two-dimensional (2D) flatband systems are predicted to host spin e..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 47.68,
+          "weighted_signal": 34.33,
+          "entity": "Eduardo C. Lima",
+          "topic": "quant-ph",
+          "text": "Harnessing bound states in the continuum for quantum and nonlinear photonics in silicon nitride microresonators. In this work we theoretically and experimentally investigate bound states in the continuum (BICs) in a reconfigurable integrated photonic structure, focusing on spontaneous four-wave mixing. We consider a c..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 47.4,
+          "weighted_signal": 34.13,
+          "entity": "Jun Jia",
+          "topic": "quant-ph",
+          "text": "Entanglement-enhanced optical magnetometry beyond the standard quantum limit. Optical atomic magnetometry is a powerful tool for continuous sensing applications, yet, in the absence of quantum correlations, its sensitivity is limited by the standard quantum limit (SQL) stemming from a trade-off between optical probe i..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 45.84,
+          "weighted_signal": 33.01,
+          "entity": "Kritsana Srakaew",
+          "topic": "quant-ph",
+          "text": "Single-qubit detection by collective phase imprinting. The amplification of quantum information carried by a single quantum excitation is a recurring challenge across diverse quantum platforms. The coupling between a single qubit and a mesoscopic ensemble of spins, for example, can be leveraged to realize non-destruct..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 45.61,
+          "weighted_signal": 32.84,
+          "entity": "Pim H. Vree",
+          "topic": "quant-ph",
+          "text": "Temperature-tunable spin-wave refraction using superconducting control elements. Spin waves are promising signal carriers for microwave control at the micrometer scale. However, realizing low-damping, tunable control of spin-wave propagation remains a central challenge. Here we use magnetic shielding by superconductin..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 145,
+      "headline": "Control Systems / Generative Grammar / Artificial Intelligence is useful context for the ai / llm beat",
+      "category": "AI / LLM",
+      "status": "Develop lead",
+      "weighted_score": 50.74,
+      "records": 8,
+      "sources": 6,
+      "source_mix": {
+        "arXiv cs.AI": 3,
+        "GitHub Trending (Python/AI)": 1,
+        "VentureBeat": 1,
+        "AWS What's New": 1,
+        "arXiv cs.RO": 1,
+        "Google Cloud Blog": 1
+      },
+      "source_classes": {
+        "research": 4,
+        "news_discourse": 3,
+        "code_models": 1
+      },
+      "evidence_roles": {
+        "arxiv": 4,
+        "news": 3,
+        "ml_community": 1
+      },
+      "top_topics": "news / cs.AI / python",
+      "summary": "8 records landed this week across 6 active sources. The strongest weighted evidence is Afreen Alam from arXiv cs.AI with weighted signal 38.95. Evidence mix: research=4, news_discourse=3, code_models=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 54.1,
+          "weighted_signal": 38.95,
+          "entity": "Afreen Alam",
+          "topic": "cs.AI",
+          "text": "Taxonomy-Driven Analysis of Open-Source AI Risk Mitigation Tools. Rapid adoption of large language models (LLMs) in enterprise settings has introduced operational, security, and governance risks. As generative AI applications move from pilot to production, manual harm identification and mitigation are becoming difficu..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 51.06,
+          "weighted_signal": 36.76,
+          "entity": "Haoning Wang",
+          "topic": "cs.AI",
+          "text": "An End-to-End Agent Auditing Engine. With the rapid advancement of large language models (LLMs), harnesses have become essential infrastructure for deploying agents across a wide range of domains. The fast-evolving harness ecosystem has also made rigorous capability evaluation increasingly important. However, efficien..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "VentureBeat",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 40.82,
+          "weighted_signal": 33.48,
+          "entity": "venturebeat.com",
+          "topic": "news",
+          "text": "Four AI agents coordinating in real time outperformed Claude Opus 4.8 on enterprise coding tasks. As enterprise codebases grow, AI agents tasked with analyzing them are buckling under the weight of long-horizon tasks that require multiple interactions and tool calls. Dividing the work among a team of agents seems like..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "AWS What's New",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 40.17,
+          "weighted_signal": 32.94,
+          "entity": "aws.amazon.com",
+          "topic": "news",
+          "text": "Amazon Bedrock AgentCore adds memory, policy, and harness in AWS GovCloud (US-West). Today, Amazon Bedrock AgentCore introduces new capabilities in AWS GovCloud (US-West). AgentCore is the platform to build, connect, and optimize agents. With these capabilities, teams operating in regulated environments can build cont..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 45.46,
+          "weighted_signal": 32.73,
+          "entity": "Ricardo Britto",
+          "topic": "cs.AI",
+          "text": "Towards Assurance Closure in AI-Native Large-Scale Agile Software Development. The AI-Native Manifesto envisions large-scale agile software development in which humans increasingly govern intent, risk, and exceptions while agents execute more of the engineering process. Realizing that end-state requires more than bett..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.RO",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 41.67,
+          "weighted_signal": 30.0,
+          "entity": "Zhen Huang",
+          "topic": "cs.RO",
+          "text": "When Coordination Becomes a Threat: Communication Attacks in LLM-Controlled Multi-Robot Systems. Large Language Models (LLMs) are increasingly used as high-level planners in embodied multi-robot systems, enabling robots to interpret natural language instructions and coordinate executable actions. Yet, this growing rel..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 238,
+      "headline": "Quantum Physics / Quantum / Machine Learning activity is accelerating across 4 sources",
+      "category": "Quantum",
+      "status": "Investigate first",
+      "weighted_score": 48.7,
+      "records": 18,
+      "sources": 4,
+      "source_mix": {
+        "arXiv quant-ph": 11,
+        "Quantum Computing Report": 5,
+        "arXiv cs.AI": 1,
+        "Nature News": 1
+      },
+      "source_classes": {
+        "research": 12,
+        "news_discourse": 6
+      },
+      "evidence_roles": {
+        "arxiv": 12,
+        "news": 6
+      },
+      "top_topics": "quant-ph / news / cs.AI",
+      "summary": "18 records landed this week across 4 active sources. The strongest weighted evidence is Chien-Tung Kuo from arXiv quant-ph with weighted signal 36.17. Evidence mix: research=12, news_discourse=6.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 50.24,
+          "weighted_signal": 36.17,
+          "entity": "Chien-Tung Kuo",
+          "topic": "quant-ph",
+          "text": "Architecture-Aware Reinforcement Learning for Communication-Efficient Distributed Quantum Circuit Compilation. Distributed quantum computing provides a scalable route for executing quantum circuits beyond the capacity limits of a single quantum processing unit (QPU), but it introduces a communication-aware compilation..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 49.14,
+          "weighted_signal": 35.38,
+          "entity": "Gong-Chu Li",
+          "topic": "quant-ph",
+          "text": "Correlation Geometry of Quantum Sensor Networks: Local-Global Information Flow and Local Privacy. Quantum sensor networks typically encode N unknown parameters while targeting a single linear combination, rendering the N-1 remaining parameters as nuisance directions. To rigorously quantify estimation precision under s..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 47.34,
+          "weighted_signal": 34.08,
+          "entity": "Sayeda Bipanchi Ahmed",
+          "topic": "quant-ph",
+          "text": "QMIMO: Circuit Based Quantum MIMO Design with Variational Receiver. This paper investigates a quantum extension of classical Multiple-Input Multiple-Output (MIMO) communication in which the conventional linear channel model is replaced by a parameterized multi-qubit unitary transformation. Within this framework, inter..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 46.75,
+          "weighted_signal": 33.66,
+          "entity": "Hao-Yuan Chen",
+          "topic": "quant-ph",
+          "text": "Investigating Quantum-Embedded Transformers on Classical Datasets for Cross-Modality Classification. We test whether a parameterized quantum circuit (PQC) improves a hybrid quantum-classical model's performance on classical datasets, using an interface-matched classical map as the control while holding all other compo..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 45.34,
+          "weighted_signal": 32.64,
+          "entity": "Nilesh Sawant",
+          "topic": "quant-ph",
+          "text": "Exact quantum circuits for lattice Boltzmann realization of the Dirac equation. The quantum lattice Boltzmann (QLB) scheme of Succi and Dellar advances a four-component Dirac spinor on a lattice by a fixed sequence of local, exactly norm-preserving operations: a basis rotation, a collision, a streaming shift, and the..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 44.55,
+          "weighted_signal": 32.08,
+          "entity": "Heyue Li",
+          "topic": "quant-ph",
+          "text": "QCORE: A Quantum-Control-Oriented Real-Time Execution Architecture with Extensible Closed-Loop Services and Shared AI Acceleration. Scalable quantum processors require control, readout, feedback, calibration, and error correction to coexist under bounded latency and shared-resource constraints, whereas existing platfo..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 217,
+      "headline": "Environmental Science / Numerical Weather Prediction / Machine Learning is useful context for the ml research beat",
+      "category": "ML Research",
+      "status": "Develop lead",
+      "weighted_score": 46.65,
+      "records": 8,
+      "sources": 6,
+      "source_mix": {
+        "Hacker News": 2,
+        "Ars Technica": 2,
+        "Google DeepMind Blog": 1,
+        "Science Magazine": 1,
+        "Nature News": 1,
+        "arXiv eess.SP": 1
+      },
+      "source_classes": {
+        "news_discourse": 5,
+        "code_models": 2,
+        "research": 1
+      },
+      "evidence_roles": {
+        "news": 5,
+        "community": 2,
+        "arxiv": 1
+      },
+      "top_topics": "news / AI / eess.SP",
+      "summary": "8 records landed this week across 6 active sources. The strongest weighted evidence is arstechnica.com from Ars Technica with weighted signal 33.68. Evidence mix: news_discourse=5, code_models=2, research=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-08",
+          "source": "Ars Technica",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 41.08,
+          "weighted_signal": 33.68,
+          "entity": "arstechnica.com",
+          "topic": "news",
+          "text": "DeepMind\u2019s hurricane breakthrough has surprised weather scientists. Open source WeatherNext model can make accurate predictions with lower-resolution weather data."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "Google DeepMind Blog",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 36.66,
+          "weighted_signal": 30.06,
+          "entity": "deepmind.google",
+          "topic": "news",
+          "text": "WeatherNext: AI model achieves breakthrough in forecasting cyclones."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "Nature News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 32.23,
+          "weighted_signal": 26.43,
+          "entity": "nature.com",
+          "topic": "news",
+          "text": "Operational Tropical Cyclone Forecasting with AI. Nature, Published online: 06 August 2026; doi:10.1038/s41586-026-10953-2 Operational Tropical Cyclone Forecasting with AI"
+        },
+        {
+          "date": "2026-08-07",
+          "source": "Ars Technica",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 29.6,
+          "weighted_signal": 24.27,
+          "entity": "arstechnica.com",
+          "topic": "news",
+          "text": "Europe's free satellite service just made it easier to track wildfires. Copernicus Browser adds wildfire visualization amid record wildfire season."
+        },
+        {
+          "date": "2026-08-04",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 33.23,
+          "weighted_signal": 23.92,
+          "entity": "Minhyeok Ko",
+          "topic": "eess.SP",
+          "text": "Unscented KalmanNet: a hybrid deep learning filter with calibrated posterior covariance for nonlinear state estimation. State estimation for nonlinear dynamical systems is commonly performed with the Unscented Kalman filter (UKF), which propagates the state moments through deterministic sigma points and reports a post..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "Science Magazine",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 25.64,
+          "weighted_signal": 21.02,
+          "entity": "science.org",
+          "topic": "news",
+          "text": "NASA\u2019s PUNCH punches up space weather forecasts. Science, Volume 393, Issue 6811, Page 548-549, August 2026."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Check repo/model history for maintainers, funders, dependencies, and sudden activity changes.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 192,
+      "headline": "Computer Vision / Interpretability / Segmentation is useful context for the ml research beat",
+      "category": "ML Research",
+      "status": "Develop lead",
+      "weighted_score": 45.79,
+      "records": 12,
+      "sources": 5,
+      "source_mix": {
+        "arXiv cs.AI": 5,
+        "arXiv cs.LG": 3,
+        "arXiv eess.SP": 2,
+        "arXiv cs.CE (Computational Engineering/Finance)": 1,
+        "arXiv cs.RO": 1
+      },
+      "source_classes": {
+        "research": 12
+      },
+      "evidence_roles": {
+        "arxiv": 12
+      },
+      "top_topics": "cs.AI / cs.LG / eess.SP",
+      "summary": "12 records landed this week across 5 active sources. The strongest weighted evidence is Zixuan Lan from arXiv cs.AI with weighted signal 37.14. Evidence mix: research=12.",
+      "reporting_value": "watch item",
+      "coverage_gap": "No tier-1 news/trade-press evidence is present in the processed corpus.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 51.59,
+          "weighted_signal": 37.14,
+          "entity": "Zixuan Lan",
+          "topic": "cs.AI",
+          "text": "SABRE: Scalable and Automated Benchmarking of VLMs under Stress. Vision-language models (VLMs) are improving rapidly, but benchmark development lags behind, making weaknesses hard to identify. Building stress tests is costly: samples must satisfy controlled conditions, remain answerable, and challenge current models...."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 51.2,
+          "weighted_signal": 36.86,
+          "entity": "Zichuan Wang",
+          "topic": "cs.AI",
+          "text": "Same Attention, Different Truths: Put Logit-Lens over Visual Attention to Detect and Mitigate LVLM Object Hallucination. Large Vision-Language Models (LVLMs) often suffer from object hallucination, generating objects that are absent from the image. Prior work largely attributes this to insufficient visual attention. H..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 50.16,
+          "weighted_signal": 36.12,
+          "entity": "Zhen Liu",
+          "topic": "cs.LG",
+          "text": "An AI4AI Framework for Visual Token Pruning. Visual-token pruning can substantially reduce the inference cost of multimodal large language models (MLLMs), yet existing methods largely rely on fixed, handcrafted heuristics and costly expert trial and error. As pruning objectives, budgets, and model architectures divers..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 49.52,
+          "weighted_signal": 35.65,
+          "entity": "Jingkai Ying",
+          "topic": "eess.SP",
+          "text": "Token Communication for Multimodal Large Language Model. With the broad success of the Transformer architecture, token is becoming a new basic information processing unit. This trend is especially evident in multimodal large language models (MLLMs), where both visual and textual information are represented and process..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 48.52,
+          "weighted_signal": 34.94,
+          "entity": "Shibo Gao",
+          "topic": "cs.AI",
+          "text": "I Seek You in Videos: Identity-Conditioned Queries for Person-Centric Video Reasoning. Real-world video reasoning often involves multimodal, multi-source inputs, whereas existing video reasoning tasks typically assume a simplified video-text setting, limiting identity matching and person-centric reasoning. To bridge t..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 47.99,
+          "weighted_signal": 34.55,
+          "entity": "Xindi Wu",
+          "topic": "cs.LG",
+          "text": "Addressable Memory for Video World Models. We study visual persistence in interactive video world models. These models rely on a Key-Value (KV) cache as a growing visual memory to carry forward previously generated frames. However, we find that models can no longer reliably address stored content once rollouts extend..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 67,
+      "headline": "cs.CE / Economics / Natural Language Processing is useful context for the ml research beat",
+      "category": "ML Research",
+      "status": "Context watch",
+      "weighted_score": 44.33,
+      "records": 6,
+      "sources": 5,
+      "source_mix": {
+        "arXiv cs.CE (Computational Engineering/Finance)": 2,
+        "TechCrunch": 1,
+        "Hacker News": 1,
+        "Crunchbase News": 1,
+        "Ars Technica": 1
+      },
+      "source_classes": {
+        "news_discourse": 3,
+        "research": 2,
+        "code_models": 1
+      },
+      "evidence_roles": {
+        "news": 3,
+        "arxiv": 2,
+        "community": 1
+      },
+      "top_topics": "news / cs.CE / AI",
+      "summary": "6 records landed this week across 5 active sources. The strongest weighted evidence is Shivansh Verma from arXiv cs.CE (Computational Engineering/Finance) with weighted signal 31.22. Evidence mix: news_discourse=3, research=2, code_models=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-06",
+          "source": "arXiv cs.CE (Computational Engineering/Finance)",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 43.36,
+          "weighted_signal": 31.22,
+          "entity": "Shivansh Verma",
+          "topic": "cs.CE",
+          "text": "Quantitative Analysis of Media Bias and Stock Price Dynamics: The 2020 Shock. Whether financial news influences stock prices or simply reflects information already incorporated into them remains an open question in financial economics. The COVID-19 pandemic provides an opportunity to revisit this question, as it disru..."
+        },
+        {
+          "date": "2026-08-04",
+          "source": "arXiv cs.CE (Computational Engineering/Finance)",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 41.36,
+          "weighted_signal": 29.78,
+          "entity": "Andreas Sauter",
+          "topic": "cs.CE",
+          "text": "Amortized Interventional Forecasting for Multivariate CIR Processes. Mean-reverting dynamics are pervasive in finance, and the Cox--Ingersoll--Ross (CIR) process is a standard model for the time series they produce, from short rates to credit default swap (CDS) spreads. Yet CIR models capture only \\emph{correlated} co..."
+        },
+        {
+          "date": "2026-08-09",
+          "source": "TechCrunch",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 28.91,
+          "weighted_signal": 23.71,
+          "entity": "techcrunch.com",
+          "topic": "news",
+          "text": "Embattled hedge fund Situational Awareness invests $400M in chip startup Source Foundry. The AI-focused hedge fund is still making some big bets."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "Crunchbase News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 27.54,
+          "weighted_signal": 22.58,
+          "entity": "news.crunchbase.com",
+          "topic": "news",
+          "text": "The Week\u2019s 10 Biggest Funding Rounds: A Big Week For Big Checks. Startups raised funding rounds with a lot of zeroes at the end this week, with three companies securing financings of $1 billion or more. Additionally, a robust lineup of companies in sectors including AI, e-commerce, cybersecurity, biotech and even mini..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "Ars Technica",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 26.81,
+          "weighted_signal": 21.98,
+          "entity": "arstechnica.com",
+          "topic": "news",
+          "text": "DOGE's wild, unverifiable savings claims discredited in US government report. DOGE's inflated \"Wall of Receipts\": 96% of grant savings unverifiable, GAO says."
+        },
+        {
+          "date": "2026-08-09",
+          "source": "Hacker News",
+          "signal_class": "code_models",
+          "evidence_role": "community",
+          "authority_weight": 0.175,
+          "signal_pct": 32.29,
+          "weighted_signal": 5.65,
+          "entity": "Brajeshwar",
+          "topic": "AI",
+          "text": "AI push is putting banks at mercy of tech firms, warns Moody's. via theguardian.com"
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 189,
+      "headline": "Natural Language Processing / Artificial Intelligence / Machine Learning activity is accelerating across 4 sources",
+      "category": "AI / LLM",
+      "status": "Develop lead",
+      "weighted_score": 44.17,
+      "records": 6,
+      "sources": 3,
+      "source_mix": {
+        "arXiv cs.AI": 4,
+        "VentureBeat": 1,
+        "arXiv cs.LG": 1
+      },
+      "source_classes": {
+        "research": 5,
+        "news_discourse": 1
+      },
+      "evidence_roles": {
+        "arxiv": 5,
+        "news": 1
+      },
+      "top_topics": "cs.AI / news / cs.LG",
+      "summary": "6 records landed this week across 3 active sources. The strongest weighted evidence is Mingxuan Zheng from arXiv cs.AI with weighted signal 37.99. Evidence mix: research=5, news_discourse=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 52.77,
+          "weighted_signal": 37.99,
+          "entity": "Mingxuan Zheng",
+          "topic": "cs.AI",
+          "text": "SkillProx: Self-Evolving Agent Skills via Proximal Textual Gradient Descent. LLM agents increasingly adapt to recurring tasks by accumulating procedural knowledge in skills. These skills are lightweight, reusable textual artifacts that are loaded into the agent's context without weight updates. Recent methods refine s..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 51.85,
+          "weighted_signal": 37.33,
+          "entity": "Taeil Kim",
+          "topic": "cs.LG",
+          "text": "Agent Memory Distillation: Empowering Small LLM Agents with Hierarchical Teacher Memory. Memory systems have shown promise for improving agent performance, but their potential remains largely unexplored for small language models, which struggle to generate sufficient successful trajectories on their own. We propose Ag..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 44.5,
+          "weighted_signal": 32.04,
+          "entity": "Yan Zhou",
+          "topic": "cs.AI",
+          "text": "TEPA: Revoking Stale Memories for Conflict-Robust Language Agents. Long-term memory enables language agents to reuse past facts, preferences, and task experience. Persistence also creates a central falsifiability problem: when the world changes, stale memories can remain retrievable and pollute the prompt. We characte..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "VentureBeat",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 38.4,
+          "weighted_signal": 31.49,
+          "entity": "venturebeat.com",
+          "topic": "news",
+          "text": "Tencent's Team Memory shares AI agent memory across a team \u2014 with no governance yet for when it's wrong. A VB Pulse survey this June found that 57% of enterprises had traced a confidently wrong agent answer back to missing or inconsistent context \u2014 the latest sign of how central context has become to whether AI agents..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 42.79,
+          "weighted_signal": 30.81,
+          "entity": "Mohammad Amanlou",
+          "topic": "cs.AI",
+          "text": "PsychoAgent: An Affect-Sensitive Cognitive Architecture for Conflict-Aware Memory in LLM Agents. Human-like cognition does not select past experience by topical similarity alone: affective significance and unresolved conflict also shape what becomes accessible. We present PsychoAgent, a cognitive architecture for LLM..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 41.27,
+          "weighted_signal": 29.71,
+          "entity": "MY Pitsane",
+          "topic": "cs.AI",
+          "text": "Blast Radius. Agentic coding faces growing problems of affordability and wasted tokens. We introduce Blast Radius, a predictive memory management layer that estimates an incoming prompt's reach through coupled context and code channels. NECROPHORESIS enables reversible eviction by archiving dead context verbatim, whil..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 180,
+      "headline": "Machine Learning / Reinforcement Learning / Robustness (Evolution) is useful context for the ml research beat",
+      "category": "ML Research",
+      "status": "Develop lead",
+      "weighted_score": 43.78,
+      "records": 9,
+      "sources": 3,
+      "source_mix": {
+        "arXiv cs.LG": 7,
+        "arXiv cs.AI": 1,
+        "arXiv cs.CE (Computational Engineering/Finance)": 1
+      },
+      "source_classes": {
+        "research": 9
+      },
+      "evidence_roles": {
+        "arxiv": 9
+      },
+      "top_topics": "cs.LG / cs.AI / cs.CE",
+      "summary": "9 records landed this week across 3 active sources. The strongest weighted evidence is Qi Zhao from arXiv cs.LG with weighted signal 39.96. Evidence mix: research=9.",
+      "reporting_value": "watch item",
+      "coverage_gap": "No tier-1 news/trade-press evidence is present in the processed corpus.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 55.5,
+          "weighted_signal": 39.96,
+          "entity": "Qi Zhao",
+          "topic": "cs.LG",
+          "text": "Beyond Isolation: Unlocking Reinforcement Learning Component Synergy for Sample-Efficient Continuous Control. Reinforcement learning systems are significantly more complex than other machine learning paradigms due to inherent properties, causing RL system design to jointly account for many tightly coupled factors. Des..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 48.65,
+          "weighted_signal": 35.03,
+          "entity": "Haoyu Zheng",
+          "topic": "cs.LG",
+          "text": "Trajectory-Relative Hindsight Distillation for Agentic Reinforcement Learning. Recent agentic reinforcement learning methods use hindsight to complement sparse outcome rewards. However, a completed rollout can yield many such signals, leaving their appropriate allocation across turns unclear. We introduce TRIAL, a tra..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 48.35,
+          "weighted_signal": 34.81,
+          "entity": "Adam \u0160tafa",
+          "topic": "cs.LG",
+          "text": "Momba: Network Modernization Improves Multi-Objective Reinforcement Learning. Recent advances in deep reinforcement learning (RL) have shown that improving neural network architectures can yield substantial gains in sample efficiency and asymptotic performance without altering the underlying algorithms. In contrast, w..."
+        },
+        {
+          "date": "2026-08-03",
+          "source": "arXiv cs.CE (Computational Engineering/Finance)",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 47.29,
+          "weighted_signal": 34.05,
+          "entity": "Nam-Phong Huu Nguyen",
+          "topic": "cs.CE",
+          "text": "Physics-Constrained Soft Actor-Critic for Simulator-in-the-Loop Petroleum Reservoir History Matching. Many scientific calibration problems expose only an expensive executable simulator, making gradients unavailable and large-scale training-data generation impractical. We study petroleum reservoir history matching as a..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 45.52,
+          "weighted_signal": 32.78,
+          "entity": "Joar Skalse",
+          "topic": "cs.LG",
+          "text": "Online Conformal Prediction Beyond Feedback. Uncertainty quantification is essential when deploying machine learning models in safety-critical applications. Online conformal prediction (OCP) provides theoretically principled uncertainty quantification for arbitrary black-box classifiers and non-i.i.d. data streams by..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 42.51,
+          "weighted_signal": 30.61,
+          "entity": "Idil G\u00f6zel",
+          "topic": "cs.LG",
+          "text": "Learning Suffers More Than the Policy Class Under Partial Observability: A Closed-Form Analysis. When a reinforcement learning agent cannot observe the full state, we usually blame its policies: it cannot see enough to represent a good one. We show that in a solvable case the bigger problem lies elsewhere. Even when a..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 65,
+      "headline": "Microsoft / Google / Ai Agent is showing deployment-adjacent signals across code, discourse, paper",
+      "category": "AI / LLM",
+      "status": "Develop lead",
+      "weighted_score": 43.48,
+      "records": 10,
+      "sources": 8,
+      "source_mix": {
+        "GitHub Trending (Python/AI)": 2,
+        "Hacker News": 2,
+        "TechCrunch": 1,
+        "VentureBeat": 1,
+        "AWS What's New": 1,
+        "Microsoft Azure Blog": 1,
+        "The Register": 1,
+        "Hugging Face Blog": 1
+      },
+      "source_classes": {
+        "code_models": 5,
+        "news_discourse": 5
+      },
+      "evidence_roles": {
+        "news": 5,
+        "ml_community": 3,
+        "community": 2
+      },
+      "top_topics": "news / python / AI",
+      "summary": "10 records landed this week across 8 active sources. The strongest weighted evidence is azure.microsoft.com from Microsoft Azure Blog with weighted signal 32.1. Evidence mix: code_models=5, news_discourse=5.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-06",
+          "source": "Microsoft Azure Blog",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 39.15,
+          "weighted_signal": 32.1,
+          "entity": "azure.microsoft.com",
+          "topic": "news",
+          "text": "Microsoft named a Leader in the 2026 Gartner\u00ae Magic Quadrant\u2122 for AI-Augmented Code Modernization Tools. GitHub Copilot and Azure are helping organizations modernize legacy applications, reduce technical debt, and prepare for AI innovation. The post Microsoft named a Leader in the 2026 Gartner\u00ae Magic Quadrant\u2122 for AI-..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "VentureBeat",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 32.52,
+          "weighted_signal": 26.67,
+          "entity": "venturebeat.com",
+          "topic": "news",
+          "text": "No cloud, no GPUs, no problem: Liquid AI's new model LFM2.5-2.6B brings powerful AI agents to devices as small as a Raspberry Pi. Earlier this week, the AI startup Liquid, formed in 2023 by former MIT computer scientists, debuted LFM2.5-2.6B , a new open-weight language model designed specifically for agentic workload..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "The Register",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 31.57,
+          "weighted_signal": 25.89,
+          "entity": "theregister.com",
+          "topic": "news",
+          "text": "Meta wants to get inside your terminal with its new coding agent. Muse Code showcases Muse Spark's fresh software engineering chops"
+        },
+        {
+          "date": "2026-08-07",
+          "source": "TechCrunch",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 28.86,
+          "weighted_signal": 23.67,
+          "entity": "techcrunch.com",
+          "topic": "news",
+          "text": "Cloudflare launches Kitesurf, a browser built for AI agents. Kitesurf is a cloud-hosted browser designed for AI agents instead of people. It uses less computing power than Chromium for common automation tasks, helping developers build browser-based AI agents more efficiently."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "AWS What's New",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 28.01,
+          "weighted_signal": 22.97,
+          "entity": "aws.amazon.com",
+          "topic": "news",
+          "text": "AgentCore runtime instances are now generally available. Today, AWS announces runtime instances, a new feature in Amazon Bedrock AgentCore that lets you run agents on your own Amazon EC2 instances without managing infrastructure. AgentCore runtime provides purpose-built infrastructure to deploy and operate AI agents s..."
+        },
+        {
+          "date": "2026-08-09",
+          "source": "GitHub Trending (Python/AI)",
+          "signal_class": "code_models",
+          "evidence_role": "ml_community",
+          "authority_weight": 0.364,
+          "signal_pct": 53.49,
+          "weighted_signal": 19.47,
+          "entity": "SimplifyJobs/Summer2027-Internships",
+          "topic": "python",
+          "text": "SimplifyJobs/Summer2027-Internships. Summer 2026 software engineering, data science, AI, quant, product management, and hardware internship postings. Updated daily by Simplify and Pitt CSC."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Check repo/model history for maintainers, funders, dependencies, and sudden activity changes.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 153,
+      "headline": "Computer Security / Machine Learning / Intrusion Detection System is useful context for the ml research beat",
+      "category": "ML Research",
+      "status": "Develop lead",
+      "weighted_score": 43.33,
+      "records": 10,
+      "sources": 7,
+      "source_mix": {
+        "TechCrunch": 2,
+        "Google Cloud Blog": 2,
+        "AWS What's New": 2,
+        "Wired": 1,
+        "arXiv cs.AI": 1,
+        "The Register": 1,
+        "VentureBeat": 1
+      },
+      "source_classes": {
+        "news_discourse": 9,
+        "research": 1
+      },
+      "evidence_roles": {
+        "news": 9,
+        "arxiv": 1
+      },
+      "top_topics": "news / cs.AI",
+      "summary": "10 records landed this week across 7 active sources. The strongest weighted evidence is cloud.google.com from Google Cloud Blog with weighted signal 30.84. Evidence mix: news_discourse=9, research=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "Google Cloud Blog",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 37.61,
+          "weighted_signal": 30.84,
+          "entity": "cloud.google.com",
+          "topic": "news",
+          "text": "How Google Cloud detects, contains, and protects against emerging threats. At Google Cloud, securing your data and business systems is our foundational commitment. We empower our customers with the tools, governance, and infrastructure needed to securely deploy workloads and maintain long-term trust. We approach secur..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 42.53,
+          "weighted_signal": 30.62,
+          "entity": "Elena Dumitrescu",
+          "topic": "cs.AI",
+          "text": "Diffusion LLMs as Targets and Adversaries: Mechanistic Safety Exploits. Diffusion Large Language Models (DLLMs) replace autoregressive next-token prediction with iterative parallel denoising, yet their internal safety mechanisms remain poorly understood. In this work, we investigate DLLMs both as targets and as advers..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "Google Cloud Blog",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 37.16,
+          "weighted_signal": 30.47,
+          "entity": "cloud.google.com",
+          "topic": "news",
+          "text": "UNC6671 Rebrands: Multi-Brand Vishing Extortion Targets Financial Services and Enterprise Cloud Environments. Written by: Tyler McLellan, Austin Larsen Introduction Google Threat Intelligence Group (GTIG) continues to track UNC6671 actively conducting compromises leading to data theft extortion, despite the alleged an..."
+        },
+        {
+          "date": "2026-08-04",
+          "source": "AWS What's New",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 32.58,
+          "weighted_signal": 26.72,
+          "entity": "aws.amazon.com",
+          "topic": "news",
+          "text": "AWS Security Hub Extended adds supply chain security as its 10th category. The AWS Security Hub Extended plan now includes Supply Chain Security as its 10th security category, with Chainguard and Socket as the curated partners. As developers adopt open-source libraries at scale, security teams need confidence that the..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "AWS What's New",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 30.07,
+          "weighted_signal": 24.66,
+          "entity": "aws.amazon.com",
+          "topic": "news",
+          "text": "AWS WAF now supports a Salt Security managed rule group for API and MCP threat detection. AWS WAF now supports the Salt Security managed rule group, available through AWS Marketplace: Salt Managed Rules for AWS WAF - AI Agent & API Security . This rule group gives AWS WAF customers detection and mitigation for API-foc..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "The Register",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 30.05,
+          "weighted_signal": 24.64,
+          "entity": "theregister.com",
+          "topic": "news",
+          "text": "Attacker phished way into US defense supplier's Microsoft 365 account. Intruder gained access to engineering files and potentially export-controlled technical data"
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Check repo/model history for maintainers, funders, dependencies, and sudden activity changes.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 80,
+      "headline": "Context (Archaeology) / Training (Meteorology) / cs.DC is useful context for the infra / code beat",
+      "category": "Infra / Code",
+      "status": "Develop lead",
+      "weighted_score": 43.27,
+      "records": 10,
+      "sources": 6,
+      "source_mix": {
+        "AWS What's New": 3,
+        "Google Cloud Blog": 2,
+        "arXiv eess.SP": 2,
+        "The Register": 1,
+        "arXiv cs.LG": 1,
+        "arXiv cs.CE (Computational Engineering/Finance)": 1
+      },
+      "source_classes": {
+        "news_discourse": 6,
+        "research": 4
+      },
+      "evidence_roles": {
+        "news": 6,
+        "arxiv": 4
+      },
+      "top_topics": "news / eess.SP / cs.LG",
+      "summary": "10 records landed this week across 6 active sources. The strongest weighted evidence is Matthew Pennybacker from arXiv eess.SP with weighted signal 31.43. Evidence mix: news_discourse=6, research=4.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-05",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 43.65,
+          "weighted_signal": 31.43,
+          "entity": "Matthew Pennybacker",
+          "topic": "eess.SP",
+          "text": "GPU-Resident CUDA Acceleration for OCUDU 5G PHY and O-RAN Fronthaul: Architecture and Preliminary Performance. This paper describes DeepSig's CUDA-based acceleration backend for the OCUDU physical layer and O-RAN fronthaul path, integrated through acceleration interfaces that are largely independent of the underlying..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "Google Cloud Blog",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 33.43,
+          "weighted_signal": 27.41,
+          "entity": "cloud.google.com",
+          "topic": "news",
+          "text": "Agentic Future Ready With BigQuery: Continually Improving Price-Performance, Zero Effort. In the modern data landscape, query performance tuning and managing system price-performance is challenging, especially as the number of agentic workloads increase. Even for experienced developers and DBAs, constantly analyzing q..."
+        },
+        {
+          "date": "2026-08-05",
+          "source": "arXiv cs.CE (Computational Engineering/Finance)",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 36.47,
+          "weighted_signal": 26.26,
+          "entity": "Suparno Bhattacharyya",
+          "topic": "cs.CE",
+          "text": "scikit-rom: An Open-Source Python Platform for Teaching and Prototyping Projection-Based Reduced-Order Modeling. Projection-based reduced-order modeling (ROM) has become a cornerstone technique for accelerating parameter-intensive engineering simulations, yet the methodology remains challenging to teach and prototype...."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "AWS What's New",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 30.16,
+          "weighted_signal": 24.73,
+          "entity": "aws.amazon.com",
+          "topic": "news",
+          "text": "Amazon EC2 R8i and R8i-Flex instances are now available in Europe (Milan) region. Starting today, Amazon Elastic Compute Cloud (Amazon EC2) R8i and R8i-flex instances are available in the Europe (Milan) region. These instances are powered by custom Intel Xeon 6 processors, available only on AWS, delivering the highest..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 34.21,
+          "weighted_signal": 24.63,
+          "entity": "Minh-Tuong Nguyen",
+          "topic": "eess.SP",
+          "text": "Exact DC Representation of Multi-Tier Offloading Product in SAGINs via Quantifier Elimination. Task offloading in space--air--ground integrated networks (SAGIN) yields non-convex signomial or polynomial programs with cubic couplings. Sequential geometric programming (SGP) approximates them via exponential cone represe..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 33.88,
+          "weighted_signal": 24.39,
+          "entity": "Vasanth Iyer",
+          "topic": "cs.LG",
+          "text": "Dual-Node NVIDIA DGX Spark over Tailscale: A Remote-Access Testbed for Distributed LLM Training and Cyber-Threat-Intelligence Fine-Tuning. Compact AI systems make local language-model experimentation increasingly accessible, yet practical evidence for multi-node training on desktop-class accelerators remains limited...."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 112,
+      "headline": "Higher Education / Artificial Intelligence / Transformative Learning is useful context for the ml research beat",
+      "category": "ML Research",
+      "status": "Context watch",
+      "weighted_score": 43.26,
+      "records": 4,
+      "sources": 4,
+      "source_mix": {
+        "Hugging Face Blog": 1,
+        "arXiv cs.AI": 1,
+        "Crunchbase News": 1,
+        "arXiv cs.CE (Computational Engineering/Finance)": 1
+      },
+      "source_classes": {
+        "research": 2,
+        "code_models": 1,
+        "news_discourse": 1
+      },
+      "evidence_roles": {
+        "arxiv": 2,
+        "ml_community": 1,
+        "news": 1
+      },
+      "top_topics": "ml_community / cs.AI / news",
+      "summary": "4 records landed this week across 4 active sources. The strongest weighted evidence is Henrique Mohallem Paiva from arXiv cs.AI with weighted signal 31.29. Evidence mix: research=2, code_models=1, news_discourse=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 43.46,
+          "weighted_signal": 31.29,
+          "entity": "Henrique Mohallem Paiva",
+          "topic": "cs.AI",
+          "text": "Curriculum as Code: An AI-Assisted Architecture for Instructional Design in STEM Education. Contribution: This paper presents a six-phase AI-assisted instructional design architecture based on the Curriculum as Code paradigm, integrating Generative AI with LaTeX and Python to automate the creation of reproducible, vis..."
+        },
+        {
+          "date": "2026-08-04",
+          "source": "arXiv cs.CE (Computational Engineering/Finance)",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 42.08,
+          "weighted_signal": 30.3,
+          "entity": "Lydia Manikonda",
+          "topic": "cs.CE",
+          "text": "Policy Fragmentation or Institutional Alignment? Institutional Governance of AI in Universities and Business Schools. Artificial intelligence (AI) is rapidly transforming high-skilled domains, requiring higher education institutions (HEI) to balance the teaching of foundational principles with the integration of emerg..."
+        },
+        {
+          "date": "2026-08-05",
+          "source": "Crunchbase News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 31.01,
+          "weighted_signal": 25.43,
+          "entity": "news.crunchbase.com",
+          "topic": "news",
+          "text": "\u2018Nobody Wanted to Give A Former Principal Money\u2019: How An Educator Built An Edtech AI Startup With $63M From VCs. Founded by an educator fascinated by the educational potential of ChatGPT, MagicSchool AI leads off a series of articles featuring startup founders from non-technical backgrounds who have launched successfu..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "Hugging Face Blog",
+          "signal_class": "code_models",
+          "evidence_role": "ml_community",
+          "authority_weight": 0.364,
+          "signal_pct": 36.69,
+          "weighted_signal": 13.36,
+          "entity": "huggingface.co",
+          "topic": "ml_community",
+          "text": "TutorMoments: Do AI tutors know when to help and when to hold back?."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 122,
+      "headline": "Neural Computing / Signal Processing / Machine Learning activity is accelerating across 3 sources",
+      "category": "ML Research",
+      "status": "Develop lead",
+      "weighted_score": 43.13,
+      "records": 10,
+      "sources": 4,
+      "source_mix": {
+        "arXiv eess.SP": 5,
+        "arXiv cs.AI": 2,
+        "arXiv cs.LG": 2,
+        "arXiv cs.CE (Computational Engineering/Finance)": 1
+      },
+      "source_classes": {
+        "research": 10
+      },
+      "evidence_roles": {
+        "arxiv": 10
+      },
+      "top_topics": "eess.SP / cs.AI / cs.LG",
+      "summary": "10 records landed this week across 4 active sources. The strongest weighted evidence is Taha Shieenavaz from arXiv cs.AI with weighted signal 34.19. Evidence mix: research=10.",
+      "reporting_value": "watch item",
+      "coverage_gap": "No tier-1 news/trade-press evidence is present in the processed corpus.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 47.48,
+          "weighted_signal": 34.19,
+          "entity": "Taha Shieenavaz",
+          "topic": "cs.AI",
+          "text": "Aftab: A Comprehensive Benchmark of CNN Encoders and Advanced Value Functions in Parallelized Q-Networks. Recent advancements in deep reinforcement learning have increasingly favored simplified, highly parallelized paradigms. Notably, the Parallelized Q-Network (PQN) algorithm achieves stable off-policy learning witho..."
+        },
+        {
+          "date": "2026-08-05",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 46.69,
+          "weighted_signal": 33.62,
+          "entity": "Yuan Gao",
+          "topic": "eess.SP",
+          "text": "Generalizable and Computational Efficient Channel Extrapolation for 6G: A Configurable AI-Driven Framework Built from a Modular Perspective. Acquiring channel state information (CSI) with manageable overhead has been essential to provide high-performance communication services, which is extremely challenging in the em..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 45.94,
+          "weighted_signal": 33.08,
+          "entity": "Beatrice Alessandra Motetti",
+          "topic": "cs.LG",
+          "text": "MAUPITI: On-Device Prototype-Based Learning on a Smart Infrared Sensor. Low-resolution infrared (IR) array sensors represent an interesting solution for privacy-preserving human sensing in embedded systems. In this letter, we describe a smart multi-pixel IR sensor integrating a 16$\\times$16 thermal MOSFET (TMOS) array..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 44.68,
+          "weighted_signal": 32.17,
+          "entity": "Jinchao Zhou",
+          "topic": "eess.SP",
+          "text": "Radio-FM: A Foundation Model for Radio Signal Representation Learning and Its Applications. Applying foundation models to the radio frequency (RF) domain presents unique challenges due to the intrinsic physical complexity of raw I/Q signals and the extreme heterogeneity of spectral data. In this paper, we present Radi..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 41.87,
+          "weighted_signal": 30.15,
+          "entity": "Ioannis Ziogas",
+          "topic": "cs.AI",
+          "text": "Omni-modal decomposition autoencoders learn full-stack wearable disentangled representations. Learning disentangled representations is a key requirement for developing versatile, general-purpose, and sustainable models in multi-modal wearable computing. However, existing approaches do not operate as full-stack wearabl..."
+        },
+        {
+          "date": "2026-08-05",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 41.02,
+          "weighted_signal": 29.53,
+          "entity": "Blessed Guda",
+          "topic": "eess.SP",
+          "text": "MultiPathFormer: Towards a Foundation Model for Multipath Wireless Propagation. Recent advances in machine learning have enabled training of wireless foundation models, which aim to support tasks such as channel estimation, beam prediction, and localization based on wireless signals. Existing wireless foundation model..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 123,
+      "headline": "Cytotoxicity / Extracellular Vesicles / Microvesicles is useful context for the bio / health beat",
+      "category": "Bio / Health",
+      "status": "Context watch",
+      "weighted_score": 42.69,
+      "records": 3,
+      "sources": 3,
+      "source_mix": {
+        "arXiv cs.CE (Computational Engineering/Finance)": 1,
+        "Nature News": 1,
+        "SEC EDGAR 8-K Filings": 1
+      },
+      "source_classes": {
+        "research": 1,
+        "news_discourse": 1,
+        "primary_docs": 1
+      },
+      "evidence_roles": {
+        "arxiv": 1,
+        "news": 1,
+        "sec": 1
+      },
+      "top_topics": "cs.CE / news / bio",
+      "summary": "3 records landed this week across 3 active sources. The strongest weighted evidence is Beam Therapeutics Inc. from SEC EDGAR 8-K Filings with weighted signal 34.52. Evidence mix: research=1, news_discourse=1, primary_docs=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-04",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 34.52,
+          "weighted_signal": 34.52,
+          "entity": "Beam Therapeutics Inc.",
+          "topic": "bio",
+          "text": "Beam Therapeutics Inc. BEAM 8-K. bio. 8-K"
+        },
+        {
+          "date": "2026-08-06",
+          "source": "arXiv cs.CE (Computational Engineering/Finance)",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 42.94,
+          "weighted_signal": 30.91,
+          "entity": "Kai Dahms",
+          "topic": "cs.CE",
+          "text": "Accelerating nanodrug development in continuous flow systems using informed prediction models based on low-cost surrogate nanoparticles. The development of nanotherapeutics often involves extensive empirical optimization due to the sensitivity of nanoparticle properties, such as size and polydispersity index (PDI), to..."
+        },
+        {
+          "date": "2026-08-05",
+          "source": "Nature News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 29.48,
+          "weighted_signal": 24.18,
+          "entity": "nature.com",
+          "topic": "news",
+          "text": "Editorial Expression of Concern: Tumour exosome integrins determine organotropic metastasis. Nature, Published online: 05 August 2026; doi:10.1038/s41586-026-10977-8 Editorial Expression of Concern: Tumour exosome integrins determine organotropic metastasis"
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Check clinical trial, FDA, and institutional affiliations before treating this as deployable medicine.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 210,
+      "headline": "Natural Language Processing / Artificial Intelligence / Medical Diagnosis is useful context for the ai / llm beat",
+      "category": "AI / LLM",
+      "status": "Develop lead",
+      "weighted_score": 42.42,
+      "records": 4,
+      "sources": 2,
+      "source_mix": {
+        "arXiv cs.AI": 3,
+        "Google Cloud Blog": 1
+      },
+      "source_classes": {
+        "research": 3,
+        "news_discourse": 1
+      },
+      "evidence_roles": {
+        "arxiv": 3,
+        "news": 1
+      },
+      "top_topics": "cs.AI / news",
+      "summary": "4 records landed this week across 2 active sources. The strongest weighted evidence is Valentin Li\u00e9vin from arXiv cs.AI with weighted signal 41.32. Evidence mix: research=3, news_discourse=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 57.4,
+          "weighted_signal": 41.32,
+          "entity": "Valentin Li\u00e9vin",
+          "topic": "cs.AI",
+          "text": "ResidencyRL: Reinforcement Learning in Simulated Clinical Environments. In medical education, physicians convert academic knowledge into clinical expertise through residency: years of training across thousands of encounters, with diverse sources of feedback and progressively greater autonomy. Much of clinical reasonin..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 46.88,
+          "weighted_signal": 33.75,
+          "entity": "Kaela Kokkas",
+          "topic": "cs.AI",
+          "text": "Artificial Intelligence Can Match Domain Experts in Evidence Extraction and Critical Appraisal of Microbial Oncogenesis Research Publications. Confirmed oncogenic microbes contribute significantly to cancer burden. Identifying novel microbial oncogenicity could yield strategies that will reduce disease burdens. Howeve..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 43.6,
+          "weighted_signal": 31.39,
+          "entity": "Chengyi Peng",
+          "topic": "cs.AI",
+          "text": "EliSeg: Verified Target Construction for Report-Grounded Abnormality Segmentation. Radiology reports describe clinical observations but do not specify executable segmentation targets. They may contain present, negated, prior,uncertain, or irrelevant findings, while multiple valid abnormalities may coexist. Existing se..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "Google Cloud Blog",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 36.71,
+          "weighted_signal": 30.11,
+          "entity": "cloud.google.com",
+          "topic": "news",
+          "text": "Unifying Structured and Unstructured Data Insights with BQ Search Innovations. Modern enterprises possess a vast amount of unstructured data, yet they frequently encounter significant challenges in managing and extracting value from it. Historically, unlocking the insights hidden within PDFs, audio files, images, and..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 86,
+      "headline": "Labelling / Econometrics / Series (Stratigraphy) is useful context for the ai / llm beat",
+      "category": "AI / LLM",
+      "status": "Context watch",
+      "weighted_score": 42.23,
+      "records": 3,
+      "sources": 3,
+      "source_mix": {
+        "arXiv cs.AI": 1,
+        "arXiv cs.LG": 1,
+        "AWS What's New": 1
+      },
+      "source_classes": {
+        "research": 2,
+        "news_discourse": 1
+      },
+      "evidence_roles": {
+        "arxiv": 2,
+        "news": 1
+      },
+      "top_topics": "cs.AI / cs.LG / news",
+      "summary": "3 records landed this week across 3 active sources. The strongest weighted evidence is Daniele Raimondi from arXiv cs.AI with weighted signal 37.25. Evidence mix: research=2, news_discourse=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 51.74,
+          "weighted_signal": 37.25,
+          "entity": "Daniele Raimondi",
+          "topic": "cs.AI",
+          "text": "SCALE: Scientific Concept Aggregation via LLMs and Embeddings for Fine-Grained Taxonomy Extension. The increasing specialization of scientific research challenges existing classification systems, which provide effective representations of broad disciplines and research topics but often fail to capture the fine-grained..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 49.81,
+          "weighted_signal": 35.86,
+          "entity": "Luc Hazenoot",
+          "topic": "cs.LG",
+          "text": "Measuring Concept Content in Text from LLM Activations: ESG Evidence from Concept Vectors and Linear Probes. Existing measures of how much a text is about a concept read the surface of the text: dictionary word shares, topic proportions, embedding similarities. They score the words a text uses, not the judgment a read..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "AWS What's New",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 35.51,
+          "weighted_signal": 29.12,
+          "entity": "aws.amazon.com",
+          "topic": "news",
+          "text": "Amazon Quick supports multi-dataset analytical capabiity. Today, Amazon Quick announces supporting multi-dataset topics, enabling users to model relationships across multiple datasets in a single topic and use that model to build dashboards and answer questions in natural language. Previously, answering a question in..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 51,
+      "headline": "Openai / Run Llama / Google is showing deployment-adjacent signals across code",
+      "category": "Infra / Code",
+      "status": "Needs corroboration",
+      "weighted_score": 41.93,
+      "records": 8,
+      "sources": 4,
+      "source_mix": {
+        "OpenAI News": 4,
+        "TechCrunch": 2,
+        "Hacker News": 1,
+        "AWS What's New": 1
+      },
+      "source_classes": {
+        "news_discourse": 7,
+        "code_models": 1
+      },
+      "evidence_roles": {
+        "news": 7,
+        "community": 1
+      },
+      "top_topics": "news / AI",
+      "summary": "8 records landed this week across 4 active sources. The strongest weighted evidence is openai.com from OpenAI News with weighted signal 29.88. Evidence mix: news_discourse=7, code_models=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "OpenAI News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 36.44,
+          "weighted_signal": 29.88,
+          "entity": "openai.com",
+          "topic": "news",
+          "text": "Responding to the next frontier of critical cyber capabilities. OpenAI is sharing preliminary cybersecurity evaluations for Astra and the steps we\u2019re taking to strengthen safeguards and security controls."
+        },
+        {
+          "date": "2026-08-08",
+          "source": "TechCrunch",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 34.66,
+          "weighted_signal": 28.42,
+          "entity": "techcrunch.com",
+          "topic": "news",
+          "text": "OpenAI acquires presentation startup NextSlide. NextSlide says its team members are now working on ChatGPT."
+        },
+        {
+          "date": "2026-08-03",
+          "source": "OpenAI News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 31.87,
+          "weighted_signal": 26.13,
+          "entity": "openai.com",
+          "topic": "news",
+          "text": "Circles powers telco personalization with OpenAI technology. Circles uses the OpenAI API and Codex to power AI-native telco experiences, increasing ARPU by 22%, reducing churn by 9%, and improving development efficiency."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "OpenAI News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 31.3,
+          "weighted_signal": 25.66,
+          "entity": "openai.com",
+          "topic": "news",
+          "text": "From asking to doing: How the world is putting ChatGPT to work. New OpenAI Signals data shows how people use ChatGPT worldwide, with country-level insights on adoption, usage trends, and evolving behavior."
+        },
+        {
+          "date": "2026-08-04",
+          "source": "AWS What's New",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 29.85,
+          "weighted_signal": 24.48,
+          "entity": "aws.amazon.com",
+          "topic": "news",
+          "text": "Amazon Bedrock launches Web Search for OpenAI GPT models. Today, we are announcing the general availability of Web Search on Amazon Bedrock, a built-in server side tool that performs web search entirely within AWS, enabling OpenAI models (GPT-5.4, GPT-5.5, and GPT-5.6 Sol/Terra/Luna) to ground responses with current w..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "TechCrunch",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 29.44,
+          "weighted_signal": 24.14,
+          "entity": "techcrunch.com",
+          "topic": "news",
+          "text": "OpenAI says it slowed Astra model development over security concerns. OpenAI said this model, which is still in development, reached its \"critical cybersecurity threshold,\" meaning it could independently identify and carry out cyberattacks against traditionally well-protected real-world systems."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Check repo/model history for maintainers, funders, dependencies, and sudden activity changes.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 6,
+      "headline": "Bio / Space is showing deployment-adjacent signals across filing",
+      "category": "Space",
+      "status": "Needs corroboration",
+      "weighted_score": 41.88,
+      "records": 3,
+      "sources": 3,
+      "source_mix": {
+        "Quantum Computing Report": 1,
+        "Defense One": 1,
+        "SEC EDGAR 8-K Filings": 1
+      },
+      "source_classes": {
+        "news_discourse": 2,
+        "primary_docs": 1
+      },
+      "evidence_roles": {
+        "news": 1,
+        "defense": 1,
+        "sec": 1
+      },
+      "top_topics": "news / defense / bio",
+      "summary": "3 records landed this week across 3 active sources. The strongest weighted evidence is RECURSION PHARMACEUTICALS, INC. from SEC EDGAR 8-K Filings with weighted signal 38.53. Evidence mix: news_discourse=2, primary_docs=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-05",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 38.53,
+          "weighted_signal": 38.53,
+          "entity": "RECURSION PHARMACEUTICALS, INC.",
+          "topic": "bio",
+          "text": "RECURSION PHARMACEUTICALS, INC. RXRX 8-K. bio. 8-K"
+        },
+        {
+          "date": "2026-08-07",
+          "source": "Quantum Computing Report",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 32.48,
+          "weighted_signal": 26.63,
+          "entity": "quantumcomputingreport.com",
+          "topic": "news",
+          "text": "SEC Declares Registration Statement Effective for Pasqal\u2019s Business Combination with Bleichroeder Acquisition Corp. II. French neutral-atom quantum computing developer Pasqal Holding SAS has announced that its joint Form F-4 Registration Statement with Special Purpose Acquisition Company (SPAC) Bleichroeder Acquisitio..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "Defense One",
+          "signal_class": "news_discourse",
+          "evidence_role": "defense",
+          "authority_weight": 0.85,
+          "signal_pct": 26.09,
+          "weighted_signal": 22.17,
+          "entity": "defenseone.com",
+          "topic": "defense",
+          "text": "Officials hedge SpaceX aircraft-tracking satellite bet with three smaller company contracts. Rocket Labs, STR, and one mystery company are the latest space-based AMTI awardees."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Pull the underlying SEC filing exhibits and compare claims against technical evidence.",
+        "Search for deployment evidence: customers, pilots, contracts, factories, launch manifests, or field tests.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 229,
+      "headline": "Nickel / Quantitative Analysis (Chemistry) / Brine is useful context for the materials / mining beat",
+      "category": "Materials / Mining",
+      "status": "Context watch",
+      "weighted_score": 41.7,
+      "records": 2,
+      "sources": 2,
+      "source_mix": {
+        "SEC EDGAR 8-K Filings": 1,
+        "MIT News (AI/ML)": 1
+      },
+      "source_classes": {
+        "primary_docs": 1,
+        "research": 1
+      },
+      "evidence_roles": {
+        "sec": 1,
+        "university_lab": 1
+      },
+      "top_topics": "materials_mining / university_lab",
+      "summary": "2 records landed this week across 2 active sources. The strongest weighted evidence is LITHIUM AMERICAS CORP. from SEC EDGAR 8-K Filings with weighted signal 42.41. Evidence mix: primary_docs=1, research=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "No tier-1 news/trade-press evidence is present in the processed corpus.",
+      "top_evidence": [
+        {
+          "date": "2026-08-06",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 42.41,
+          "weighted_signal": 42.41,
+          "entity": "LITHIUM AMERICAS CORP.",
+          "topic": "materials_mining",
+          "text": "LITHIUM AMERICAS CORP. LAC 8-K. materials_mining. 8-K"
+        },
+        {
+          "date": "2026-08-04",
+          "source": "MIT News (AI/ML)",
+          "signal_class": "research",
+          "evidence_role": "university_lab",
+          "authority_weight": 0.68,
+          "signal_pct": 41.0,
+          "weighted_signal": 27.88,
+          "entity": "news.mit.edu",
+          "topic": "university_lab",
+          "text": "Solving the solvent problem. By focusing on electrolytes, MIT scientists are making sodium-metal batteries a more practical energy storage option."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Search for deployment evidence: customers, pilots, contracts, factories, launch manifests, or field tests.",
+        "Check environmental/regulatory records and claims that may be overstated or underdisclosed."
+      ]
+    },
+    {
+      "cluster_id": 271,
+      "headline": "Annotation / Pipeline (Software) / Genome is useful context for the ml research beat",
+      "category": "ML Research",
+      "status": "Context watch",
+      "weighted_score": 41.55,
+      "records": 5,
+      "sources": 2,
+      "source_mix": {
+        "SEC EDGAR 8-K Filings": 4,
+        "Science Magazine": 1
+      },
+      "source_classes": {
+        "primary_docs": 4,
+        "news_discourse": 1
+      },
+      "evidence_roles": {
+        "sec": 4,
+        "news": 1
+      },
+      "top_topics": "bio / news",
+      "summary": "5 records landed this week across 2 active sources. The strongest weighted evidence is Twist Bioscience Corp from SEC EDGAR 8-K Filings with weighted signal 38.76. Evidence mix: primary_docs=4, news_discourse=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-03",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 38.76,
+          "weighted_signal": 38.76,
+          "entity": "Twist Bioscience Corp",
+          "topic": "bio",
+          "text": "Twist Bioscience Corp TWST 8-K. bio. 8-K"
+        },
+        {
+          "date": "2026-08-05",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 34.42,
+          "weighted_signal": 34.42,
+          "entity": "Twist Bioscience Corp",
+          "topic": "bio",
+          "text": "Twist Bioscience Corp TWST 8-K. bio. FORM 8-K"
+        },
+        {
+          "date": "2026-08-06",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 33.23,
+          "weighted_signal": 33.23,
+          "entity": "Intellia Therapeutics, Inc.",
+          "topic": "bio",
+          "text": "Intellia Therapeutics, Inc. NTLA 8-K. bio. 8-K"
+        },
+        {
+          "date": "2026-08-05",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 31.72,
+          "weighted_signal": 31.72,
+          "entity": "Ginkgo Bioworks Holdings, Inc.",
+          "topic": "bio",
+          "text": "Ginkgo Bioworks Holdings, Inc. DNA 8-K. bio. 8-K"
+        },
+        {
+          "date": "2026-08-06",
+          "source": "Science Magazine",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 36.62,
+          "weighted_signal": 30.03,
+          "entity": "science.org",
+          "topic": "news",
+          "text": "AI-designed viral genomes. Science, Volume 393, Issue 6811, Page 563-564, August 2026."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 242,
+      "headline": "Astronomy Instrumentation / Cosmology / astro ph.GA activity is accelerating across 4 sources",
+      "category": "ML Research",
+      "status": "Investigate first",
+      "weighted_score": 41.45,
+      "records": 6,
+      "sources": 4,
+      "source_mix": {
+        "Ars Technica": 2,
+        "MIT Technology Review": 2,
+        "Nature News": 1,
+        "arXiv eess.SP": 1
+      },
+      "source_classes": {
+        "news_discourse": 5,
+        "research": 1
+      },
+      "evidence_roles": {
+        "news": 5,
+        "arxiv": 1
+      },
+      "top_topics": "news / eess.SP",
+      "summary": "6 records landed this week across 4 active sources. The strongest weighted evidence is technologyreview.com from MIT Technology Review with weighted signal 29.95. Evidence mix: news_discourse=5, research=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-05",
+          "source": "MIT Technology Review",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 36.52,
+          "weighted_signal": 29.95,
+          "entity": "technologyreview.com",
+          "topic": "news",
+          "text": "NASA\u2019s new dark-energy space telescope can also detect killer asteroids. At the end of August, NASA is set to launch the Nancy Grace Roman Space Telescope from Kennedy Space Center in Florida. Its goal is to help us better understand how the universe works, from the glue-like dark matter that keeps galaxies together t..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "Ars Technica",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 35.18,
+          "weighted_signal": 28.85,
+          "entity": "arstechnica.com",
+          "topic": "news",
+          "text": "The world's biggest solar telescope caught vortexes on the Sun's surface. We expected them to be there, but they had previously been too small to see."
+        },
+        {
+          "date": "2026-08-05",
+          "source": "MIT Technology Review",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 34.94,
+          "weighted_signal": 28.65,
+          "entity": "technologyreview.com",
+          "topic": "news",
+          "text": "The Download: NASA\u2019s new telescope and Chinese tech import curbs. This is today\u2019s edition of The Download, our weekday newsletter that provides a daily dose of what\u2019s going on in the world of technology. NASA\u2019s new dark energy space telescope can also detect killer asteroids At the end of August, NASA is set to launch..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "Ars Technica",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 32.45,
+          "weighted_signal": 26.61,
+          "entity": "arstechnica.com",
+          "topic": "news",
+          "text": "The ultimate eclipse chase: A Concorde raced against the Moon's shadow. Fitted with telescopes, the plane did our longest imaging of the Sun's corona."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "Nature News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 31.28,
+          "weighted_signal": 25.65,
+          "entity": "nature.com",
+          "topic": "news",
+          "text": "Scientists up in arms about cuts to UK physics and astronomy. Nature, Published online: 06 August 2026; doi:10.1038/d41586-026-02460-1 Funding is being terminated for projects including a future CERN experiment and the iconic Lovell Telescope."
+        },
+        {
+          "date": "2026-08-05",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 33.14,
+          "weighted_signal": 23.86,
+          "entity": "Hyeonsu Lyu",
+          "topic": "eess.SP",
+          "text": "SceneBaker: Radio-Ready Scene Generation for Sionna Ray-Tracing. Wireless digital-twin (DT) research needs ray-tracing (RT) scenes that can be generated, versioned, and checked reproducibly. Current visual-authoring workflows can produce plausible city models, but they are poorly matched to repeated radio-simulation s..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 89,
+      "headline": "Software Deployment / Digital Economy / Scarcity is useful context for the climate / sustainability beat",
+      "category": "Climate / Sustainability",
+      "status": "Context watch",
+      "weighted_score": 41.44,
+      "records": 5,
+      "sources": 4,
+      "source_mix": {
+        "Google Cloud Blog": 2,
+        "Hacker News": 1,
+        "TechCrunch": 1,
+        "Science Magazine": 1
+      },
+      "source_classes": {
+        "news_discourse": 4,
+        "code_models": 1
+      },
+      "evidence_roles": {
+        "news": 4,
+        "community": 1
+      },
+      "top_topics": "news / AI",
+      "summary": "5 records landed this week across 4 active sources. The strongest weighted evidence is cloud.google.com from Google Cloud Blog with weighted signal 32.65. Evidence mix: news_discourse=4, code_models=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-06",
+          "source": "Google Cloud Blog",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 39.82,
+          "weighted_signal": 32.65,
+          "entity": "cloud.google.com",
+          "topic": "news",
+          "text": "Digital sovereignty in the age of AI: You don\u2019t have to choose between control and innovation. For enterprises and governments with strict compliance and sovereignty requirements, keeping sensitive data on-premises often means missing out on the latest AI. These organizations are managing three major risks: Jurisdicti..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "Science Magazine",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 33.77,
+          "weighted_signal": 27.69,
+          "entity": "science.org",
+          "topic": "news",
+          "text": "How should India approach AI?. Science, Volume 393, Issue 6811, Page 545-545, August 2026."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "Google Cloud Blog",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 33.26,
+          "weighted_signal": 27.28,
+          "entity": "cloud.google.com",
+          "topic": "news",
+          "text": "What\u2019s new with Google Cloud. Want to know the latest from Google Cloud? Find it here in one handy location. Check back regularly for our newest updates, announcements, resources, events, learning opportunities, and more. Tip : Not sure where to find what you\u2019re looking for on the Google Cloud blog? Start here: Google..."
+        },
+        {
+          "date": "2026-08-08",
+          "source": "TechCrunch",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 26.83,
+          "weighted_signal": 22.0,
+          "entity": "techcrunch.com",
+          "topic": "news",
+          "text": "Planned Amazon data center could become the biggest climate polluter in the U.S.. As part of a planned Texas data center, Amazon is investing in an on-site power plant that could reportedly become the largest source of climate pollution in the United States."
+        },
+        {
+          "date": "2026-08-09",
+          "source": "Hacker News",
+          "signal_class": "code_models",
+          "evidence_role": "community",
+          "authority_weight": 0.175,
+          "signal_pct": 41.17,
+          "weighted_signal": 7.2,
+          "entity": "tomwphillips",
+          "topic": "AI",
+          "text": "As AI guzzles water and energy, we are facing a choice: datacentres or homes?. via theguardian.com"
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Check environmental/regulatory records and claims that may be overstated or underdisclosed.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 227,
+      "headline": "Artificial Intelligence / Computer Vision / Deep Learning is useful context for the bio / health beat",
+      "category": "Bio / Health",
+      "status": "Develop lead",
+      "weighted_score": 41.19,
+      "records": 4,
+      "sources": 4,
+      "source_mix": {
+        "arXiv cs.AI": 1,
+        "arXiv cs.LG": 1,
+        "arXiv eess.SP": 1,
+        "arXiv cs.CE (Computational Engineering/Finance)": 1
+      },
+      "source_classes": {
+        "research": 4
+      },
+      "evidence_roles": {
+        "arxiv": 4
+      },
+      "top_topics": "cs.AI / cs.LG / eess.SP",
+      "summary": "4 records landed this week across 4 active sources. The strongest weighted evidence is Jia Wang from arXiv cs.AI with weighted signal 35.62. Evidence mix: research=4.",
+      "reporting_value": "watch item",
+      "coverage_gap": "No tier-1 news/trade-press evidence is present in the processed corpus.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 49.47,
+          "weighted_signal": 35.62,
+          "entity": "Jia Wang",
+          "topic": "cs.AI",
+          "text": "H2AL: Hyperbolic Hierarchy-aware Aggregative Learning for Registration-based Few-shot Medical Image Segmentation. Registration-based Few-shot medical image segmentation (RFMIS) aims to generate pseudo-labels for unlabeled images by warping a labeled image through registration. However, existing methods primarily perfo..."
+        },
+        {
+          "date": "2026-08-03",
+          "source": "arXiv cs.CE (Computational Engineering/Finance)",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 43.8,
+          "weighted_signal": 31.54,
+          "entity": "Zhiyin An",
+          "topic": "cs.CE",
+          "text": "TransNRank: Towards Accurate Neoantigen Ranking with Transformer. Personalized neoantigen prediction is challenging due to the scarcity of positive samples, the noise of the experimental data, the severe class imbalance trait and the complex of immunogenicity features. Prior arts, such as linear regression and XGBoost..."
+        },
+        {
+          "date": "2026-08-05",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 40.01,
+          "weighted_signal": 28.81,
+          "entity": "Chongbiao Wang",
+          "topic": "eess.SP",
+          "text": "The Neural Echo: A Signal Processing Perspective for Understanding Neural Networks. We introduce the neural echo as a tool for understanding the behavior of neural networks. It generalizes the model-based concepts of impulse responses, diffusion echoes, and filter echoes to learning-based methods. It provides local, s..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 36.85,
+          "weighted_signal": 26.53,
+          "entity": "Alexandre Bernier",
+          "topic": "cs.LG",
+          "text": "Machine Learning-Based Inter-Crystal Scatter Recovery for Ultra-High Resolution PET Imaging. Inter-crystal scatter (ICS) events pose a significant challenge in ultrahigh- resolution positron emission tomography (UHR-PET), especially as detector crystals become smaller and their readouts increasingly segmented. Current..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Check clinical trial, FDA, and institutional affiliations before treating this as deployable medicine.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 190,
+      "headline": "Natural Language Processing / Machine Learning / Artificial Intelligence is useful context for the ai / llm beat",
+      "category": "AI / LLM",
+      "status": "Develop lead",
+      "weighted_score": 40.94,
+      "records": 7,
+      "sources": 3,
+      "source_mix": {
+        "arXiv cs.AI": 4,
+        "arXiv cs.LG": 2,
+        "arXiv eess.SP": 1
+      },
+      "source_classes": {
+        "research": 7
+      },
+      "evidence_roles": {
+        "arxiv": 7
+      },
+      "top_topics": "cs.AI / cs.LG / eess.SP",
+      "summary": "7 records landed this week across 3 active sources. The strongest weighted evidence is Purbesh Mitra from arXiv eess.SP with weighted signal 36.05. Evidence mix: research=7.",
+      "reporting_value": "watch item",
+      "coverage_gap": "No tier-1 news/trade-press evidence is present in the processed corpus.",
+      "top_evidence": [
+        {
+          "date": "2026-08-05",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 50.08,
+          "weighted_signal": 36.05,
+          "entity": "Purbesh Mitra",
+          "topic": "eess.SP",
+          "text": "Chained Recursive Language Models for Multi-Iteration Reasoning. Long context reasoning in large language models (LLMs) is usually constrained by the fact that a single inference trajectory has to simultaneously explore the context, store intermediate state, verify evidence, and produce the final answer. This becomes..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 48.26,
+          "weighted_signal": 34.75,
+          "entity": "Ruochen Jin",
+          "topic": "cs.LG",
+          "text": "Beyond Post-Hoc Temperature Scaling: Bilevel Optimization for LLM Calibration. Preference alignment often makes large language models (LLMs) overconfident and poorly calibrated. Traditional post-hoc temperature scaling is inherently domain-dependent: a temperature fitted on one domain does not generalize across domain..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 46.94,
+          "weighted_signal": 33.8,
+          "entity": "Karim Radouane",
+          "topic": "cs.AI",
+          "text": "Geo-Spatial Concept Probing of Large Language Models: Abstraction, Compositionality, and Grounding. Understanding concepts is fundamental to generalization. Despite their impressive performance on a wide range of tasks, Large Language Models (LLMs) still struggle with genuine concept understanding. Prior work has eval..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 45.76,
+          "weighted_signal": 32.95,
+          "entity": "Rodrigo Ferreira Rodrigues",
+          "topic": "cs.AI",
+          "text": "GeoBenchLLM: A Comprehensive Benchmark for Evaluating LLMs on Geo-Related Tasks. In the context of geodata, existing Large Language Models have often been studied in a homogeneous setting, which has considerably limited insights into their generalization capabilities. In this paper, we present \\benchName, a comprehens..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 45.7,
+          "weighted_signal": 32.9,
+          "entity": "Jiacheng Miao",
+          "topic": "cs.AI",
+          "text": "Fisher-R1: Training LLM Agents for Reliable Hypothesis Testing. Reliable hypothesis testing is the foundation of many empirical scientific claims. Large language model (LLM) agents are increasingly used to automate this process, as they can inspect datasets, generate code, and produce analyses end-to-end. However, we..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 43.87,
+          "weighted_signal": 31.59,
+          "entity": "Ruijie Hou",
+          "topic": "cs.AI",
+          "text": "Zero Gap Is Not Restoration: Stratified Per-Question Probability Evaluation and Step-wise Mitigation of Benchmark Contamination. Test data from public benchmarks inevitably leaks into pretraining corpora, inflating evaluation scores once memorized. \\textbf{Contamination mitigation evaluation} intervenes in the decodin..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 220,
+      "headline": "Health Care / Workflow / Corporate Governance is useful context for the bio / health beat",
+      "category": "Bio / Health",
+      "status": "Context watch",
+      "weighted_score": 40.87,
+      "records": 5,
+      "sources": 4,
+      "source_mix": {
+        "STAT News": 2,
+        "Ars Technica": 1,
+        "The Register": 1,
+        "MIT News (AI/ML)": 1
+      },
+      "source_classes": {
+        "news_discourse": 4,
+        "research": 1
+      },
+      "evidence_roles": {
+        "news": 4,
+        "university_lab": 1
+      },
+      "top_topics": "news / university_lab",
+      "summary": "5 records landed this week across 4 active sources. The strongest weighted evidence is statnews.com from STAT News with weighted signal 29.67. Evidence mix: news_discourse=4, research=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "STAT News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 36.19,
+          "weighted_signal": 29.67,
+          "entity": "statnews.com",
+          "topic": "news",
+          "text": "Opinion: AI won\u2019t enhance physician autonomy. It will further diminish it. \u201cAI is not the villain here; it is a mirror,\u201d reflecting the diminishment of physician judgment, writes former surgeon Frances Mei Hardin."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "Ars Technica",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 34.56,
+          "weighted_signal": 28.34,
+          "entity": "arstechnica.com",
+          "topic": "news",
+          "text": "AI chatbots have failed people in crisis. Can that be fixed?. Clinicians and researchers say AI companies need to open up their safety data."
+        },
+        {
+          "date": "2026-08-04",
+          "source": "MIT News (AI/ML)",
+          "signal_class": "research",
+          "evidence_role": "university_lab",
+          "authority_weight": 0.68,
+          "signal_pct": 41.39,
+          "weighted_signal": 28.15,
+          "entity": "news.mit.edu",
+          "topic": "university_lab",
+          "text": "The benefits of medical AI assistance vary based on user expertise. Study finds non-experts deferred to LLM-based diagnostic assistance, even when it was wrong, while clinicians caught AI errors."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "STAT News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 34.14,
+          "weighted_signal": 27.99,
+          "entity": "statnews.com",
+          "topic": "news",
+          "text": "STAT+: Medicare pushes ACCESS but doesn\u2019t tell patients what providers offer it. In this edition: Progress report on ACCESS, Medicare's chronic care pilot, and health regulators courting industry on AI regulation."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "The Register",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 31.01,
+          "weighted_signal": 25.43,
+          "entity": "theregister.com",
+          "topic": "news",
+          "text": "Intrusion at US healthcare software provider puts 3.8M people's data at risk. Unlimited Technology Systems says names, Social Security numbers, diagnoses, and insurance details may have been swiped"
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Check clinical trial, FDA, and institutional affiliations before treating this as deployable medicine.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 152,
+      "headline": "Machine Learning / cs.NI / Counterfactual Thinking is useful context for the ml research beat",
+      "category": "ML Research",
+      "status": "Context watch",
+      "weighted_score": 40.71,
+      "records": 3,
+      "sources": 3,
+      "source_mix": {
+        "arXiv cs.AI": 1,
+        "arXiv cs.LG": 1,
+        "Google Cloud Blog": 1
+      },
+      "source_classes": {
+        "research": 2,
+        "news_discourse": 1
+      },
+      "evidence_roles": {
+        "arxiv": 2,
+        "news": 1
+      },
+      "top_topics": "cs.AI / cs.LG / news",
+      "summary": "3 records landed this week across 3 active sources. The strongest weighted evidence is Yuhan Xie from arXiv cs.AI with weighted signal 34.96. Evidence mix: research=2, news_discourse=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 48.55,
+          "weighted_signal": 34.96,
+          "entity": "Yuhan Xie",
+          "topic": "cs.AI",
+          "text": "TOFD: Target-Oriented Feature Decoupling against Poisoning Attacks in Split Federated Learning. Split Federated Learning (SFL) facilitates privacy-preserving collaborative training with reduced client-side overhead. However, its split architecture introduces unique attack surfaces, rendering it vulnerable to diverse p..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "Google Cloud Blog",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 40.18,
+          "weighted_signal": 32.95,
+          "entity": "cloud.google.com",
+          "topic": "news",
+          "text": "Advancing brain tumor research with privacy-first AI. The intersection of medicine and AI has led to remarkable innovations. However, developers now face the thorny challenge of building robust medical AI tools that have been tested and evaluated on diverse, real-world patient data while also protecting patient privac..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 39.8,
+          "weighted_signal": 28.66,
+          "entity": "Alireza Moayedikia",
+          "topic": "cs.LG",
+          "text": "Capacity Confounds and Coverage Guarantees in Adaptive Sub-model Federated Learning. Sub-model federated learning lets resource-constrained clients train width-reduced versions of a global model, but existing methods allocate capacity by device resources alone. A natural next step, allocating capacity by each client's..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 106,
+      "headline": "Knowledge Management / Generative Grammar / Task (Project Management) is useful context for the ai / llm beat",
+      "category": "AI / LLM",
+      "status": "Context watch",
+      "weighted_score": 40.56,
+      "records": 6,
+      "sources": 5,
+      "source_mix": {
+        "Hacker News": 2,
+        "The Register": 1,
+        "The Sequence (Xavier Amatriain)": 1,
+        "OpenAI News": 1,
+        "Crunchbase News": 1
+      },
+      "source_classes": {
+        "news_discourse": 4,
+        "code_models": 2
+      },
+      "evidence_roles": {
+        "news": 3,
+        "community": 2,
+        "newsletter": 1
+      },
+      "top_topics": "news / AI / newsletter",
+      "summary": "6 records landed this week across 5 active sources. The strongest weighted evidence is openai.com from OpenAI News with weighted signal 30.14. Evidence mix: news_discourse=4, code_models=2.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-06",
+          "source": "OpenAI News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 36.76,
+          "weighted_signal": 30.14,
+          "entity": "openai.com",
+          "topic": "news",
+          "text": "Working with the American Psychological Association on youth mental health and AI. OpenAI and the American Psychological Association advance evidence-based guidance, resources, and safeguards for responsible AI use and youth mental health."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "The Register",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 35.75,
+          "weighted_signal": 29.31,
+          "entity": "theregister.com",
+          "topic": "news",
+          "text": "'Asimov was right' about rules for robots, says ex-US Cyber Director. Humans will get the AI models they deserve"
+        },
+        {
+          "date": "2026-08-05",
+          "source": "Crunchbase News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 35.2,
+          "weighted_signal": 28.86,
+          "entity": "news.crunchbase.com",
+          "topic": "news",
+          "text": "Your AI Strategy May Be Destroying Your Exit Value. While integrating AI into a startup's product strategy is often viewed as a way to enhance valuation, it can inadvertently reduce exit value, argues tech strategic adviser Itay Sagie. In this guest commentary he shares three ways your AI strategy can provide a positi..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "The Sequence (Xavier Amatriain)",
+          "signal_class": "news_discourse",
+          "evidence_role": "newsletter",
+          "authority_weight": 0.5,
+          "signal_pct": 39.86,
+          "weighted_signal": 19.93,
+          "entity": "thesequence.substack.com",
+          "topic": "newsletter",
+          "text": "The Sequence Opinion #909: Return on Token: The New Economics of AI-Native Engineering. Token maxing was the adoption phase. Intelligence resource planning is what comes next."
+        },
+        {
+          "date": "2026-08-09",
+          "source": "Hacker News",
+          "signal_class": "code_models",
+          "evidence_role": "community",
+          "authority_weight": 0.175,
+          "signal_pct": 38.5,
+          "weighted_signal": 6.74,
+          "entity": "tosh",
+          "topic": "AI",
+          "text": "People Who Will Thrive in the AI Age. via theatlantic.com"
+        },
+        {
+          "date": "2026-08-09",
+          "source": "Hacker News",
+          "signal_class": "code_models",
+          "evidence_role": "community",
+          "authority_weight": 0.175,
+          "signal_pct": 38.17,
+          "weighted_signal": 6.68,
+          "entity": "newusertoday",
+          "topic": "AI",
+          "text": "AI Is Rewiring South Korea's Careers, Dating and Culture. via bloomberg.com"
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 1,
+      "headline": "Waste Water Sustainability / Environmental Health / Commission is showing deployment-adjacent signals across filing, paper",
+      "category": "Waste / Circularity",
+      "status": "Develop lead",
+      "weighted_score": 40.54,
+      "records": 4,
+      "sources": 1,
+      "source_mix": {
+        "SEC EDGAR 8-K Filings": 4
+      },
+      "source_classes": {
+        "primary_docs": 4
+      },
+      "evidence_roles": {
+        "sec": 4
+      },
+      "top_topics": "waste_water_sustainability",
+      "summary": "4 records landed this week across 1 active source. The strongest weighted evidence is CASELLA WASTE SYSTEMS INC from SEC EDGAR 8-K Filings with weighted signal 45.43. Evidence mix: primary_docs=4.",
+      "reporting_value": "watch item",
+      "coverage_gap": "No tier-1 news/trade-press evidence is present in the processed corpus.",
+      "top_evidence": [
+        {
+          "date": "2026-08-06",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 45.43,
+          "weighted_signal": 45.43,
+          "entity": "CASELLA WASTE SYSTEMS INC",
+          "topic": "waste_water_sustainability",
+          "text": "CASELLA WASTE SYSTEMS INC CWST 8-K. waste_water_sustainability. 8-K"
+        },
+        {
+          "date": "2026-08-06",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 39.74,
+          "weighted_signal": 39.74,
+          "entity": "REPUBLIC SERVICES, INC.",
+          "topic": "waste_water_sustainability",
+          "text": "REPUBLIC SERVICES, INC. RSG 8-K. waste_water_sustainability. 8-K"
+        },
+        {
+          "date": "2026-08-07",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 38.06,
+          "weighted_signal": 38.06,
+          "entity": "Waste Connections, Inc.",
+          "topic": "waste_water_sustainability",
+          "text": "Waste Connections, Inc. WCN 8-K. waste_water_sustainability. FORM 8-K"
+        },
+        {
+          "date": "2026-08-04",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 38.06,
+          "weighted_signal": 38.06,
+          "entity": "Waste Connections, Inc.",
+          "topic": "waste_water_sustainability",
+          "text": "Waste Connections, Inc. WCN 8-K. waste_water_sustainability. FORM 8-K"
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Pull the underlying SEC filing exhibits and compare claims against technical evidence.",
+        "Check environmental/regulatory records and claims that may be overstated or underdisclosed.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 98,
+      "headline": "Natural Language Processing / cs.SD / eess.AS is useful context for the ml research beat",
+      "category": "ML Research",
+      "status": "Develop lead",
+      "weighted_score": 40.36,
+      "records": 5,
+      "sources": 3,
+      "source_mix": {
+        "arXiv cs.AI": 3,
+        "arXiv cs.LG": 1,
+        "OpenAI News": 1
+      },
+      "source_classes": {
+        "research": 4,
+        "news_discourse": 1
+      },
+      "evidence_roles": {
+        "arxiv": 4,
+        "news": 1
+      },
+      "top_topics": "cs.AI / cs.LG / news",
+      "summary": "5 records landed this week across 3 active sources. The strongest weighted evidence is Xin Wang from arXiv cs.AI with weighted signal 32.88. Evidence mix: research=4, news_discourse=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 45.67,
+          "weighted_signal": 32.88,
+          "entity": "Xin Wang",
+          "topic": "cs.AI",
+          "text": "LSEAD: A Privacy-Preserving LLM-Based Speech Analysis Framework for Early Alzheimer's Disease Screening. Early diagnosis of Alzheimer's disease (AD) is critical for enabling timely interventions that may slow disease progression and improve patient outcomes. There is a growing need for AD detection methods that are no..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 43.21,
+          "weighted_signal": 31.11,
+          "entity": "Fernando Garcia de la Cruz",
+          "topic": "cs.AI",
+          "text": "How Much AI Is in This Track? Quantifying the Proportion of AI-Generated Stems in Hybrid Music Mixtures. AI-generated music is increasingly used at the stem level, with producers integrating synthetic drums, basslines, or vocals alongside human-performed instruments. However, current AI music detection systems are bin..."
+        },
+        {
+          "date": "2026-08-03",
+          "source": "OpenAI News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 35.6,
+          "weighted_signal": 29.2,
+          "entity": "openai.com",
+          "topic": "news",
+          "text": "How we built a realtime system for responsive voice AI in six months. GPT-Live enables continuous voice interaction with AI, using a turnless speech model and low-latency architecture for faster, more natural conversations."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 40.53,
+          "weighted_signal": 29.18,
+          "entity": "Xulin Fan",
+          "topic": "cs.LG",
+          "text": "Cloud-Boosted Low-Compute Multi-Channel Speech Enhancement. Low-latency, low-compute speech enhancement is essential for wearable devices with real-time communication requirements, but strict computational constraints significantly limit on-device performance. Knowledge Boosting has been proposed as an effective appro..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 37.54,
+          "weighted_signal": 27.03,
+          "entity": "David L\u00f3pez-Ayala",
+          "topic": "cs.AI",
+          "text": "Assessing AI-generated music detection in real-world broadcast monitoring. The proliferation of AI-generated music in broadcast media raises concerns about transparency and fair compensation, but reliable detection under real broadcast conditions remains unresolved. Existing studies report substantial performance degr..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 121,
+      "headline": "Signal Processing / cs.IT / Ranging activity is accelerating across 4 sources",
+      "category": "Space",
+      "status": "Develop lead",
+      "weighted_score": 40.17,
+      "records": 18,
+      "sources": 2,
+      "source_mix": {
+        "arXiv eess.SP": 17,
+        "arXiv cs.LG": 1
+      },
+      "source_classes": {
+        "research": 18
+      },
+      "evidence_roles": {
+        "arxiv": 18
+      },
+      "top_topics": "eess.SP / cs.LG",
+      "summary": "18 records landed this week across 2 active sources. The strongest weighted evidence is Shuaifei Chen from arXiv eess.SP with weighted signal 34.86. Evidence mix: research=18.",
+      "reporting_value": "watch item",
+      "coverage_gap": "No tier-1 news/trade-press evidence is present in the processed corpus.",
+      "top_evidence": [
+        {
+          "date": "2026-08-06",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 48.42,
+          "weighted_signal": 34.86,
+          "entity": "Shuaifei Chen",
+          "topic": "eess.SP",
+          "text": "Channel Map-Based Channel Estimation for Near-Field UM-MIMO with Movable Planar Arrays. Accurate channel estimation is essential for coherent transmission in ultra-massive multiple-input multiple-output (UM-MIMO) systems, where near-field propagation and high-dimensional spatial channels impose substantial signal proc..."
+        },
+        {
+          "date": "2026-08-04",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 47.59,
+          "weighted_signal": 34.26,
+          "entity": "Yao Ge",
+          "topic": "eess.SP",
+          "text": "Structured-Sparsity-Aware Joint User Activity Detection and Channel Estimation for OTFS-Based Grant-Free Random Access. Grant-free random access (GFRA) is a promising solution for massive machine-type communications (mMTC) in future wireless networks. However, reliable user activity detection and channel estimation ar..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 47.36,
+          "weighted_signal": 34.1,
+          "entity": "L. Yashvanth",
+          "topic": "eess.SP",
+          "text": "Sub-Sampling for Positioning Privacy in ISAC: Deception by Aliasing via Sparse Arrays and Pilots. Integrated sensing and communications (ISAC) enables simultaneous communication and sensing using shared spectrum and hardware resources in wireless systems. However, securing the sensing functionality against unauthorize..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 44.05,
+          "weighted_signal": 31.72,
+          "entity": "Md Tarek Hassan",
+          "topic": "cs.LG",
+          "text": "RIS-Aided mmWave Localization Under Cross-Link Interference via Beam-Domain ML Fingerprinting. Accurate user equipment (UE) localization is critical for beam management in reconfigurable intelligent surface (RIS)-assisted millimeter-wave (mmWave) based sixth-generation (6G) networks, especially if the direct base-stat..."
+        },
+        {
+          "date": "2026-08-05",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 44.04,
+          "weighted_signal": 31.71,
+          "entity": "Qing Zhang",
+          "topic": "eess.SP",
+          "text": "Near-Field Velocity Estimation and Doppler-Aware Localization in OFDM Massive MIMO. In Orthogonal Frequency Division Multiplexing (OFDM)-based massive Multiple-Input Multiple-Output (MIMO) near-field (NF) sensing, target motion induces an antenna-dependent bistatic Doppler variation across the array aperture. Ignoring..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 43.76,
+          "weighted_signal": 31.51,
+          "entity": "Zhang Jingwen",
+          "topic": "eess.SP",
+          "text": "DoDTrack: Indoor Mobile Devices Tracking via Difference-of-Doppler. In this paper, the Doppler frequency shift (DFS) is exploited as the only sensing parameter for low-cost indoor mobile device tracking. The existing trajectory tracking methods via DFS of Wi-Fi systems often require the knowledge of the starting posit..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Search for deployment evidence: customers, pilots, contracts, factories, launch manifests, or field tests.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 102,
+      "headline": "Corporate Governance / Knowledge Management / Transparency (Behavior) is useful context for the ai / llm beat",
+      "category": "AI / LLM",
+      "status": "Develop lead",
+      "weighted_score": 39.98,
+      "records": 5,
+      "sources": 5,
+      "source_mix": {
+        "TechCrunch": 1,
+        "AWS What's New": 1,
+        "VentureBeat": 1,
+        "Defense One": 1,
+        "OpenAI News": 1
+      },
+      "source_classes": {
+        "news_discourse": 5
+      },
+      "evidence_roles": {
+        "news": 4,
+        "defense": 1
+      },
+      "top_topics": "news / defense",
+      "summary": "5 records landed this week across 5 active sources. The strongest weighted evidence is venturebeat.com from VentureBeat with weighted signal 32.61. Evidence mix: news_discourse=5.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-06",
+          "source": "VentureBeat",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 39.76,
+          "weighted_signal": 32.61,
+          "entity": "venturebeat.com",
+          "topic": "news",
+          "text": "AI agents are part of your team now. Here\u2019s how to secure all of them.. Presented by JumpCloud A practical framework for securing every identity in the modern workforce, human or not. Your organization already has a rigorous process for governing human identities. New employees go through onboarding. They get a role,..."
+        },
+        {
+          "date": "2026-08-04",
+          "source": "OpenAI News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 38.77,
+          "weighted_signal": 31.79,
+          "entity": "openai.com",
+          "topic": "news",
+          "text": "Third-party cyber evaluations involving OpenAI models. OpenAI explains recent third-party cybersecurity evaluation incidents and outlines new safeguards to strengthen AI model testing and evaluation."
+        },
+        {
+          "date": "2026-08-09",
+          "source": "TechCrunch",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 37.23,
+          "weighted_signal": 30.53,
+          "entity": "techcrunch.com",
+          "topic": "news",
+          "text": "The AI safety test is becoming a safety risk. AI agents are escaping cybersecurity testing environments and reaching real-world systems, raising questions about whether safety infrastructure, industry standards and regulation can keep pace with increasingly powerful models."
+        },
+        {
+          "date": "2026-08-05",
+          "source": "Defense One",
+          "signal_class": "news_discourse",
+          "evidence_role": "defense",
+          "authority_weight": 0.85,
+          "signal_pct": 35.35,
+          "weighted_signal": 30.05,
+          "entity": "defenseone.com",
+          "topic": "defense",
+          "text": "As AI models break free, White House works with firms on secret safety measures. Lawmakers blast administration's \"ad-hoc\" AI strategy; tech giants pitch ideas to keep federal contracts flowing."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "AWS What's New",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 27.45,
+          "weighted_signal": 22.51,
+          "entity": "aws.amazon.com",
+          "topic": "news",
+          "text": "AWS Parallel Computing Service is now in scope for FedRAMP, SOC, ISO, CSA STAR, and PCI. AWS Parallel Computing Service (PCS), a managed service that simplifies running and scaling high performance computing (HPC) workloads on AWS using Slurm, has expanded its security and compliance coverage. Federal agencies, public..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 186,
+      "headline": "Electroencephalography / Machine Learning / Signal Processing is useful context for the ml research beat",
+      "category": "ML Research",
+      "status": "Develop lead",
+      "weighted_score": 39.7,
+      "records": 4,
+      "sources": 3,
+      "source_mix": {
+        "arXiv cs.LG": 2,
+        "arXiv eess.SP": 1,
+        "Nature News": 1
+      },
+      "source_classes": {
+        "research": 3,
+        "news_discourse": 1
+      },
+      "evidence_roles": {
+        "arxiv": 3,
+        "news": 1
+      },
+      "top_topics": "cs.LG / eess.SP / news",
+      "summary": "4 records landed this week across 3 active sources. The strongest weighted evidence is Guilherme S. Imai Aldeia from arXiv cs.LG with weighted signal 32.9. Evidence mix: research=3, news_discourse=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 45.7,
+          "weighted_signal": 32.9,
+          "entity": "Guilherme S. Imai Aldeia",
+          "topic": "cs.LG",
+          "text": "A foundation-model approach to pediatric headache classification from rs-fMRI. Headache is the most common neurological disorder in children and substantially affects quality of life. We investigated whether resting-state functional MRI (rs-fMRI) can support pediatric headache classification using machine learning. We..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 43.69,
+          "weighted_signal": 31.46,
+          "entity": "Le Xing",
+          "topic": "eess.SP",
+          "text": "Design and Validation of a Portable EEG-tES Platform Supporting High-Rate EEG Recording and Temporal Interference Stimulation. Background: Closed-loop neuromodulation integrating electroencephalography (EEG) and transcranial electrical stimulation (tES) has strong potential for neuroscience research and clinical appli..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.LG",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 42.02,
+          "weighted_signal": 30.26,
+          "entity": "Fabian Bongratz",
+          "topic": "cs.LG",
+          "text": "International Transfer of Stochastic Cortical Self-Reconstruction. Stochastic cortical self-reconstruction (SCSR) enables personalized mapping of gray matter atrophy, a hallmark of neurodegenerative disorders such as Alzheimer's disease (AD), onto high-resolution cortical surfaces. Unlike conventional normative modeli..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "Nature News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 26.53,
+          "weighted_signal": 21.75,
+          "entity": "nature.com",
+          "topic": "news",
+          "text": "Levitating sensor for magnetic fields could detect ultrafaint brain activity. Nature, Published online: 06 August 2026; doi:10.1038/d41586-026-02458-9 The device\u2019s simple design could rival much more complex alternatives in biophysics research \u2014 and could even be used to search for dark matter."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 237,
+      "headline": "Quantum Physics / Oblivious Transfer / Quantum activity is accelerating across 4 sources",
+      "category": "Quantum",
+      "status": "Develop lead",
+      "weighted_score": 39.41,
+      "records": 5,
+      "sources": 2,
+      "source_mix": {
+        "arXiv quant-ph": 4,
+        "Quantum Computing Report": 1
+      },
+      "source_classes": {
+        "research": 4,
+        "news_discourse": 1
+      },
+      "evidence_roles": {
+        "arxiv": 4,
+        "news": 1
+      },
+      "top_topics": "quant-ph / news",
+      "summary": "5 records landed this week across 2 active sources. The strongest weighted evidence is Qian Zhang from arXiv quant-ph with weighted signal 36.45. Evidence mix: research=4, news_discourse=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 50.62,
+          "weighted_signal": 36.45,
+          "entity": "Qian Zhang",
+          "topic": "quant-ph",
+          "text": "Robust device-independent characterization of sharpness and incompatibility of unsharp instruments. Unsharp measurements are key resources for tasks that balance information gain and disturbance, but certifying them without device assumptions remains a challenge. We propose a fully device-independent protocol for char..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 40.3,
+          "weighted_signal": 29.01,
+          "entity": "S. Barzanjeh",
+          "topic": "quant-ph",
+          "text": "Sub-Vacuum Jamming for Secure Communication. Artificial-noise jamming improves physical-layer security by degrading an eavesdropper's channel, but the injected noise also interferes with the legitimate receiver. We introduce a correlated-jamming protocol based on classical and quantum correlations that suppresses this..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 40.06,
+          "weighted_signal": 28.84,
+          "entity": "Christiano M. S. Nascimento",
+          "topic": "quant-ph",
+          "text": "Demonstration of an LLO CV-QKD system over 12 km of optical fiber. Continuous-variable quantum key distribution (CV-QKD) promises high rates and seamless integration with classical beams within a single optical fiber. Over the years, implementations have been performed by transmitting a local oscillator reference alon..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 37.81,
+          "weighted_signal": 27.22,
+          "entity": "Willers Yang",
+          "topic": "quant-ph",
+          "text": "Designer Codes from GALA: Compact, Self-Dual, and Rate-1/2 QEC on Reconfigurable Atom Arrays. High rate quantum low-density parity-check codes on reconfigurable neutral-atom arrays can reduce the overhead of quantum error correction, but near-term devices support only hundreds of qubits with limited reconfigurability..."
+        },
+        {
+          "date": "2026-08-08",
+          "source": "Quantum Computing Report",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 26.71,
+          "weighted_signal": 21.9,
+          "entity": "quantumcomputingreport.com",
+          "topic": "news",
+          "text": "TuringQ Planning to IPO and In Race to Become China\u2019s First Public Quantum Firm. Shanghai-based photonic quantum firm TuringQ has officially initiated pre-IPO tutoring with the Shanghai branch of the China Securities Regulatory Commission, positioning itself as a leading contender in the race to become China\u2019s first p..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 257,
+      "headline": "Neuroscience / Sanger Sequencing / Disease is useful context for the bio / health beat",
+      "category": "Bio / Health",
+      "status": "Context watch",
+      "weighted_score": 38.81,
+      "records": 3,
+      "sources": 3,
+      "source_mix": {
+        "Science Magazine": 1,
+        "Nature News": 1,
+        "SEC EDGAR 8-K Filings": 1
+      },
+      "source_classes": {
+        "news_discourse": 2,
+        "primary_docs": 1
+      },
+      "evidence_roles": {
+        "news": 2,
+        "sec": 1
+      },
+      "top_topics": "news / bio",
+      "summary": "3 records landed this week across 3 active sources. The strongest weighted evidence is CRISPR Therapeutics AG from SEC EDGAR 8-K Filings with weighted signal 32.75. Evidence mix: news_discourse=2, primary_docs=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-03",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 32.75,
+          "weighted_signal": 32.75,
+          "entity": "CRISPR Therapeutics AG",
+          "topic": "bio",
+          "text": "CRISPR Therapeutics AG CRSP 8-K. bio. 8-K"
+        },
+        {
+          "date": "2026-08-05",
+          "source": "Nature News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 31.91,
+          "weighted_signal": 26.16,
+          "entity": "nature.com",
+          "topic": "news",
+          "text": "More muscle, less belly fat: mutations to a gene are linked to wide-ranging benefits. Nature, Published online: 05 August 2026; doi:10.1038/d41586-026-02438-z Analysis of one million diverse genomes yields mutations associated with lower risk of diabetes, heart disease and other \u2018cardiometabolic\u2019 conditions."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "Science Magazine",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 31.43,
+          "weighted_signal": 25.78,
+          "entity": "science.org",
+          "topic": "news",
+          "text": "Genes of an icon. Science, Volume 393, Issue 6811, Page 554-559, August 2026."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Check clinical trial, FDA, and institutional affiliations before treating this as deployable medicine.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 162,
+      "headline": "Reinforcement Learning / Signal Processing / Orchestration is useful context for the ai / llm beat",
+      "category": "AI / LLM",
+      "status": "Context watch",
+      "weighted_score": 38.3,
+      "records": 6,
+      "sources": 3,
+      "source_mix": {
+        "arXiv cs.CE (Computational Engineering/Finance)": 2,
+        "arXiv eess.SP": 2,
+        "AWS What's New": 2
+      },
+      "source_classes": {
+        "research": 4,
+        "news_discourse": 2
+      },
+      "evidence_roles": {
+        "arxiv": 4,
+        "news": 2
+      },
+      "top_topics": "cs.CE / eess.SP / news",
+      "summary": "6 records landed this week across 3 active sources. The strongest weighted evidence is Ajeet Kumar Yadav from arXiv eess.SP with weighted signal 29.83. Evidence mix: research=4, news_discourse=2.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-05",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 41.43,
+          "weighted_signal": 29.83,
+          "entity": "Ajeet Kumar Yadav",
+          "topic": "eess.SP",
+          "text": "A 6G Integrated Sensing and Communication Framework for Railway Intrusion Detection and Collision Prediction. Integrated Sensing and Communication (ISAC) combines sensing and communication to efficiently utilize wireless resources and is emerging as a key paradigm for next-generation wireless networks. By leveraging t..."
+        },
+        {
+          "date": "2026-08-03",
+          "source": "arXiv cs.CE (Computational Engineering/Finance)",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 38.52,
+          "weighted_signal": 27.73,
+          "entity": "Xinpeng Hong",
+          "topic": "cs.CE",
+          "text": "In-Network Market Prediction Using Machine Learning and Limit Order Books. Machine learning is significantly transforming algorithmic trading, yet the requirement for rapid execution speeds persists. While both aspects aim to boost profitability, embedding advanced machine-learning techniques with reduced trading late..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 36.43,
+          "weighted_signal": 26.23,
+          "entity": "Baichuan Zhao",
+          "topic": "eess.SP",
+          "text": "Lyapunov-Based Completion-Aware Scheduling for PDU Set-Based Real-Time XR Traffic. Real-time extended reality (XR) services impose stringent throughput, latency, and reliability requirements. An XR media unit is commonly segmented into a protocol data unit (PDU) set that is useful only when all required PDUs are deliv..."
+        },
+        {
+          "date": "2026-08-06",
+          "source": "arXiv cs.CE (Computational Engineering/Finance)",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 28.81,
+          "weighted_signal": 20.74,
+          "entity": "Kaijing Ding",
+          "topic": "cs.CE",
+          "text": "Benefits of Shifting Passenger Traffic from Air to Rail: A Case Study of California High-Speed Rail. This study provides a method to quantify the benefits of shifting passenger traffic from air to high-speed rail from the perspective of flight-delay cost reduction. We first estimate the number of flight reductions for..."
+        },
+        {
+          "date": "2026-08-05",
+          "source": "AWS What's New",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 25.05,
+          "weighted_signal": 20.54,
+          "entity": "aws.amazon.com",
+          "topic": "news",
+          "text": "AWS Lambda announces scalable network bandwidth up to 3,000 Mbps for functions outside a VPC. AWS Lambda now supports scalable network bandwidth for Lambda functions, enabling faster data transfer to and from your execution environment for latency-sensitive workloads. This feature enables functions outside a VPC confi..."
+        },
+        {
+          "date": "2026-08-04",
+          "source": "AWS What's New",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 24.88,
+          "weighted_signal": 20.4,
+          "entity": "aws.amazon.com",
+          "topic": "news",
+          "text": "Amazon Connect Customer now supports capacity planning in 15 or 30 minute intervals. Amazon Connect Customer now lets you generate capacity plans at the interval level (15-minute or 30-minute intervals), giving workforce planners visibility into more granular staffing requirements across Voice, Chat, Task, and Email c..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 160,
+      "headline": "Rubric / Json / Identification (Biology) is useful context for the ai / llm beat",
+      "category": "AI / LLM",
+      "status": "Develop lead",
+      "weighted_score": 38.29,
+      "records": 3,
+      "sources": 3,
+      "source_mix": {
+        "Hacker News": 1,
+        "arXiv cs.AI": 1,
+        "Google Cloud Blog": 1
+      },
+      "source_classes": {
+        "code_models": 1,
+        "research": 1,
+        "news_discourse": 1
+      },
+      "evidence_roles": {
+        "community": 1,
+        "arxiv": 1,
+        "news": 1
+      },
+      "top_topics": "AI / cs.AI / news",
+      "summary": "3 records landed this week across 3 active sources. The strongest weighted evidence is cloud.google.com from Google Cloud Blog with weighted signal 29.26. Evidence mix: code_models=1, research=1, news_discourse=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-03",
+          "source": "Google Cloud Blog",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 35.69,
+          "weighted_signal": 29.26,
+          "entity": "cloud.google.com",
+          "topic": "news",
+          "text": "Real-world mainframe modernization with AI: A safe, scalable path from mainframe to cloud. For too long, enterprises with legacy mainframe estates have been faced with a high-stakes dilemma: continue maintaining their mainframes, essentially kicking the modernization can down the road (fully aware that delayed action..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv cs.AI",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 37.61,
+          "weighted_signal": 27.08,
+          "entity": "Guilin Zhang",
+          "topic": "cs.AI",
+          "text": "Winning by Peeking: Unenforced Budgets and Test-Set Selection Inflate Short-Budget AutoML Comparisons. Comparisons between AutoML systems at short time budgets -- tens of seconds rather than hours -- are common in tool READMEs and workshop papers, and they are easy to get wrong. We report a case study in which a simpl..."
+        },
+        {
+          "date": "2026-08-09",
+          "source": "Hacker News",
+          "signal_class": "code_models",
+          "evidence_role": "community",
+          "authority_weight": 0.175,
+          "signal_pct": 38.06,
+          "weighted_signal": 6.66,
+          "entity": "aakashns",
+          "topic": "AI",
+          "text": "Large-Scale Code Refactoring with AI. via swiftace.org"
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Check repo/model history for maintainers, funders, dependencies, and sudden activity changes.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 221,
+      "headline": "Quantum Physics / Quantum Materials / Hep Th activity is accelerating across 4 sources",
+      "category": "Quantum",
+      "status": "Investigate first",
+      "weighted_score": 38.02,
+      "records": 5,
+      "sources": 2,
+      "source_mix": {
+        "arXiv quant-ph": 4,
+        "Nature News": 1
+      },
+      "source_classes": {
+        "research": 4,
+        "news_discourse": 1
+      },
+      "evidence_roles": {
+        "arxiv": 4,
+        "news": 1
+      },
+      "top_topics": "quant-ph / news",
+      "summary": "5 records landed this week across 2 active sources. The strongest weighted evidence is Thiago R. Gir\u00e3o Souza from arXiv quant-ph with weighted signal 33.6. Evidence mix: research=4, news_discourse=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "News/discourse evidence is present.",
+      "top_evidence": [
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 46.66,
+          "weighted_signal": 33.6,
+          "entity": "Thiago R. Gir\u00e3o Souza",
+          "topic": "quant-ph",
+          "text": "Many-Body Localization Induced by Correlated Disorder in Interacting Superconducting Qubits. The failure of quantum thermalization due to Many-Body Localization (MBL) has evolved from a theoretical concept in spin chains to an experimental reality in synthetic quantum platforms, most notably superconducting circuits b..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 44.49,
+          "weighted_signal": 32.03,
+          "entity": "Lavoisier Wah",
+          "topic": "quant-ph",
+          "text": "Many-Body Mobility Edge and Non-Hermitian Skin Effect in an Interacting Quasi-Periodic Spin Chain. Non-Hermitian many-body physics reveals a rich interplay between topology, localization, and boundary effects, yet their collective behavior in interacting disordered systems remains largely unexplored. In this work, we..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 38.45,
+          "weighted_signal": 27.69,
+          "entity": "Simone Manti",
+          "topic": "quant-ph",
+          "text": "Atomic correlation effects in collapse-induced spontaneous radiation. Collapse models introduce stochastic and nonlinear modifications in the quantum dynamics, predicting observable effects, such as spontaneous radiation from charged particles, which can be used to constrain their parameters. Recently, attention has f..."
+        },
+        {
+          "date": "2026-08-05",
+          "source": "Nature News",
+          "signal_class": "news_discourse",
+          "evidence_role": "news",
+          "authority_weight": 0.82,
+          "signal_pct": 31.6,
+          "weighted_signal": 25.91,
+          "entity": "nature.com",
+          "topic": "news",
+          "text": "Pseudogap in a Fermi\u2013Hubbard quantum simulator. Nature, Published online: 05 August 2026; doi:10.1038/s41586-026-10875-z A cold-atom quantum simulator reveals the pseudogap metallic state in the Hubbard model, mapping its phase diagram and advancing understanding of doped Mott insulators and high-temperature supercond..."
+        },
+        {
+          "date": "2026-08-07",
+          "source": "arXiv quant-ph",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 34.98,
+          "weighted_signal": 25.19,
+          "entity": "Shin-Ming Huang",
+          "topic": "quant-ph",
+          "text": "Quantum-State Projectors on Grassmannian: Geometry, Holonomy, and Topology. An isolated group of $k$ bands in an $N$-level quantum system defines a rank-$k$ spectral projector and hence a map into the complex Grassmannian $\\mathrm{Gr}(k,N)$. For a smooth gapped Hamiltonian, this projector is globally smooth and period..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    },
+    {
+      "cluster_id": 101,
+      "headline": "Consciousness / Generative Grammar / Observer (Physics) is useful context for the quantum beat",
+      "category": "Quantum",
+      "status": "Develop lead",
+      "weighted_score": 37.88,
+      "records": 2,
+      "sources": 2,
+      "source_mix": {
+        "arXiv eess.SP": 1,
+        "SEC EDGAR 8-K Filings": 1
+      },
+      "source_classes": {
+        "research": 1,
+        "primary_docs": 1
+      },
+      "evidence_roles": {
+        "arxiv": 1,
+        "sec": 1
+      },
+      "top_topics": "eess.SP / space",
+      "summary": "2 records landed this week across 2 active sources. The strongest weighted evidence is Intuitive Machines, Inc. from SEC EDGAR 8-K Filings with weighted signal 36.41. Evidence mix: research=1, primary_docs=1.",
+      "reporting_value": "watch item",
+      "coverage_gap": "No tier-1 news/trade-press evidence is present in the processed corpus.",
+      "top_evidence": [
+        {
+          "date": "2026-08-03",
+          "source": "SEC EDGAR 8-K Filings",
+          "signal_class": "primary_docs",
+          "evidence_role": "sec",
+          "authority_weight": 1.0,
+          "signal_pct": 36.41,
+          "weighted_signal": 36.41,
+          "entity": "Intuitive Machines, Inc.",
+          "topic": "space",
+          "text": "Intuitive Machines, Inc. LUNR 8-K. space. 8-K"
+        },
+        {
+          "date": "2026-08-05",
+          "source": "arXiv eess.SP",
+          "signal_class": "research",
+          "evidence_role": "arxiv",
+          "authority_weight": 0.72,
+          "signal_pct": 35.65,
+          "weighted_signal": 25.67,
+          "entity": "Afan Ali",
+          "topic": "eess.SP",
+          "text": "A Knowledge-Centric Communication For Autonomous Cislunar Networks. Future lunar infrastructure requires communication as a persistent service rather than a mission specific capability. Communication, digital twin, and artificial intelligence (AI) research have advanced autonomy independently while largely assuming th..."
+        }
+      ],
+      "next_moves": [
+        "Read the top evidence records end-to-end; do not rely on snippets.",
+        "Identify whether the same actors recur across independent sources.",
+        "Look for filings, procurement, grants, or patents that connect the technical signal to institutions.",
+        "Write down one falsifiable question before doing more collection."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,675 @@
+/*
+ * Sunday Data Field Adventure
+ * Original painted stages with restrained, diegetic controls layered above them.
+ */
+
+.adventure-plate,
+.reality-backdrop--painted {
+  position: absolute;
+  inset: -2%;
+  z-index: 0;
+  width: 104%;
+  height: 104%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+  filter: saturate(.94) contrast(1.04);
+  transform: translate3d(var(--scene-x, 0), var(--scene-y, 0), 0) scale(1.025);
+  transition: transform 1.1s cubic-bezier(.22,1,.36,1), filter .45s ease;
+  will-change: transform;
+}
+
+.baggage-scene,
+.shadow-world,
+.dungeon-board,
+.reality-scene {
+  isolation: isolate;
+}
+
+.baggage-scene::after,
+.shadow-world::after,
+.dungeon-board::after,
+.reality-scene::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  content: "";
+  box-shadow: inset 0 0 90px rgba(5,16,29,.32), inset 0 -46px 80px rgba(5,16,29,.25);
+}
+
+/* Baggage Claim: a playable illustrated airport room. */
+.baggage-scene {
+  min-height: clamp(480px,56vw,630px);
+  background: #15283a;
+}
+
+.baggage-scene::before {
+  z-index: 2;
+  inset: auto 0 0;
+  height: 24%;
+  background: linear-gradient(0deg,rgba(7,19,31,.62),transparent);
+  box-shadow: none;
+}
+
+.baggage-scene .terminal-ink {
+  display: none;
+}
+
+.airport-board {
+  top: 25px;
+  left: 25px;
+  min-width: min(340px,calc(100% - 50px));
+  border: 2px solid #8a7047;
+  background: rgba(9,23,38,.91);
+  box-shadow: 8px 10px rgba(4,13,22,.24), inset 0 0 20px rgba(241,202,123,.05);
+  backdrop-filter: blur(7px);
+}
+
+.airport-board em {
+  animation: adventureBoardPulse 2.6s steps(2,end) infinite;
+}
+
+.service-desk {
+  right: 4%;
+  bottom: 10%;
+  width: clamp(132px,16vw,185px);
+  height: clamp(205px,26vw,275px);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.service-desk>img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(8px 12px 7px rgba(4,13,22,.35));
+}
+
+.service-desk i {
+  display: none;
+}
+
+.service-desk i::before {
+  border: 3px solid #17283b;
+  background: #bf7358;
+}
+
+.service-desk span {
+  right: -4px;
+  bottom: 91%;
+  z-index: 2;
+  border: 2px solid #17283b;
+  color: #263047;
+  background: #fff3d2;
+  box-shadow: 6px 7px rgba(4,13,22,.22);
+}
+
+#travelerSprite {
+  left: 9%;
+  bottom: 8%;
+  width: clamp(128px,16vw,180px);
+  height: clamp(210px,27vw,300px);
+  filter: drop-shadow(8px 12px 7px rgba(4,13,22,.35));
+}
+
+#travelerSprite>img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+#travelerSprite>i {
+  display: none;
+}
+
+#travelerSprite>span {
+  z-index: 2;
+  bottom: 2px;
+}
+
+#travelerSprite>i::before {
+  border: 3px solid #17283b;
+  background: #a75e47;
+}
+
+#travelerSprite>i::after {
+  top: 15px;
+  left: -12px;
+  width: 61px;
+  height: 3px;
+  border-radius: 99px;
+  background: #17283b;
+  box-shadow: 0 19px 0 #17283b;
+}
+
+.baggage-carousel {
+  right: 9%;
+  bottom: 4%;
+  left: 23%;
+  height: 150px;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.baggage-carousel>span {
+  display: none;
+}
+
+#bagSprite {
+  top: 73px;
+  width: 49px;
+  height: 55px;
+  border-width: 3px;
+  filter: drop-shadow(7px 10px 6px rgba(4,13,22,.38));
+}
+
+.apology-tickets {
+  right: clamp(155px,20vw,230px);
+  bottom: 39%;
+}
+
+.baggage-actions {
+  border-color: #31465c;
+  background: #31465c;
+}
+
+.baggage-actions>div {
+  color: #e8e4d8;
+  background: linear-gradient(rgba(255,255,255,.025),rgba(255,255,255,0)),#102235;
+}
+
+.baggage-actions>div>span {
+  color: #e8b865;
+}
+
+.baggage-actions [data-baggage-action] {
+  border-color: #526a7e;
+  color: #e6edf0;
+  background: rgba(255,255,255,.035);
+  box-shadow: inset 0 1px rgba(255,255,255,.05);
+}
+
+.baggage-actions>div:last-child button {
+  border-color: #5c806f;
+  color: #c6ead8;
+  background: rgba(57,116,90,.16);
+}
+
+.baggage-actions [data-baggage-action]:hover:not(:disabled) {
+  border-color: #efc46f;
+  color: #17283b;
+  background: #efc46f;
+  box-shadow: 0 5px #806337;
+}
+
+/* Model of Me: one painted neighborhood, four diegetic destinations. */
+.shadow-world {
+  min-height: clamp(510px,56vw,630px);
+  background: #d9eadf;
+}
+
+.shadow-world::before,
+.shadow-map {
+  display: none;
+}
+
+.shadow-world::after {
+  right: auto;
+  bottom: auto;
+  padding: 0;
+  border: 0;
+  color: transparent;
+  background: linear-gradient(180deg,rgba(9,28,38,.05),rgba(9,28,38,.2));
+  content: "" !important;
+  text-decoration: none !important;
+  transform: none;
+}
+
+.shadow-game {
+  --zone: clamp(150px,18vw,200px);
+}
+
+[data-person-target] {
+  z-index: 9;
+  min-height: 130px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 40% 47% 44%;
+  color: #fff5d9;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+[data-person-target] .place-icon {
+  display: none;
+}
+
+[data-person-target] span,
+[data-person-target] small {
+  position: absolute;
+  left: 50%;
+  display: block;
+  width: max-content;
+  max-width: 150px;
+  transform: translateX(-50%);
+}
+
+[data-person-target] span {
+  bottom: 10px;
+  padding: 7px 10px;
+  border: 1px solid rgba(255,244,208,.45);
+  border-radius: 2px;
+  background: rgba(8,25,36,.78);
+  box-shadow: 4px 5px rgba(4,13,22,.18);
+  backdrop-filter: blur(6px);
+  font-size: 10px;
+  letter-spacing: .04em;
+}
+
+[data-person-target] small {
+  bottom: -8px;
+  color: #fff0bf;
+  font-size: 7px;
+  text-shadow: 0 2px 4px #081924;
+}
+
+[data-person-target]:is(:hover,[aria-pressed=true]) {
+  border-color: rgba(244,203,112,.84);
+  background: radial-gradient(circle,rgba(244,203,112,.2),transparent 66%);
+  box-shadow: 0 0 0 8px rgba(244,203,112,.08),0 0 42px rgba(244,203,112,.18);
+}
+
+[data-person-target][aria-pressed=true]::after {
+  top: 1px;
+  right: 7%;
+  border: 1px solid #fff1c5;
+  color: #17283b;
+  background: #efc46f;
+  box-shadow: 3px 4px rgba(4,13,22,.16);
+}
+
+#shadowThread {
+  z-index: 3;
+  filter: drop-shadow(0 1px 2px rgba(8,25,36,.55));
+}
+
+#shadowThread line {
+  stroke: #f07f73;
+  stroke-width: 1.1;
+}
+
+#personNow,
+#profileShadow {
+  z-index: 8;
+  width: clamp(88px,10vw,116px);
+  height: clamp(132px,15vw,174px);
+  filter: drop-shadow(7px 10px 5px rgba(8,25,36,.3));
+}
+
+#personNow>img,
+#profileShadow>img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+#personNow>i,
+#profileShadow>i {
+  display: none;
+}
+
+#personNow>i::before,
+#profileShadow>i::before {
+  border: 3px solid #17283b;
+  background: #9e5c47;
+}
+
+#profileShadow {
+  filter: sepia(.2) saturate(.75) drop-shadow(7px 10px 5px rgba(109,39,39,.25));
+}
+
+#profileShadow>img {
+  filter: sepia(1) saturate(2.1) hue-rotate(305deg) brightness(.82);
+  mix-blend-mode:multiply;
+}
+
+#personNow>span,
+#profileShadow>span {
+  z-index: 2;
+  bottom: -2px;
+}
+
+.shadow-console {
+  background: radial-gradient(circle at 9% 0,rgba(239,196,111,.1),transparent 28%),#102235;
+}
+
+[data-profile-action] {
+  border-radius: 2px;
+  box-shadow: 0 4px #0a1623;
+}
+
+/* Memory Dungeon: the interface now sits inside a painted archive room. */
+.dungeon-board {
+  position: relative;
+  min-height: clamp(560px,58vw,650px);
+  overflow: hidden;
+  background: #091525;
+}
+
+.adventure-plate--dungeon {
+  z-index: 0;
+  object-position: center;
+  filter: saturate(.88) contrast(1.07) brightness(.82);
+}
+
+.dungeon-board::after {
+  z-index: 1;
+  background: linear-gradient(90deg,rgba(6,15,26,.67) 0 53%,rgba(6,15,26,.16) 64%,rgba(6,15,26,.35));
+  box-shadow: inset 0 0 100px rgba(2,8,15,.55);
+}
+
+.dungeon-inventory,
+.dungeon-run {
+  position: relative;
+  z-index: 2;
+}
+
+.dungeon-inventory {
+  padding: clamp(30px,4vw,46px);
+  border-right-color: rgba(215,184,126,.35);
+  background: linear-gradient(90deg,rgba(9,22,37,.8),rgba(9,22,37,.56));
+}
+
+[data-memory-item] {
+  min-height: 96px;
+  border-color: #6f5b45;
+  color: #f3ead5;
+  background: linear-gradient(135deg,rgba(255,248,224,.09),rgba(255,255,255,.025)),rgba(15,27,39,.78);
+  box-shadow: 5px 7px rgba(2,8,15,.26), inset 0 1px rgba(255,255,255,.05);
+  backdrop-filter: blur(5px);
+}
+
+[data-memory-item]>i {
+  border-radius: 3px 12px 3px 3px;
+  background: rgba(9,21,34,.58);
+  box-shadow: 3px 4px rgba(2,8,15,.2);
+}
+
+[data-memory-item]:is([aria-pressed=true],.is-selected,.is-carried) {
+  color: #272115;
+  background: #e9cc86;
+  box-shadow: 0 0 0 3px rgba(240,200,117,.18),0 9px rgba(2,8,15,.32);
+}
+
+.dungeon-run {
+  min-height: 650px;
+  padding: 28px 30px;
+  background: linear-gradient(180deg,rgba(6,15,26,.18),rgba(6,15,26,.56));
+}
+
+.dungeon-run::before,
+.dungeon-run::after {
+  opacity: .72;
+}
+
+.dungeon-mission {
+  border-color: rgba(239,201,125,.48);
+  background: rgba(11,25,39,.84);
+  box-shadow: 6px 7px rgba(2,8,15,.25);
+  backdrop-filter: blur(7px);
+}
+
+.dungeon-pack {
+  margin: 13px 2px 16px;
+  border: 2px solid #9f7645;
+  background: linear-gradient(90deg,rgba(255,255,255,.06),transparent),rgba(88,55,31,.88);
+  box-shadow: inset 0 0 0 5px rgba(37,18,10,.25),7px 9px rgba(2,8,15,.28);
+}
+
+.dungeon-gate,
+.dungeon-run .dungeon-gate {
+  width: 148px;
+  height: 183px;
+  border-color: rgba(147,199,174,.56);
+  background: rgba(5,15,25,.2);
+  box-shadow: 0 0 0 3px rgba(12,31,43,.62),inset 0 0 36px rgba(158,224,184,.16),0 0 50px rgba(119,201,161,.11);
+  backdrop-filter: blur(1px);
+}
+
+.dungeon-gate>i {
+  background: linear-gradient(90deg,transparent 48%,rgba(50,79,91,.9) 48% 52%,transparent 52%),repeating-linear-gradient(0deg,rgba(19,40,54,.88) 0 22px,rgba(43,70,80,.9) 23px 25px);
+}
+
+.dungeon-npc {
+  top: 52%;
+  right: -1%;
+  width: clamp(118px,13vw,154px);
+  height: clamp(190px,23vw,252px);
+  filter: drop-shadow(6px 9px 5px rgba(2,8,15,.45));
+}
+
+.dungeon-npc>img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.dungeon-npc>i {
+  display: none;
+}
+
+.dungeon-npc>i::before {
+  border: 3px solid #142537;
+  background: #b56d50;
+}
+
+#dungeonOutcome {
+  border-color: rgba(142,170,179,.46);
+  background: rgba(8,20,33,.82);
+  backdrop-filter: blur(7px);
+}
+
+/* Reality: keep the point-and-click mechanics, replace the flat vector room. */
+.reality-scene>svg.reality-backdrop {
+  display: none;
+}
+
+.reality-backdrop--painted {
+  display: block;
+  object-position: center;
+  filter: saturate(.94) contrast(1.05) brightness(.9);
+}
+
+.reality-scene::before {
+  position: absolute;
+  inset: -18% 0 0;
+  z-index: 3;
+  pointer-events: none;
+  background: repeating-linear-gradient(105deg,transparent 0 31px,rgba(207,235,239,.24) 32px 34px,transparent 35px 58px);
+  content: "";
+  opacity: .45;
+  transform: translateY(-8%);
+  animation: adventureRain 1.25s linear infinite;
+}
+
+.reality-scene::after {
+  z-index: 2;
+}
+
+.reality-cart,
+.reality-marshal,
+.reality-target-label,
+.reality-hotspot {
+  z-index: 8;
+}
+
+.reality-cart {
+  bottom: 5%;
+  width: clamp(180px,25vw,280px);
+  filter: drop-shadow(9px 13px 8px rgba(2,11,20,.44));
+}
+
+.reality-cart>img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.reality-cart>svg {
+  display: none;
+}
+
+.reality-marshal {
+  right: 1%;
+  bottom: 3%;
+  width: clamp(128px,16vw,190px);
+}
+
+.reality-marshal>img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.reality-marshal>svg {
+  display: none;
+}
+
+.reality-adventure:is([data-reality-state=deploying],[data-reality-state=correcting]) .reality-cart>img {
+  animation: adventureCartJostle .36s ease-in-out infinite alternate;
+}
+
+@keyframes adventureBoardPulse {
+  50% { opacity: .68; text-shadow: 0 0 9px rgba(238,130,121,.72); }
+}
+
+@keyframes adventureRain {
+  to { transform: translate(-42px,92px); }
+}
+
+@keyframes adventureCartJostle {
+  to { transform: translateY(-4px) rotate(.7deg); }
+}
+
+@media (max-width:760px) {
+  .baggage-scene,
+  .shadow-world,
+  .reality-scene {
+    min-height: 590px;
+  }
+
+  .adventure-plate--baggage {
+    object-position: 43% center;
+  }
+
+  .adventure-plate--shadow {
+    object-position: center;
+  }
+
+  .dungeon-board {
+    min-height: 1140px;
+  }
+
+  .adventure-plate--dungeon {
+    width: auto;
+    min-width: 1320px;
+    left: 50%;
+    transform: translateX(-52%) scale(1.025);
+  }
+
+  .dungeon-inventory {
+    background: rgba(7,18,31,.72);
+  }
+
+  .dungeon-run {
+    min-height: 570px;
+  }
+}
+
+@media (max-width:680px) {
+  .baggage-scene {
+    min-height: 590px;
+  }
+
+  .airport-board {
+    top: 18px;
+    left: 18px;
+    min-width: calc(100% - 36px);
+  }
+
+  #travelerSprite {
+    left: 12%;
+    bottom: 18%;
+  }
+
+  .service-desk {
+    right: 1%;
+    bottom: 27%;
+  }
+
+  .baggage-carousel {
+    right: -30%;
+    bottom: 4%;
+    left: 8%;
+  }
+
+  .apology-tickets {
+    right: 112px;
+    bottom: 43%;
+  }
+
+  .shadow-world {
+    min-height: 620px;
+  }
+
+  .shadow-game {
+    --zone: 148px;
+  }
+
+  [data-person-target] {
+    min-height: 115px;
+  }
+
+  [data-person-target] span {
+    max-width: 124px;
+    white-space: normal;
+  }
+
+  .reality-backdrop--painted {
+    width: auto;
+    min-width: 1040px;
+    left: 50%;
+    transform: translateX(-55%) scale(1.025);
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .adventure-plate,
+  .reality-backdrop--painted {
+    transform: scale(1.025) !important;
+    transition: none !important;
+  }
+
+  .reality-scene::before {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,1062 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pende.AI - Cycle 6, Week 3</title>
+    <meta
+      name="description"
+      content="A formatted editorial essay on cargo cults, AR hardware, aspiration, timing, and mutation."
+    />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23fff0f6'/%3E%3Cpath d='M7 17c4-8 14-8 18 0-2 5-6 8-9 8s-7-3-9-8z' fill='%23ffffff' stroke='%23d94f96' stroke-width='2'/%3E%3Ccircle cx='12' cy='16' r='1.5' fill='%2318202a'/%3E%3Ccircle cx='20' cy='16' r='1.5' fill='%2318202a'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      .meme-block { margin: 2rem auto; max-width: 420px; text-align: center; }
+      .meme-block img { width: 100%; border-radius: 6px; box-shadow: 0 4px 20px rgba(24,32,42,0.12); }
+      .meme-block .meme-credit { font-size: 0.7rem; color: var(--muted); margin-top: 0.35rem; }
+      .data-inline { margin: 2rem 0; overflow-x: auto; }
+      .data-inline table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+      .data-inline th { text-align: left; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 0.5rem 0.75rem; border-bottom: 2px solid var(--ink); }
+      .data-inline td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.4; }
+      .data-inline .money { font-weight: 600; color: var(--red); }
+      .data-inline .success { font-weight: 600; color: var(--green); }
+    </style>
+  </head>
+  <body>
+    <div class="storybook-cover" aria-label="Opening storybook cover">
+      <div class="storybook-cover__curtain storybook-cover__curtain--left"></div>
+      <div class="storybook-cover__curtain storybook-cover__curtain--right"></div>
+      <div class="storybook-cover__book">
+        <div class="storybook-cover__page storybook-cover__page--left">
+          <p class="storybook-cover__eyebrow">A moving data fable</p>
+          <h2>The Cargo Is Not the Ritual</h2>
+          <p>Open the book for pink-lit charts, founder folklore, and a few statistical trapdoors.</p>
+        </div>
+        <div class="storybook-cover__page storybook-cover__page--right" aria-hidden="true">
+          <span class="storybook-sparkle storybook-sparkle--one"></span>
+          <span class="storybook-sparkle storybook-sparkle--two"></span>
+          <span class="storybook-sparkle storybook-sparkle--three"></span>
+          <div class="storybook-cover__mini-chart">
+            <i style="--h: 42%"></i>
+            <i style="--h: 58%"></i>
+            <i style="--h: 74%"></i>
+            <i style="--h: 92%"></i>
+          </div>
+          <p>Charts that dance, but still show their math.</p>
+        </div>
+      </div>
+      <button class="storybook-open" type="button">Open the story</button>
+    </div>
+
+    <div class="progress" aria-hidden="true">
+      <div class="progress__bar"></div>
+    </div>
+
+    <div class="owl-guide" aria-label="Accessibility guide">
+      <button
+        class="owl-guide__bird"
+        id="owlGuideButton"
+        type="button"
+        aria-expanded="false"
+        aria-controls="owlGuidePanel"
+      >
+        <span class="owl-bird" aria-hidden="true">
+          <span class="owl-bird__wing owl-bird__wing--left"></span>
+          <span class="owl-bird__wing owl-bird__wing--right"></span>
+          <span class="owl-bird__body">
+            <span class="owl-bird__eye owl-bird__eye--left"></span>
+            <span class="owl-bird__eye owl-bird__eye--right"></span>
+            <span class="owl-bird__beak"></span>
+            <span class="owl-bird__foot owl-bird__foot--left"></span>
+            <span class="owl-bird__foot owl-bird__foot--right"></span>
+          </span>
+        </span>
+        <span class="sr-only">Open accessibility guide</span>
+      </button>
+
+      <section class="owl-guide__panel" id="owlGuidePanel" hidden>
+        <div class="owl-guide__head">
+          <p class="kicker">Snow guide</p>
+          <button type="button" id="owlGuideClose">Close</button>
+        </div>
+        <h2>Reading options</h2>
+        <p>
+          A small perch for accessibility choices: more spacious reading, or a
+          prewritten Japanese edition of the essay.
+        </p>
+        <div class="owl-guide__actions">
+          <button type="button" id="guideDyslexiaToggle" aria-pressed="false">
+            Dyslexia mode
+          </button>
+          <button
+            type="button"
+            id="japaneseToggle"
+            aria-expanded="false"
+            aria-controls="japaneseArticle"
+          >
+            Open Japanese version
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <aside class="translation-drawer" id="japaneseArticle" lang="ja" hidden tabindex="-1">
+      <div class="translation-drawer__inner">
+        <div class="translation-drawer__head">
+          <div>
+            <p class="kicker">日本語版</p>
+            <h2>貨物は儀式ではない</h2>
+          </div>
+          <button type="button" id="japaneseClose">Close</button>
+        </div>
+        <div class="translation-drawer__body">
+          <p>
+            これは、すごい技術がなぜ失敗するのか、なぜ「憧れ」が採用を変えるのか、
+            そして長く残る企業が昔の成功を再演するのではなく変異していく理由についての
+            戦略エッセイです。
+          </p>
+          <h3>儀式が見落とすもの</h3>
+          <p>
+            カーゴ・カルトの怖さは、人が愚かだから起きるのではありません。むしろ、
+            見えている形をとてもよく観察しているから起きます。滑走路、管制塔、
+            ヘッドセット、創業者の神話、プロダクト発表の熱気。すべては本物に似ている。
+            でも、貨物を運ぶ目に見えない制度、需要、供給網、欲望の回路が欠けている。
+          </p>
+          <p>
+            テックでも同じことが起きます。企業は成功企業のふるまいをまねます。大胆な価格、
+            大きなビジョン、開発者向けの語り、未来を先取りしたようなデバイス。しかし、
+            市場が欲しがっていたのは儀式ではなく、生活に入ってくる理由でした。
+          </p>
+          <h3>データ・ラボ</h3>
+          <p>
+            データが教えるのは、単純な「高いから失敗した」ではありません。Snap の
+            Spectacles は在庫評価損と株価下落の物語になり、HoloLens 2 は産業用途に
+            強みを見せながらも消費者の毎日には届きませんでした。一方、Meta のグラスは、
+            カメラや AI だけでなく、Ray-Ban という社会的な見え方をまとっていました。
+          </p>
+          <p>
+            ここで欠けていた変数が「憧れ」です。性能表では測りにくいけれど、人が外に
+            着けて出たいと思うかどうかを決める力です。AR グラスは顔に乗るものなので、
+            機能だけでは足りません。見られ方そのものがプロダクトの一部になります。
+          </p>
+          <h3>サイロの問題</h3>
+          <p>
+            Snap の論理は一貫していました。カメラ企業になる。世界をレンズ越しに見る。
+            その考えは間違っていない。ただし、消費者が買う理由は会社の戦略文書とは
+            違います。社内ではつながって見える物語も、外では「なぜ今それを着けるのか」
+            という問いに戻されます。
+          </p>
+          <p>
+            データサイエンスの比喩で言えば、モデルは観測できる特徴量を拾います。価格、
+            バッテリー、発売時期、ブランド、用途。しかし、残差が偏っているとき、
+            モデルはまだ構造を取り逃がしています。ここでの残差は、憧れ、恥ずかしさ、
+            社会的許可、そして日常の中での自然さです。
+          </p>
+          <h3>変異する会社</h3>
+          <p>
+            強い会社は、過去の成功を保存するだけではありません。変異します。富士フイルムが
+            フィルムから化粧品や医療へ移ったように、OpenAI が研究所から日常的な
+            インターフェースへと移ったように、組織は自分の本質を別の形に翻訳する必要がある。
+          </p>
+          <p>
+            重要なのは「同じ儀式を続けること」ではなく、「何が本当に貨物を運んでいたのか」を
+            見抜くことです。技術、物語、データ、ブランド、欲望。その組み合わせがそろったとき、
+            未来っぽいものは初めて未来としてではなく、今の生活として採用されます。
+          </p>
+          <h3>結論</h3>
+          <p>
+            Meta グラスが示したのは、AR の勝利というより、採用の条件が変わったということです。
+            顔に乗るコンピュータは、便利であるだけでは足りない。人がそれを身につけた自分を
+            好きになれる必要があります。儀式を再現するだけでは貨物は来ない。貨物を運ぶ
+            目に見えない仕組みを設計できたとき、プロダクトはやっと滑走路を離れます。
+          </p>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <header class="hero section-band">
+        <div class="hero__copy reveal">
+          <p class="kicker">Pende.AI / Cycle 6, Week 3</p>
+          <h1>The Cargo Is Not the Ritual</h1>
+          <p class="dek">
+            A strategy essay on why impressive technology fails, why aspiration changes adoption,
+            and how enduring companies mutate instead of reenacting old success.
+          </p>
+          <blockquote class="epigraph">
+            <span>"Depend on the rabbit's foot if you will, but remember it didn't work for the rabbit."</span>
+            <cite>R.E. Shay</cite>
+          </blockquote>
+        </div>
+
+        <figure class="hero__visual reveal" aria-label="Four verified signals from the article">
+          <div class="signal signal--price">
+            <span class="signal__label">Specs price</span>
+            <strong>$2,195</strong>
+          </div>
+          <div class="signal signal--drop">
+            <span class="signal__label">Reported Snap slide</span>
+            <strong>~10% + 8%</strong>
+          </div>
+          <div class="signal signal--charge">
+            <span class="signal__label">Spectacles charge</span>
+            <strong>~$40M</strong>
+          </div>
+          <div class="signal signal--date">
+            <span class="signal__label">HoloLens 2</span>
+            <strong>2024</strong>
+          </div>
+        </figure>
+      </header>
+
+      <nav class="story-nav" aria-label="Article sections">
+        <button class="replay-cover" type="button">Cover</button>
+        <a href="#ritual">The Ritual</a>
+        <a href="#data-lab">Data Lab</a>
+        <a href="#silo">The Silo</a>
+        <a href="#mutation">The Mutation</a>
+      </nav>
+
+      <section id="ritual" class="chapter">
+        <div class="chapter__marker reveal">
+          <span>I</span>
+          <p>The Ritual</p>
+        </div>
+
+        <article class="essay-grid">
+          <div class="prose">
+            <p>
+              On June 16, 2026, Snap CEO Evan Spiegel walked onstage at the Augmented World Expo
+              in Long Beach, California, and debuted a pair of augmented reality glasses called
+              Specs. Fully self-contained. See-through color display. Contextual AI. Hand and voice
+              control. Built-in camera, built-in speaker. Games, navigation, work, video: the works.
+            </p>
+
+            <p>
+              The price: $2,195. The weight: conspicuous. The look: somewhere between a welding
+              visor and a prop from a low-budget sci-fi film.
+            </p>
+
+            <div class="meme-block reveal">
+              <img src="meme_risitas.png" alt="El Risitas laughing — People when Spiegel created goofy looking AI glasses priced at 2K" loading="lazy">
+              <p class="meme-credit">"El Risitas" — Jesús Quintero interview with Juan Joya Borja, <em>Ratones Coloraos</em> (2007)</p>
+            </div>
+
+            <p>
+              Memes arrived before the press releases. Snap's shares fell after the announcement;
+              MarketWatch reported a nearly 10% drop Tuesday and another 8% Wednesday. By June 18th,
+              the two-day slide had reached roughly seventeen percent — erasing hundreds of millions
+              in market cap. Diehard AR enthusiasts, the people who <em>want</em> this future,
+              called them too expensive and too bulky to matter. Everyone else was less diplomatic.
+              The consensus: <em>nobody asked for this.</em>
+            </p>
+
+            <aside class="pull pull--wide reveal">
+              <p>Form over function. Ritual over rigor.</p>
+            </aside>
+
+            <p>
+              This isn't Snap's first attempt. A decade ago, the company launched Spectacles,
+              camera-equipped sunglasses that sold poorly and led to a roughly $40 million charge
+              for excess inventory and purchase commitments. The new bet is bulkier, vastly more
+              expensive, and less conventionally stylish than the original consumer Spectacles. If
+              the first attempt was a polite nudge from the market, Specs was the market screaming
+              through a megaphone.
+            </p>
+
+            <p>
+              Snap isn't alone. Google previewed Project Glass in 2012, opened Glass to the public
+              in 2014, halted the Explorer program in 2015, and ended sales of Glass Enterprise
+              Edition in 2023 after a long retreat. Microsoft built HoloLens, genuinely impressive
+              engineering that never crossed from enterprise and developer showcase into mainstream
+              consumer habit; Microsoft stopped producing HoloLens 2 in 2024. Even Apple launched
+              Vision Pro into narrower demand than the hype suggested, with reports later that year
+              saying production had been scaled back.
+            </p>
+          </div>
+
+          <aside class="rail">
+            <section class="data-card reveal" aria-labelledby="ar-readout-title">
+              <p class="eyebrow">Pre-attentive readout</p>
+              <h2 id="ar-readout-title">AR hardware keeps failing the wearability test</h2>
+              <div class="metric-row" style="--value: 92">
+                <span>Price shock</span>
+                <strong>$2,195</strong>
+              </div>
+              <div class="metric-row" style="--value: 76">
+                <span>Market recoil</span>
+                <strong>~10% + 8%</strong>
+              </div>
+              <div class="metric-row" style="--value: 38">
+                <span>Old inventory pain</span>
+                <strong>~$40M</strong>
+              </div>
+              <div class="metric-row" style="--value: 62">
+                <span>Category fatigue</span>
+                <strong>2012-2024</strong>
+              </div>
+            </section>
+          </aside>
+        </article>
+
+        <section class="data-lab reveal" id="data-lab" aria-labelledby="data-lab-title">
+          <div class="data-lab__intro">
+            <p class="eyebrow">Data lab</p>
+            <h2 id="data-lab-title">The pattern gets clearer when the numbers move.</h2>
+            <div>
+              <p>
+                Four draft figures translate the essay's argument into pre-attentive signals:
+                capital burn, timing gaps, projection errors, and weak-pattern clustering. Click
+                marks to pin notes, or let the charts perform themselves.
+              </p>
+              <div class="viz-actions" aria-label="Data lab playback controls">
+                <button id="playDataStory" type="button">Play Data Story</button>
+                <button id="replayChartMotion" type="button">Replay motion</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="viz-shell">
+            <div class="viz-tabs" role="tablist" aria-label="Data visualization selector">
+              <button class="is-active" type="button" role="tab" aria-selected="true" data-viz="burn">
+                Meta burn
+              </button>
+              <button type="button" role="tab" aria-selected="false" data-viz="timing">
+                Timing gap
+              </button>
+              <button type="button" role="tab" aria-selected="false" data-viz="gap">
+                Projection gap
+              </button>
+              <button type="button" role="tab" aria-selected="false" data-viz="cluster">
+                Cluster lab
+              </button>
+            </div>
+
+            <div class="viz-stage">
+              <figure class="viz-panel is-active" data-panel="burn">
+                <figcaption>
+                  <strong>Meta Reality Labs: annual losses and cumulative burn</strong>
+                  <span>Bars show annual operating loss. The line shows cumulative losses, reaching $83.5B in this draft series.</span>
+                </figcaption>
+                <div class="chart" id="burnChart" aria-label="Animated bar and line chart of Meta Reality Labs losses"></div>
+                <p class="chart-note">Source note from tracked visualization: Meta Platforms quarterly earnings reports, 2020-2025.</p>
+              </figure>
+
+              <figure class="viz-panel" data-panel="timing">
+                <figcaption>
+                  <strong>The same idea can be early, then inevitable.</strong>
+                  <span>Failed or premature products sit beside later winners to show the adoption gap.</span>
+                </figcaption>
+                <div class="chart" id="timingChart" aria-label="Interactive timing gap chart"></div>
+                <p class="chart-note">Source note from tracked visualization: public launch and shutdown dates.</p>
+              </figure>
+
+              <figure class="viz-panel" data-panel="gap">
+                <figcaption>
+                  <strong>The echo chamber gap</strong>
+                  <span>Leadership projections pull right. Market outcomes often land far left.</span>
+                </figcaption>
+                <div class="chart" id="gapChart" aria-label="Interactive dumbbell chart of projected versus actual outcomes"></div>
+                <p class="chart-note">Draft figure using public filings, press reports, and SEC disclosures. Treat as citation-pass required before final publication.</p>
+              </figure>
+
+              <figure class="viz-panel" data-panel="cluster">
+                <figcaption>
+                  <strong>The gut-feel cluster</strong>
+                  <span>A toy model of how venture pattern matching can look predictive while the residuals tell another story.</span>
+                </figcaption>
+                <div class="cluster-controls" aria-label="Cluster visualization controls">
+                  <button class="is-active" type="button" data-cluster-mode="clusters">Cluster view</button>
+                  <button type="button" data-cluster-mode="misses">Show model misses</button>
+                  <button type="button" data-cluster-mode="residuals">Residuals</button>
+                </div>
+                <p class="cluster-mode-note" id="clusterModeNote">
+                  <strong>Cluster view</strong>
+                  <span>The ovals show the story a pattern-matcher wants to tell: familiar-looking founders appear to sort into neat groups.</span>
+                </p>
+                <div class="chart chart--tall" id="clusterChart" aria-label="Interactive cluster and residual chart"></div>
+                <p class="chart-note">Illustrative model metaphor inspired by the tracked DBSCAN visualization. Not an empirical venture-outcome model.</p>
+              </figure>
+
+              <div class="viz-tooltip" id="vizTooltip" role="tooltip" aria-hidden="true"></div>
+              <div class="viz-pinboard" id="vizPinboard" aria-live="polite">
+                <span>Pinned note</span>
+                <p>Click a bar, point, or timeline segment to pin what it is saying.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <article class="essay-grid">
+          <div class="prose">
+            <p>
+              And beneath these headline failures runs a quieter, more revealing lineage. Many of
+              the ideas building these devices travel through the same small ecosystem: light-field
+              imaging, mixed-reality headsets, hand tracking, developer kits, and AR labs that keep
+              recombining the same technical bets. Lytro helped popularize consumer light-field
+              photography before shutting down in 2018; Leap Motion's Project North Star became an
+              influential open-source AR headset reference design. The talent and the ideas keep
+              circulating. The products keep failing. The pattern repeats.
+            </p>
+
+            <p>So why?</p>
+
+            <p>
+              The answer has a name. Richard Feynman used it in his 1974 Caltech commencement
+              address. Anthropologists coined it decades earlier. And it started on islands most
+              people have never heard of.
+            </p>
+
+            <p>
+              During World War II, island communities across Melanesia watched as Allied and
+              Japanese forces carved airstrips out of jungle and unloaded an almost supernatural
+              abundance of goods. From the perspective of people who had never seen an airplane,
+              the supplies appeared to descend from the sky as if summoned.
+            </p>
+
+            <p>The war ended. The troops left. The cargo stopped.</p>
+
+            <p>
+              Some communities began building replicas. Bamboo control towers. Coconut-shell
+              headsets. Dirt runways carved with hand tools. They marched in formation, mimicked
+              air traffic control, performed the entire liturgy of military logistics, every
+              visible ritual, hoping to summon the cargo back.
+            </p>
+          </div>
+
+          <aside class="rail">
+            <section class="sequence-card reveal" aria-labelledby="ritual-loop-title">
+              <p class="eyebrow">The repeated mistake</p>
+              <h2 id="ritual-loop-title">Visible rituals replace invisible mechanics</h2>
+              <ol class="loop">
+                <li><span>1</span>Copy the surface</li>
+                <li><span>2</span>Miss the mechanism</li>
+                <li><span>3</span>Raise on the story</li>
+                <li><span>4</span>Ship into silence</li>
+              </ol>
+            </section>
+          </aside>
+        </article>
+
+        <article class="essay-grid">
+          <div class="prose">
+            <p>
+              The most enduring movement took root on the island of Tanna, in present-day Vanuatu,
+              organized around a messianic figure called John Frum, likely derived from an American
+              serviceman who introduced himself as "John from America." Nearly eighty years later,
+              followers still gather each February 15th to march, pray, and wait for his return.
+            </p>
+
+            <p>
+              Anthropologists call these cargo cults. Feynman borrowed the term to describe
+              something he saw in science itself: the meticulous imitation of form without
+              comprehension of function. Copying the surface behaviors of a system without
+              understanding what actually produced its results. The concept has echoes everywhere,
+              in religious eschatology, in political theater, and, as it turns out, in the way
+              machine learning models themselves can overfit to patterns in training data, mistaking
+              correlation for causation with mathematical confidence and zero understanding.
+            </p>
+
+            <p>Replace the bamboo airstrips with keynote stages, and you have Silicon Valley.</p>
+
+            <p>
+              Steve Jobs commissioned a hundred identical black turtlenecks from Issey Miyake, and
+              a generation of founders followed, as if the garment contained some transferable
+              genius. Elizabeth Holmes adopted the same uniform at Theranos, the most literal cargo
+              cult cosplay in corporate history: the black turtleneck, the hushed baritone, the
+              minimalist stage presence, all performed with religious conviction while the
+              underlying technology didn't work. She is the extreme case, but the impulse is
+              everywhere. Open floor plans. Garage origin stories. "Move fast and break things"
+              without the legal infrastructure to survive the consequences. Startups pitching
+              themselves as "the Uber of laundry," borrowing the architecture of someone else's
+              success as if it were load-bearing.
+            </p>
+
+            <div class="meme-block reveal">
+              <img src="meme_clown.png" alt="Clown applying makeup meme — escalating startup cargo cult behaviors" loading="lazy">
+              <p class="meme-credit">"Clown Applying Makeup" — origin: Twitter/Tumblr (c. 2019), via Know Your Meme</p>
+            </div>
+
+            <p>
+              And here's what makes it insidious: it often works, at least through a few funding
+              rounds. A charismatic founder with a borrowed playbook can raise a seed round on
+              aesthetics alone, then a Series A on momentum, then a B on the sunk-cost fear of the
+              investors who funded A. In data science, this failure has a name: survivorship bias,
+              the systematic error of studying winners while ignoring the dead. Investors
+              pattern-match against the successes they can see, which makes the failures invisible
+              by definition. The playbook looks like a map because the people it didn't work for
+              aren't around to say otherwise.
+            </p>
+
+            <aside class="idea-block reveal">
+              <span>Core idea</span>
+              <p>
+                The cargo cult error is believing you can summon the Zeitgeist by performing its
+                rituals.
+              </p>
+            </aside>
+
+            <p>
+              Hegel called it the Zeitgeist, the Spirit of the Age. True innovators, he argued, are
+              rarely autonomous geniuses. They're vehicles for a historical momentum larger than any
+              individual. The iPhone didn't succeed because Steve Jobs had singular vision. It
+              succeeded because decades of converging infrastructure, mobile networks, touchscreen
+              manufacturing, app economics, and a culture addicted to portable media, created a
+              moment ready for exactly that product. Jobs was the vehicle. The Zeitgeist was the
+              engine.
+            </p>
+
+            <p>
+              The cargo cult error is the belief that you can summon the Zeitgeist by performing
+              its rituals. You can't. You can only recognize it, align with it, and, if you're
+              honest, admit when you've mistaken your own reflection for the spirit of the age.
+            </p>
+          </div>
+
+          <aside class="rail">
+            <section class="zeitgeist-card mechanism-card reveal" aria-labelledby="zeitgeist-title">
+              <p class="eyebrow">What the ritual misses</p>
+              <h2 id="zeitgeist-title">The ritual is visible. The mechanism is not.</h2>
+              <p class="mechanism-card__lede">
+                This card is the whole argument in miniature: the surface performance is easy to
+                copy, but the market only moves when the hidden system is ready.
+              </p>
+              <div class="mechanism-compare" aria-label="Ritual versus mechanism">
+                <div>
+                  <span>Visible ritual</span>
+                  <strong>Keynote, uniform, prototype, founder myth</strong>
+                  <small>What imitators copy.</small>
+                </div>
+                <b>not enough</b>
+                <div>
+                  <span>Invisible mechanism</span>
+                  <strong>Networks, manufacturing, app economics, culture</strong>
+                  <small>What actually creates adoption.</small>
+                </div>
+              </div>
+              <div class="engine-map" aria-label="Hidden adoption engine">
+                <span>Infrastructure ready</span>
+                <span>Behavior already changing</span>
+                <span>Aspiration attached</span>
+                <span>Price and form acceptable</span>
+                <strong>Then the moment moves</strong>
+              </div>
+            </section>
+          </aside>
+        </article>
+      </section>
+
+      <section id="silo" class="chapter chapter--warm">
+        <div class="chapter__marker reveal">
+          <span>II</span>
+          <p>The Silo</p>
+        </div>
+
+        <article class="essay-grid">
+          <div class="prose">
+            <p>
+              When a billionaire CEO walks onstage and is met with open mockery, it's natural to
+              ask: how did nobody in the building see this coming?
+            </p>
+
+            <div class="meme-block reveal">
+              <img src="meme_boardroom.png" alt="Boardroom meeting suggestion — thrown out window for suggesting asking consumers what they want" loading="lazy">
+              <p class="meme-credit">"Boardroom Meeting Suggestion" — original comic by Hejibits (2013)</p>
+            </div>
+
+            <p>The answer is structural, not personal.</p>
+
+            <p>
+              Spiegel became, at 24, the world's youngest self-made billionaire in 2015, before
+              Snap's 2017 IPO valued the company at roughly $24 billion. The valuation rested on an
+              insight that teenagers wanted ephemeral, visual communication, not permanent status
+              updates. That instinct was right, and spectacularly so. But that kind of early,
+              emphatic success creates a gravitational field that warps every feedback loop around
+              the founder.
+            </p>
+
+            <p>
+              It is hard to tell a CEO no. Harder to tell a successful CEO no. Functionally
+              impossible to tell a billionaire founder-CEO, one whose instincts were validated by a
+              $24 billion market, that his pet project is a mistake. Your mortgage is on the line.
+              Your equity is on the line. The path of least resistance is to nod and hope.
+            </p>
+
+            <p>
+              Not every CEO pet project fails, of course. Gmail started as a 20% project inside
+              Google. Lockheed's Skunk Works operated as a semi-rogue internal lab that produced
+              the SR-71 Blackbird. The difference is that those projects had structural independence
+              from the organizational incentives around them, deliberate insulation from the
+              yes-men. Specs appears to have had no such insulation. The snowball built quarter
+              after quarter until the opportunity cost of turning back exceeded anyone's
+              willingness to absorb it.
+            </p>
+          </div>
+
+          <aside class="rail">
+            <section class="flow-card reveal" aria-labelledby="silo-flow-title">
+              <p class="eyebrow">Founder silo loop</p>
+              <h2 id="silo-flow-title">How a bad launch survives internal reality</h2>
+              <div class="flow-step">Founder conviction</div>
+              <div class="flow-step">Internal silence</div>
+              <div class="flow-step">Sunk cost</div>
+              <div class="flow-step">Public launch</div>
+              <div class="flow-step flow-step--final">Market rejection</div>
+            </section>
+          </aside>
+        </article>
+
+        <article class="essay-grid">
+          <div class="prose">
+            <p>
+              For investors, this pattern recurs with mechanical regularity and looks different
+              depending on where you sit. If you're a GP deploying a fund, you might tolerate this
+              dynamic too long because the founder's track record is part of your own thesis. If
+              you're a venture partner doing cross-border deep tech deals, you're balancing genuine
+              love of transformative technology against the obligation to return capital to LPs
+              within a timeline that has nothing to do with when the technology matures. And if
+              you're a family office watching from the sidelines, reading the headlines, seeing the
+              valuations, wondering why your venture allocation keeps producing write-downs instead
+              of distributions, this pattern is the answer. The cargo cult runs on charisma and
+              sunk cost. The returns run on something else.
+            </p>
+
+            <p>
+              But these bets are not entirely unreasonable. The failures weren't always wrong about
+              the future. They were wrong about the timing.
+            </p>
+          </div>
+
+          <aside class="rail rail--full">
+            <section class="timeline reveal" aria-labelledby="timing-title">
+              <p class="eyebrow">Timing gap</p>
+              <h2 id="timing-title">The same idea can fail first and win later</h2>
+              <div class="timeline__row">
+                <span class="timeline__point timeline__point--fail">Webvan, 2001</span>
+                <span class="timeline__line"></span>
+                <span class="timeline__point timeline__point--win">Instacart, 2012+</span>
+                <p>Lower capital model, mobile behavior, and later pandemic demand.</p>
+              </div>
+              <div class="timeline__row">
+                <span class="timeline__point timeline__point--fail">Newton, 1993</span>
+                <span class="timeline__line"></span>
+                <span class="timeline__point timeline__point--win">iPhone, 2007</span>
+                <p>Touchscreens, broadband, apps, and portable media culture converged.</p>
+              </div>
+              <div class="timeline__row">
+                <span class="timeline__point timeline__point--fail">Glass, 2012-2015</span>
+                <span class="timeline__line"></span>
+                <span class="timeline__point timeline__point--win">Ray-Ban Meta, 2023+</span>
+                <p>Fashion first, features second. Identity carried the technology.</p>
+              </div>
+            </section>
+          </aside>
+        </article>
+
+        <article class="essay-grid">
+          <div class="prose">
+            <p>
+              HomeGrocer promised the perfect peach at your door in the late 1990s. Webvan poured
+              hundreds of millions into automated warehouses for grocery delivery and shut down in
+              2001 after burning through more than $800 million. The logistics were ambitious. The
+              consumer behavior didn't exist at that scale. Americans in 1999 wanted to squeeze
+              their own avocados.
+            </p>
+
+            <p>
+              Then COVID-19 hit, and overnight the entire developed world needed groceries
+              delivered. Instacart, DoorDash, and their cohort didn't invent grocery delivery. They
+              inherited a proven model and met a moment that was finally ready.
+            </p>
+
+            <p>
+              Instacart stuck because of a few specific, unglamorous decisions. It didn't build
+              warehouses. It used existing grocery stores as inventory, which meant lower capital
+              requirements, faster geographic expansion, and a model that could scale with demand
+              rather than ahead of it. When the moment arrived, Instacart was light enough to ride
+              it. Webvan, with its $800 million warehouse infrastructure, would have been too
+              heavy.
+            </p>
+
+            <p>
+              Robinhood tells a similar story with a crucial twist. Online stock trading existed
+              for decades, E*Trade, Scottrade, Ameritrade, and before them, Zecco and TradeKing,
+              platforms that offered low-cost or even free trading years before Robinhood launched.
+              So what made Robinhood different? Not just zero commissions. Not just mobile-first
+              design. Gamification. Robinhood made trading feel like play, the confetti animations,
+              the clean swipe interface, the dopamine loop of watching a portfolio tick up in real
+              time. It didn't just remove barriers to entry. It made the act of investing
+              emotionally rewarding in a way that no previous platform had attempted.
+            </p>
+
+            <div class="data-inline reveal">
+              <table>
+                <thead><tr><th>Year</th><th>Revenue</th><th>PFOF %</th><th>Context</th></tr></thead>
+                <tbody>
+                  <tr><td>2020</td><td>~$960M</td><td class="money">~75–80%</td><td>Retail surge; COVID stimulus</td></tr>
+                  <tr><td>2021</td><td>~$1.82B</td><td class="money">~75–80%</td><td>Peak meme stock era; GameStop</td></tr>
+                  <tr><td>2022</td><td>~$1.36B</td><td>Declining</td><td>Bear market; regulatory scrutiny</td></tr>
+                  <tr><td>2023</td><td>~$1.87B</td><td class="success">Shifting to interest</td><td>Post-PFOF pivot</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              The deeper disruption was structural. Robinhood sold its users' trade data to market
+              makers like Citadel Securities — which alone accounted for 22% of Robinhood's
+              transaction revenue. The SEC fined Robinhood $65 million in 2020 for misleading
+              customers about this practice, finding they'd lost $34.1 million in inferior trade
+              prices. Robinhood wasn't disrupting Wall Street. It was integrating itself
+              <em>into</em> Wall Street's infrastructure — a new kind of symbiont feeding retail
+              order flow data upstream to institutional players.
+            </p>
+
+            <aside class="pull reveal">
+              <p>The sale wasn't trading. The sale was identity.</p>
+            </aside>
+
+            <p>
+              This is the distinction that separates companies that ship products from companies
+              that change behavior. Herbert Simon, the Nobel laureate who studied how organizations
+              actually make decisions, drew a line between what he called satisficing, settling for
+              good enough, and aspiring, reaching toward an image of what you could become. The
+              products that change behavior don't satisfy existing needs. They create aspirational
+              ones. They show you a version of yourself you hadn't imagined yet, and then hand you
+              the tool to become it.
+            </p>
+          </div>
+
+          <aside class="rail">
+            <section class="equation reveal" aria-labelledby="aspiration-title">
+              <p class="eyebrow">Missing layer</p>
+              <h2 id="aspiration-title">Why Meta's glasses had a path Snap missed</h2>
+              <div class="equation__grid">
+                <div>
+                  <span>Technology</span>
+                  <strong>Useful</strong>
+                </div>
+                <b>+</b>
+                <div class="equation__hot">
+                  <span>Identity</span>
+                  <strong>Aspirational</strong>
+                </div>
+                <b>+</b>
+                <div>
+                  <span>Timing</span>
+                  <strong>Ready</strong>
+                </div>
+              </div>
+              <p class="equation__result">Adoption begins when technology looks like who customers want to become.</p>
+            </section>
+          </aside>
+        </article>
+
+        <article class="essay-grid">
+          <div class="prose">
+            <p>
+              Which brings us back to the glasses.
+            </p>
+
+            <p>
+              Meta's Ray-Ban partnership is the closest thing to a success story in this space,
+              and the reason is instructive. Meta didn't lead with AR. It partnered with a brand
+              that's been aspirational for seventy years and attached modest technology to a
+              product people already wanted to wear. The camera is subtle. The AI features are
+              handy without being intrusive. The glasses look like glasses. Style did more than
+              tech, and that's not a superficial observation. Adoption begins when technology looks
+              like who customers want to become. The path to augmented reality runs through
+              fashion, not through features.
+            </p>
+
+            <p>
+              For deep tech investors, this is uncomfortable. You fell in love with the science.
+              The science is real. But the customer doesn't care about your breakthrough in
+              waveguide optics. The customer cares about whether the thing on their face makes them
+              look cool or makes them look ridiculous. For philanthropists: the technologies that
+              change the world are rarely the most technically impressive. They're the ones that
+              find the seam between what's possible and what people are ready to accept. The Salk
+              polio vaccine didn't succeed because it was the most elegant immunological solution.
+              It succeeded because Salk did not patent it, and because the March of Dimes had spent
+              years making polio personal. Impact scales when the vehicle matches the moment.
+            </p>
+          </div>
+
+          <aside class="rail">
+            <section class="quote-stack reveal" aria-label="Three large idea statements">
+              <blockquote>Technology alone explains capability. Aspiration explains adoption.</blockquote>
+              <blockquote>Fashion was not the wrapper. It was the bridge.</blockquote>
+            </section>
+          </aside>
+        </article>
+      </section>
+
+      <section id="mutation" class="chapter">
+        <div class="chapter__marker reveal">
+          <span>III</span>
+          <p>The Mutation</p>
+        </div>
+
+        <article class="essay-grid">
+          <div class="prose">
+            <p>
+              Companies with revolutionary technology and no product-market fit face three fates.
+              They can die. They can wait. Or they can change.
+            </p>
+
+            <p>
+              Most die. They can't translate capability into something the market will voluntarily
+              adopt. For first-time founders, this is the essential lesson: the gap between a
+              working prototype and a product someone integrates into their life is vast, and it's
+              not a deficiency in your product. It's a structural feature of how markets adopt new
+              things. Your job isn't to build what the market should want. It's to build what the
+              market does want, right now, even if your grandest vision has to wait.
+            </p>
+
+            <p>
+              Some wait. OpenAI is the dramatic recent case. For years it invested in large
+              language models that much of the wider world considered, at best, a novelty. Its
+              structural advantage, starting as a nonprofit, initially insulated it from ordinary
+              shareholder pressure. Then ChatGPT launched on November 30, 2022, and the future
+              arrived all at once. The underlying research had been compounding for years. What
+              changed for the public was a simple chat interface that made AI legible to
+              non-technical users, meeting a world that had just spent three years living through
+              screens.
+            </p>
+
+            <p>
+              But waiting is precarious even for those who wait well. OpenAI's post-ChatGPT shift
+              from research lab to commercial platform now sits inside a fast-moving competitive
+              field, with Anthropic and other rivals courting developers, enterprises, and capital.
+              Even the most successful "waiters" can see the ground shift beneath them the moment
+              they stop mutating. Patience without evolution is just slow death.
+            </p>
+
+            <p>The rarest outcome is mutation.</p>
+          </div>
+
+          <aside class="rail">
+            <section class="fates reveal" aria-labelledby="fates-title">
+              <p class="eyebrow">Three fates</p>
+              <h2 id="fates-title">What happens when the market says no?</h2>
+              <div class="fate fate--die">
+                <strong>Die</strong>
+                <span>Capability never becomes behavior.</span>
+              </div>
+              <div class="fate fate--wait">
+                <strong>Wait</strong>
+                <span>The moment catches up before capital runs out.</span>
+              </div>
+              <div class="fate fate--mutate">
+                <strong>Mutate</strong>
+                <span>The company redeploys what it is actually good at.</span>
+              </div>
+            </section>
+          </aside>
+        </article>
+
+        <article class="essay-grid">
+          <div class="prose">
+            <p>
+              Fujifilm is the case study that should be taught everywhere and isn't. When demand
+              for photographic film collapsed, not gradually, but in a freefall, Kodak struggled to
+              pivot away from its legacy economics and filed for bankruptcy protection in 2012.
+              Fujifilm survived by asking a deceptively simple question:
+              <em>what are we actually good at?</em>
+            </p>
+
+            <p>
+              Not what do we sell. Not what is our brand. What are the underlying capabilities
+              we've built over decades?
+            </p>
+
+            <p>
+              The answer: chemistry. Material science. Precision coating. Molecular-level imaging.
+              Fujifilm redirected these capabilities into healthcare, cosmetics, bio CDMO, and
+              semiconductor materials. It didn't abandon its technology. It mutated. It shed the
+              dying skin of consumer film and grew a new body in industries that had nothing to do
+              with photography but everything to do with what Fujifilm actually knew how to do.
+            </p>
+
+            <div class="data-inline reveal">
+              <table>
+                <thead><tr><th>Company</th><th>Origin</th><th>Mutation</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Fujifilm</strong></td><td>Film (1934)</td><td>Chemistry → healthcare, cosmetics, semiconductors</td><td class="success">Healthcare = primary revenue</td></tr>
+                  <tr><td><strong>Kodak</strong></td><td>Film (1888)</td><td><em>Refused to mutate</em></td><td class="money">Bankrupt 2012</td></tr>
+                  <tr><td><strong>Nintendo</strong></td><td>Hanafuda cards (1889)</td><td>Cards → taxis → love hotels → toys → video games</td><td class="success">Global powerhouse</td></tr>
+                  <tr><td><strong>Toshiba</strong></td><td>Karakuri dolls (1875)</td><td>Automata → telegraph → electrical → conglomerate</td><td class="success">150 years</td></tr>
+                  <tr><td><strong>Suzuki</strong></td><td>Looms (1909)</td><td>Looms → bicycles → automobiles</td><td class="success">Global automaker</td></tr>
+                  <tr><td><strong>Yamaha</strong></td><td>Organ repair (1887)</td><td>Instruments → propellers → motorcycles</td><td class="success">Two global companies</td></tr>
+                  <tr><td><strong>Olympus</strong></td><td>Microscopes (1919)</td><td>Microscopes → endoscopes → sold cameras</td><td class="success">Pure medical tech</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              Nintendo's story is the wildest. Founded in 1889 to make <em>hanafuda</em> playing
+              cards, it spent the mid-twentieth century trying everything: taxi services, instant
+              rice, and — yes — love hotels. When those failed, it didn't die. It kept mutating
+              until it found electronic toys, then video games, then an empire. The underlying
+              capability was never cards or hotels. It was <em>creating entertainment that
+              surprises</em> — a core competence abstract enough to survive every pivot.
+            </p>
+          </div>
+
+          <aside class="rail rail--full">
+            <section class="mutation-map reveal" aria-labelledby="mutation-map-title">
+              <p class="eyebrow">Capability mutation</p>
+              <h2 id="mutation-map-title">Fujifilm did not preserve the product. It preserved the capability.</h2>
+              <div class="mutation-map__grid">
+                <div>
+                  <span class="node node--past">Photographic film</span>
+                  <small>Original market</small>
+                </div>
+                <div class="capability-cluster">
+                  <span>Chemistry</span>
+                  <span>Material science</span>
+                  <span>Precision coating</span>
+                  <span>Molecular imaging</span>
+                </div>
+                <div>
+                  <span class="node node--future">Healthcare + materials</span>
+                  <small>New body</small>
+                </div>
+              </div>
+            </section>
+          </aside>
+        </article>
+
+        <article class="essay-grid">
+          <div class="prose">
+            <p>
+              Hegel would call this the synthesis, something new, born from the friction between
+              ambition and reality. Mutation is what happens when a company is honest enough to let
+              go of what it thought it was and brave enough to discover what it could become.
+            </p>
+
+            <p>
+              For exit founders chasing a second act, this is the hardest lesson. The instinct is
+              to run the same play, same sector, same model, same pattern. But the first time
+              worked because of a specific, unrepeatable confluence of conditions. Running it back
+              is the founder's version of the cargo cult. The founders who build enduring second
+              companies interrogate their own success ruthlessly enough to separate the transferable
+              skills from the situational luck, and have the honesty to admit the ratio might not
+              flatter them.
+            </p>
+
+            <p>
+              For investors, the mutation framework offers a better lens than "does this technology
+              work?" The question is whether the team has the flexibility to mutate when the market
+              says their current form isn't viable. That's not a technical diligence question. It's
+              a leadership one. Can this founder let go of the vision without losing the conviction?
+              Can this board say "the product is excellent and the market doesn't want it" without
+              someone treating it as a personal attack?
+            </p>
+
+            <p>
+              For family offices and philanthropic allocators playing a longer game, mutation may
+              be the most valuable lens of all. The technologies that generate durable, compounding
+              value are rarely the ones that arrive fully formed. They're the ones that survive long
+              enough to find their true application, often two or three pivots from where they
+              started. Patient capital that understands mutation isn't just more virtuous than
+              impatient capital. Over long enough time horizons, it's more profitable.
+            </p>
+
+            <aside class="idea-block idea-block--dark reveal">
+              <span>Final test</span>
+              <p>
+                What is the cargo, actually? Not the turtleneck, the garage, or the keynote stage.
+                The mechanism that creates value for someone who has no reason to care.
+              </p>
+            </aside>
+
+            <p>
+              On the island of Tanna, the followers of John Frum still gather each February. They
+              march. They wait. They keep faith that the cargo will return if the rituals are
+              performed correctly.
+            </p>
+
+            <p>
+              The technology industry has better data, more sophisticated models, and more capital
+              than any industry in human history. And still, it builds bamboo airstrips. Still, it
+              mistakes the copy for the thing itself.
+            </p>
+
+            <p>
+              The companies worth building, worth funding, worth believing in are the ones that
+              stop performing the rituals and start asking the harder question: what is the cargo,
+              actually? Not the turtleneck or the garage or the keynote stage. The underlying
+              mechanism that creates value for someone who has never heard of your company and has
+              no reason to care.
+            </p>
+
+            <p>Find that, and you don't need the rabbit's foot.</p>
+          </div>
+
+          <aside class="rail">
+            <section class="decision-card reveal" aria-labelledby="decision-title">
+              <p class="eyebrow">Investor diligence</p>
+              <h2 id="decision-title">Ask this before funding the next beautiful prototype</h2>
+              <ul>
+                <li>What behavior must change?</li>
+                <li>What aspiration does the product attach to?</li>
+                <li>What timing signal says the market is ready?</li>
+                <li>What can the team mutate without losing conviction?</li>
+              </ul>
+            </section>
+          </aside>
+        </article>
+      </section>
+
+      <footer class="sources section-band">
+        <div class="source-viz" aria-label="Source credibility visualization">
+          <div class="source-viz__copy">
+            <p class="kicker">Credibility meter</p>
+            <h2>What is sourced, what is illustrative</h2>
+            <p>
+              Links support the hard claims. Motion and cluster metaphors are labelled editorial
+              graphics, so new hard-number claims still get a citation pass.
+            </p>
+          </div>
+          <div class="source-viz__meter" aria-hidden="true">
+            <div class="source-viz__count">
+              <div class="source-viz__ring"><strong>14</strong></div>
+              <span>linked sources</span>
+            </div>
+            <div class="source-bars">
+              <span style="--value: 100"><b>Hard facts linked</b></span>
+              <span style="--value: 85"><b>Context links</b></span>
+              <span style="--value: 92"><b>Illustrative charts flagged</b></span>
+            </div>
+          </div>
+        </div>
+        <ul class="source-list" aria-label="Bibliography links">
+          <li><span>Hard fact</span><a href="https://www.axios.com/2026/06/16/snaps-ar-glasses-specs">Axios — Snap's AR Glasses SPECS (June 2026)</a></li>
+          <li><span>Hard fact</span><a href="https://www.marketwatch.com/story/snap-breaks-from-the-pack-with-heavy-2-195-smart-glasses-wall-street-is-panning-the-move-99e77ae6">MarketWatch — Snap stock drop post-SPECS</a></li>
+          <li><span>Hard fact</span><a href="https://www.vanityfair.com/news/2017/11/evan-spiegel-announces-snapchat-redesign-amid-brutal-earnings-report">Vanity Fair — Spiegel / Snapchat earnings</a></li>
+          <li><span>Hard fact</span><a href="https://www.theverge.com/2024/10/1/24259369/microsoft-hololens-2-discontinuation-support">The Verge — HoloLens 2 discontinuation (Oct 2024)</a></li>
+          <li><span>Hard fact</span><a href="https://www.sec.gov/news/press-release/2020-321">SEC — Robinhood $65M PFOF settlement (Dec 2020)</a></li>
+          <li><span>Hard fact</span><a href="https://investor.robinhood.com/">Robinhood Investor Relations — 10-K filings</a></li>
+          <li><span>Hard fact</span><a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&company=meta+platforms&CIK=&type=10-K">Meta Platforms — SEC 10-K filings (Reality Labs segment)</a></li>
+          <li><span>Context</span><a href="https://openai.com/index/chatgpt/">OpenAI — ChatGPT launch (Nov 2022)</a></li>
+          <li><span>Context</span><a href="https://holdings.fujifilm.com/en/about/history">Fujifilm — Corporate history</a></li>
+          <li><span>Context</span><a href="https://www.nintendo.co.jp/corporate/en/history/index.html">Nintendo — Company history (1889–present)</a></li>
+          <li><span>Context</span><a href="https://www.tdb.co.jp/english/">Teikoku Databank — Research on 100+ year companies</a></li>
+          <li><span>Context</span><a href="https://calteches.library.caltech.edu/51/2/CargoCult.htm">Richard Feynman — "Cargo Cult Science" (Caltech, 1974)</a></li>
+        </ul>
+
+        <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line);">
+          <p class="kicker" style="margin-bottom: 0.75rem;">Image credits</p>
+          <ul class="source-list" aria-label="Image credits">
+            <li><span>Meme</span>"El Risitas" — Jesús Quintero interview with Juan Joya Borja (1956–2021), <em>Ratones Coloraos</em>, Canal Sur TV (2007). Used under fair use for editorial commentary.</li>
+            <li><span>Meme</span>"Clown Applying Makeup" — origin: Twitter/Tumblr (c. 2019). Template documented at <a href="https://knowyourmeme.com/memes/clown-applying-makeup">Know Your Meme</a>. Used under fair use for editorial commentary.</li>
+            <li><span>Meme</span>"Boardroom Meeting Suggestion" — original comic by <a href="https://hejibits.com">Hejibits</a> (2013). Used under fair use for editorial commentary.</li>
+            <li><span>Viz</span>All data visualizations are original editorial graphics produced for this publication. The cluster visualization is illustrative and not an empirical venture-outcome model.</li>
+          </ul>
+        </div>
+      </footer>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# The @netlify/plugin-nextjs is auto-installed by Netlify for Next.js projects
+
+# Redirect /worldcup to the subdomain (backup for the Next.js route)
+[[redirects]]
+  from = "/worldcup"
+  to = "https://worldcup26.thesundaydata.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/worldcuptracker"
+  to = "https://worldcup26.thesundaydata.com/"
+  status = 301
+  force = true
