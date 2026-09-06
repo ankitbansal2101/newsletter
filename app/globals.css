@@ -3831,7 +3831,7 @@ html, body { background: var(--cream); }
   top: 0;
   z-index: 20;
   height: 3px;
-  margin: 0 -22px 18px;
+  margin: 0 -22px 12px;
   background: rgba(20, 35, 31, 0.08);
 }
 .living-progress i {
@@ -3841,15 +3841,16 @@ html, body { background: var(--cream); }
   transition: width 0.12s linear;
 }
 .living-chapters {
-  position: sticky;
-  top: 12px;
-  z-index: 18;
+  position: relative;
+  z-index: 2;
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding: 8px 0 14px;
-  margin-bottom: 8px;
-  background: linear-gradient(180deg, var(--living-paper), rgba(247, 241, 230, 0.88));
+  padding: 10px 12px;
+  margin: 0 0 22px;
+  border: 1px solid rgba(20, 35, 31, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.92);
   scrollbar-width: none;
 }
 .living-chapters::-webkit-scrollbar { display: none; }
@@ -3890,6 +3891,12 @@ html, body { background: var(--cream); }
   display: grid;
   gap: 18px;
   margin-bottom: 28px;
+  scroll-margin-top: 16px;
+}
+.living-chapter,
+.living-pulse,
+.living-observatory {
+  scroll-margin-top: 16px;
 }
 .living-hero-media {
   position: relative;
