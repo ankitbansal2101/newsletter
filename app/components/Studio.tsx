@@ -768,23 +768,33 @@ export default function Studio() {
       )}
 
       {viewMode === "preview" && previewIssue && (
-        <div className="quest-preview-desk">
-          {editorial && (
+        <div className="quest-preview-desk-host">
+          {editorial ? (
             <EditorialRail
               issue={previewIssue}
               editorial={editorial}
               focusedSectionId={focusedSectionId}
               onFocusSection={setFocusedSectionId}
-            />
+            >
+              <Template
+                key={templateId}
+                issue={previewIssue}
+                mode="studio"
+                focusedSectionId={focusedSectionId}
+              />
+            </EditorialRail>
+          ) : (
+            <div className="quest-preview-desk">
+              <div className="quest-preview-frame">
+                <Template
+                  key={templateId}
+                  issue={previewIssue}
+                  mode="studio"
+                  focusedSectionId={focusedSectionId}
+                />
+              </div>
+            </div>
           )}
-          <div className="quest-preview-frame">
-            <Template
-              key={templateId}
-              issue={previewIssue}
-              mode="studio"
-              focusedSectionId={focusedSectionId}
-            />
-          </div>
         </div>
       )}
 
