@@ -1,6 +1,7 @@
 "use client";
 
 import FlourishCard from "./FlourishCard";
+import InteractivePlayer from "./InteractivePlayers";
 import MemeCard from "./MemeCard";
 import type { Flourish } from "../lib/flourishes";
 import type { DraftSection, MemeAttachment, SectionBlock } from "../templates/types";
@@ -87,7 +88,7 @@ export default function SectionBlocks({
   let proseSeen = 0;
 
   return (
-    <div className={`section-blocks section-blocks-${variant}`}>
+    <div className={`section-blocks section-blocks-${variant} ${section.locked ? "is-section-locked" : ""}`}>
       {blocks.map((block, index) => {
         const key = `${section.id}-block-${index}-${block.type}`;
 
@@ -177,6 +178,14 @@ export default function SectionBlocks({
           return (
             <div className={`block-flourish ${variant === "living" ? "living-lab-card" : ""}`} key={key} data-reveal={variant === "living" ? true : undefined}>
               <FlourishCard flourish={flourish} mode={mode} />
+            </div>
+          );
+        }
+
+        if (block.type === "interactive") {
+          return (
+            <div className="block-interactive" key={key} data-reveal={variant === "living" ? true : undefined}>
+              <InteractivePlayer payload={block.payload} />
             </div>
           );
         }

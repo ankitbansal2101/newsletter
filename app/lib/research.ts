@@ -1,3 +1,5 @@
+import type { InteractionHint } from "./interaction";
+
 export type ResearchMaterial = {
   id: string;
   type: "article" | "quote" | "stat" | "image" | "meme";
@@ -7,4 +9,5 @@ export type ResearchMaterial = {
   imageUrl?: string;
   credit?: string;
   source?: string;
+  interactionHint?: InteractionHint;
 };

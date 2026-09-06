@@ -3,9 +3,11 @@
 import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
 
 import MemeCard from "../components/MemeCard";
+import NarrationControls from "../components/NarrationControls";
 import SectionBlocks from "../components/SectionBlocks";
 import { FlourishChart, formatChartValue } from "../components/charts";
 import type { Flourish } from "../lib/flourishes";
+import type { NarrationCue } from "../lib/narration";
 import type { NewsletterTemplateProps, PublishedIssue } from "./types";
 
 function useReveal(enabled: boolean, rootRef: RefObject<HTMLElement | null>, deps: unknown[]) {
@@ -152,13 +154,15 @@ export default function InteractiveNewsletter({
   mode,
   initialLanguage = "EN",
   initialSize = "desktop",
+  focusedSectionId = null,
 }: NewsletterTemplateProps) {
-  const [opened, setOpened] = useState(mode === "public");
+  const [opened, setOpened] = useState(true);
   const [language, setLanguage] = useState<"EN" | "JA">(initialLanguage);
   const [size, setSize] = useState<"desktop" | "mobile">(initialSize);
   const [progress, setProgress] = useState(0);
   const [jaOpen, setJaOpen] = useState(false);
   const [activeChapter, setActiveChapter] = useState(0);
+  const [narratingSectionId, setNarratingSectionId] = useState<string | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const articleRef = useRef<HTMLElement>(null);
 
@@ -202,6 +206,16 @@ export default function InteractiveNewsletter({
     stage.scrollTo({ top: target.offsetTop - 24, behavior: "smooth" });
   }
 
+  function handleNarrationCue(cue: NarrationCue | null) {
+    setNarratingSectionId(cue?.sectionId || null);
+    if (!cue?.sectionId) return;
+    setOpened(true);
+    const stage = stageRef.current;
+    const target = stage?.querySelector<HTMLElement>(`[data-section-id="${cue.sectionId}"]`);
+    if (!stage || !target) return;
+    stage.scrollTo({ top: Math.max(0, target.offsetTop - 28), behavior: "smooth" });
+  }
+
   return (
     <section className={`issue-preview-shell living-shell ${mode === "public" ? "newsletter-public" : ""}`}>
       <div className="preview-toolbar preview-toolbar-minimal">
@@ -215,6 +229,7 @@ export default function InteractiveNewsletter({
             <button className={language === "JA" ? "active" : ""} type="button" onClick={() => { setLanguage("JA"); setJaOpen(false); }}>JA</button>
           </div>
         </div>
+        <NarrationControls issue={issue} language={language} onCueChange={handleNarrationCue} />
         {mode === "studio" && (
           <button className="quiet-button pdf-download" type="button" onClick={() => { setOpened(true); window.setTimeout(() => window.print(), 80); }}>Download PDF</button>
         )}
@@ -294,9 +309,18 @@ export default function InteractiveNewsletter({
 
             {sections.map((section, index) => {
               const heroMemeId = index === 0 && hero?.id ? hero.id : undefined;
+              const focused = focusedSectionId === section.id;
               return (
-                <section className="living-chapter" data-chapter data-reveal key={`${language}-${section.id}`}>
-                  <p className="living-kicker">{section.eyebrow}</p>
+                <section
+                  className={`living-chapter ${section.locked ? "passage-locked" : ""} ${focused ? "is-section-focused" : ""} ${narratingSectionId === section.id ? "is-narrating" : ""}`}
+                  data-chapter
+                  data-section-id={section.id}
+                  id={`issue-section-${section.id}`}
+                  data-reveal
+                  key={`${language}-${section.id}`}
+                >
+                  {focused && <div className="section-focus-badge" aria-hidden="true">Editing this chapter</div>}
+                  <p className="living-kicker">{section.eyebrow}{section.locked ? " · locked" : ""}</p>
                   <h2>{section.title}</h2>
                   {section.subtitle && <p className="living-sub">{section.subtitle}</p>}
                   <SectionBlocks

@@ -3,12 +3,26 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { NEWSLETTER_TEMPLATES, getTemplate, type TemplateId } from "../templates/registry";
-import type { PublishedIssue } from "../templates/types";
+import type { EditorialHandlers, PublishedIssue, SectionBlock } from "../templates/types";
 import type { Flourish } from "../lib/flourishes";
 import { parseApiJson } from "../lib/http";
 import { isGenericTopicLabel, resolveStoryTopic } from "../lib/topic";
 import { materialsFromManuscript } from "../lib/manuscript";
 import type { ResearchMaterial } from "../lib/research";
+import { tagMaterialHint } from "../lib/interaction";
+import {
+  lockedSectionIds,
+  mergeLockedSections,
+  moveBlockInSections,
+  moveItem,
+  patchBlockInSections,
+  patchFlourishList,
+  patchSections,
+  toggleSectionLock,
+} from "../lib/draft";
+import { idlePipeline, markPhase, type PipelineState } from "../lib/pipeline";
+import PipelineStatus from "./PipelineStatus";
+import EditorialRail from "./EditorialRail";
 
 const FLOW_STEPS = [
   { id: 1 as const, label: "Brief", verb: "Set the mission" },
@@ -104,6 +118,9 @@ export default function Studio() {
   const [pendingPdf, setPendingPdf] = useState(false);
   /** When false, skip web scrape and convert the manuscript into a visual issue. */
   const [scrapeWeb, setScrapeWeb] = useState(true);
+  const [pipeline, setPipeline] = useState<PipelineState>(() => idlePipeline(true));
+  const [revisingKey, setRevisingKey] = useState<string | null>(null);
+  const [focusedSectionId, setFocusedSectionId] = useState<string | null>(null);
   const activeTemplate = getTemplate(templateId);
   const Template = activeTemplate.Component;
 
@@ -234,8 +251,12 @@ export default function Studio() {
     }
     setIsResearching(true);
     setError("");
-    setNotice(scrapeWeb ? "Reading your brief, then scouting the web…" : "Reading your manuscript — no web scrape…");
     setGenerated(null);
+    let nextPipeline = idlePipeline(scrapeWeb);
+    nextPipeline = markPhase(nextPipeline, "brief-read", "active", undefined, scrapeWeb ? "Reading your brief…" : "Reading your manuscript…");
+    nextPipeline = { ...nextPipeline, startedAt: Date.now(), phase: "brief-read" };
+    setPipeline(nextPipeline);
+    setNotice(nextPipeline.message);
     try {
       const form = new FormData();
       form.set("notes", documentText.trim());
@@ -268,6 +289,9 @@ export default function Studio() {
       }
       setExtractedDocument(document);
       const failed = (extracted.sources || []).filter((item) => !item.ok);
+      const briefDetail = `Read ${extracted.read || 0} of ${extracted.total || 0} sources`;
+      nextPipeline = markPhase(nextPipeline, "brief-read", "done", briefDetail, briefDetail);
+      setPipeline(nextPipeline);
       if (failed.length) {
         setNotice(`Read ${extracted.read || 0} of ${extracted.total || 0} sources. Some files/links could not be opened.`);
       }
@@ -278,7 +302,7 @@ export default function Studio() {
         topic: storyTopic,
         sourceUrl: effectiveLinks[0]?.url,
         sourceTitle,
-      });
+      }).map(tagMaterialHint);
       const attachedImages: ResearchMaterial[] = attachments
         .filter((item) => item.kind === "image" && item.preview)
         .map((item) => ({
@@ -295,6 +319,16 @@ export default function Studio() {
         ? ""
         : `Manuscript-only conversion of “${storyTopic}”. Visuals, memes, and charts are derived from the document — no live web scrape.`;
 
+      nextPipeline = markPhase(
+        nextPipeline,
+        "research",
+        "active",
+        undefined,
+        scrapeWeb ? "Scouting the live web for matching evidence…" : "Carving loot from the manuscript…",
+      );
+      setPipeline(nextPipeline);
+      setNotice(nextPipeline.message);
+
       if (scrapeWeb) {
         const response = await fetch("/api/research", {
           method: "POST",
@@ -308,7 +342,7 @@ export default function Studio() {
           error?: string;
         }>(response);
         if (response.ok && result.materials?.length) {
-          webMaterials = result.materials;
+          webMaterials = result.materials.map(tagMaterialHint);
           researchSummary = result.summary || "";
           if (result.topic && !isGenericTopicLabel(result.topic) && (topicAsLink || isGenericTopicLabel(topic) || !topic.trim())) {
             setTopic(result.topic);
@@ -316,7 +350,11 @@ export default function Studio() {
         } else {
           researchSummary = result.summary || "Web research was thin — using your manuscript as the primary source.";
         }
+        nextPipeline = markPhase(nextPipeline, "research", "done", `${webMaterials.length} web finds`, researchSummary || "Web scout finished.");
+      } else {
+        nextPipeline = markPhase(nextPipeline, "research", "done", "Manuscript only", "Skipped live web scrape.");
       }
+      setPipeline(nextPipeline);
 
       const merged = scrapeWeb
         ? [...manuscriptLoot, ...attachedImages, ...webMaterials]
@@ -347,14 +385,16 @@ export default function Studio() {
       });
       if (!scrapeWeb) setTemplateId("living");
       setStep(2);
-      setNotice(
-        scrapeWeb
-          ? `Grounded in your brief · ${merged.length} finds ready in loot`
-          : `Manuscript mode · ${merged.length} beats ready — forge a visual Living issue`,
-      );
+      const doneMessage = scrapeWeb
+        ? `Grounded in your brief · ${merged.length} finds ready in loot`
+        : `Manuscript mode · ${merged.length} beats ready — forge a visual Living issue`;
+      setPipeline({ ...nextPipeline, phase: "done", message: doneMessage });
+      setNotice(doneMessage);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Research failed.");
+      const message = err instanceof Error ? err.message : "Research failed.";
+      setError(message);
       setNotice("Scout run failed.");
+      setPipeline((current) => ({ ...current, phase: "error", message }));
     } finally {
       setIsResearching(false);
     }
@@ -381,8 +421,15 @@ export default function Studio() {
     }
     setIsGenerating(true);
     setError("");
-    setNotice("Forging the issue from your loot…");
+    let nextPipeline = idlePipeline(scrapeWeb);
+    nextPipeline = markPhase(nextPipeline, "brief-read", "done", "Using current brief");
+    nextPipeline = markPhase(nextPipeline, "research", "done", `${selectedMaterials.length} selected`);
+    nextPipeline = markPhase(nextPipeline, "generate", "active", undefined, "Forging the issue from your loot…");
+    nextPipeline = { ...nextPipeline, startedAt: Date.now(), phase: "generate" };
+    setPipeline(nextPipeline);
+    setNotice(nextPipeline.message);
     try {
+      const previous = generated?.issue;
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -405,20 +452,168 @@ export default function Studio() {
       if (!response.ok || !result.issue) {
         throw new Error(result.error || "Generation failed.");
       }
+      if (previous) {
+        result.issue.sectionsEn = mergeLockedSections(previous.sectionsEn, result.issue.sectionsEn);
+        result.issue.sectionsJa = mergeLockedSections(previous.sectionsJa, result.issue.sectionsJa);
+        const lockedIds = new Set(lockedSectionIds(previous.sectionsEn));
+        if (lockedIds.size) {
+          const lockedFlourishes = (previous.flourishes || []).filter((item) => lockedIds.has(item.sectionId));
+          const unlocked = (result.issue.flourishes || []).filter((item) => !lockedIds.has(item.sectionId));
+          result.issue.flourishes = [...lockedFlourishes, ...unlocked];
+        }
+      }
       setGenerated(result);
       setStep(3);
-      setNotice(
-        components.includes("memes")
-          ? `Issue forged with ${(result.issue.memes || []).filter((m) => m.format !== "image").length || (result.issue.memes || []).length} auto memes. Open the record.`
-          : "Issue forged. Open the record.",
-      );
+      const doneMessage = components.includes("memes")
+        ? `Issue forged with ${(result.issue.memes || []).filter((m) => m.format !== "image").length || (result.issue.memes || []).length} auto memes. Open the record.`
+        : "Issue forged. Open the record.";
+      setPipeline(markPhase({ ...nextPipeline, phase: "done", message: doneMessage }, "generate", "done", "Complete", doneMessage));
+      setNotice(doneMessage);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Generation failed.");
+      const message = err instanceof Error ? err.message : "Generation failed.";
+      setError(message);
       setNotice("Forge failed.");
+      setPipeline((current) => ({ ...current, phase: "error", message }));
     } finally {
       setIsGenerating(false);
     }
   }
+
+  function updateIssue(mutator: (issue: NonNullable<GeneratedPayload["issue"]>) => NonNullable<GeneratedPayload["issue"]>) {
+    setGenerated((current) => {
+      if (!current?.issue) return current;
+      return { ...current, issue: mutator(current.issue) };
+    });
+  }
+
+  const editorial: EditorialHandlers | undefined = generated?.issue
+    ? {
+      revisingKey,
+      onPatchSection: (sectionId, patch, language = "EN") => {
+        updateIssue((issue) => {
+          const key = language === "JA" ? "sectionsJa" : "sectionsEn";
+          return { ...issue, [key]: patchSections(issue[key], sectionId, patch) };
+        });
+      },
+      onPatchBlock: (sectionId, blockIndex, block, language = "EN") => {
+        updateIssue((issue) => {
+          const key = language === "JA" ? "sectionsJa" : "sectionsEn";
+          return { ...issue, [key]: patchBlockInSections(issue[key], sectionId, blockIndex, block) };
+        });
+        setNotice("Beat updated.");
+      },
+      onMoveBlock: (sectionId, from, to, language = "EN") => {
+        updateIssue((issue) => {
+          const key = language === "JA" ? "sectionsJa" : "sectionsEn";
+          return { ...issue, [key]: moveBlockInSections(issue[key], sectionId, from, to) };
+        });
+      },
+      onMoveSection: (from, to, language = "EN") => {
+        updateIssue((issue) => {
+          const key = language === "JA" ? "sectionsJa" : "sectionsEn";
+          return { ...issue, [key]: moveItem(issue[key], from, to) };
+        });
+      },
+      onToggleSectionLock: (sectionId, language = "EN") => {
+        updateIssue((issue) => {
+          const key = language === "JA" ? "sectionsJa" : "sectionsEn";
+          return { ...issue, [key]: toggleSectionLock(issue[key], sectionId) };
+        });
+        setNotice("Chapter lock updated.");
+      },
+      onPatchFlourish: (flourish) => {
+        updateIssue((issue) => ({
+          ...issue,
+          flourishes: patchFlourishList(issue.flourishes || [], flourish),
+        }));
+        setNotice("Visualization updated.");
+      },
+      onReviseBlock: async (sectionId, blockIndex, commentary, language = "EN") => {
+        const issue = generated?.issue;
+        if (!issue) return;
+        const sections = language === "JA" ? issue.sectionsJa : issue.sectionsEn;
+        const section = sections.find((item) => item.id === sectionId);
+        const block = section?.blocks?.[blockIndex];
+        if (!section || !block) return;
+        if (section.locked || block.locked) {
+          setError("Unlock this chapter before revising.");
+          return;
+        }
+        const key = `${sectionId}:${blockIndex}`;
+        setRevisingKey(key);
+        setError("");
+        setPipeline((current) => markPhase({ ...current, startedAt: Date.now(), phase: "revise" }, "revise", "active", undefined, "Revising selected beat…"));
+        try {
+          const response = await fetch("/api/revise", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              target: "block",
+              commentary,
+              topic: resolveStoryTopic({ userTopic: topic.trim(), document: sourceDocument }),
+              section: { id: section.id, title: section.title, eyebrow: section.eyebrow, locked: section.locked },
+              block,
+              blockIndex,
+              lockedSectionIds: lockedSectionIds(issue.sectionsEn),
+            }),
+          });
+          const result = await parseApiJson<{ block?: SectionBlock; note?: string; error?: string }>(response);
+          if (!response.ok || !result.block) throw new Error(result.error || "Revise failed.");
+          updateIssue((current) => {
+            const sectionKey = language === "JA" ? "sectionsJa" : "sectionsEn";
+            return { ...current, [sectionKey]: patchBlockInSections(current[sectionKey], sectionId, blockIndex, result.block as SectionBlock) };
+          });
+          setNotice(result.note || "Beat revised.");
+          setPipeline((current) => markPhase({ ...current, phase: "done", message: result.note || "Beat revised." }, "revise", "done"));
+        } catch (err) {
+          const message = err instanceof Error ? err.message : "Revise failed.";
+          setError(message);
+          setPipeline((current) => ({ ...current, phase: "error", message }));
+        } finally {
+          setRevisingKey(null);
+        }
+      },
+      onReviseFlourish: async (flourishId, commentary) => {
+        const issue = generated?.issue;
+        const flourish = issue?.flourishes?.find((item) => item.id === flourishId);
+        if (!issue || !flourish) return;
+        if (lockedSectionIds(issue.sectionsEn).includes(flourish.sectionId)) {
+          setError("Unlock the chapter before regenerating this visualization.");
+          return;
+        }
+        setRevisingKey(`flourish:${flourishId}`);
+        setError("");
+        setPipeline((current) => markPhase({ ...current, startedAt: Date.now(), phase: "revise" }, "revise", "active", undefined, "Reworking visualization…"));
+        try {
+          const response = await fetch("/api/revise", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              target: "flourish",
+              commentary,
+              topic: resolveStoryTopic({ userTopic: topic.trim(), document: sourceDocument }),
+              flourish,
+              lockedSectionIds: lockedSectionIds(issue.sectionsEn),
+            }),
+          });
+          const result = await parseApiJson<{ flourish?: Flourish; note?: string; error?: string }>(response);
+          if (!response.ok || !result.flourish) throw new Error(result.error || "Flourish revise failed.");
+          updateIssue((current) => ({
+            ...current,
+            flourishes: patchFlourishList(current.flourishes || [], result.flourish as Flourish),
+          }));
+          setNotice(result.note || "Visualization regenerated.");
+          setPipeline((current) => markPhase({ ...current, phase: "done", message: result.note || "Visualization regenerated." }, "revise", "done"));
+        } catch (err) {
+          const message = err instanceof Error ? err.message : "Flourish revise failed.";
+          setError(message);
+          setPipeline((current) => ({ ...current, phase: "error", message }));
+        } finally {
+          setRevisingKey(null);
+        }
+      },
+    }
+    : undefined;
 
   const previewIssue: PublishedIssue | null = generated?.issue
     ? {
@@ -568,10 +763,28 @@ export default function Studio() {
         <div className="quest-ticker" role="status" onClick={() => setNotice("")}>{notice}</div>
       )}
       {viewMode !== "preview" && error && <div className="quest-alert" role="alert">{error}</div>}
+      {viewMode !== "preview" && (
+        <PipelineStatus pipeline={pipeline} busy={isResearching || isGenerating || Boolean(revisingKey)} />
+      )}
 
       {viewMode === "preview" && previewIssue && (
-        <div className="quest-preview-frame">
-          <Template key={templateId} issue={previewIssue} mode="studio" />
+        <div className="quest-preview-desk">
+          {editorial && (
+            <EditorialRail
+              issue={previewIssue}
+              editorial={editorial}
+              focusedSectionId={focusedSectionId}
+              onFocusSection={setFocusedSectionId}
+            />
+          )}
+          <div className="quest-preview-frame">
+            <Template
+              key={templateId}
+              issue={previewIssue}
+              mode="studio"
+              focusedSectionId={focusedSectionId}
+            />
+          </div>
         </div>
       )}
 
@@ -686,7 +899,7 @@ export default function Studio() {
                       role="radio"
                       aria-checked={scrapeWeb}
                       className={`research-mode-option ${scrapeWeb ? "chosen" : ""}`}
-                      onClick={() => setScrapeWeb(true)}
+                      onClick={() => { setScrapeWeb(true); setPipeline(idlePipeline(true)); }}
                     >
                       <em>Recommended</em>
                       <strong>Scrape the web</strong>
@@ -703,7 +916,7 @@ export default function Studio() {
                       role="radio"
                       aria-checked={!scrapeWeb}
                       className={`research-mode-option ${!scrapeWeb ? "chosen" : ""}`}
-                      onClick={() => setScrapeWeb(false)}
+                      onClick={() => { setScrapeWeb(false); setPipeline(idlePipeline(false)); }}
                     >
                       <em>Offline convert</em>
                       <strong>Manuscript only</strong>
@@ -844,6 +1057,7 @@ export default function Studio() {
                     >
                       <div className="loot-card-top">
                         <em>{material.type}</em>
+                        {material.interactionHint && <em className="loot-hint">{material.interactionHint}</em>}
                         <b className="loot-check">{on ? "IN" : "+"}</b>
                       </div>
                       {material.imageUrl && <img src={material.imageUrl} alt={material.title} />}

@@ -13,6 +13,10 @@
     "app/api/brief-read/route.ts": {
       "maxDuration": 60,
       "memory": 1024
+    },
+    "app/api/revise/route.ts": {
+      "maxDuration": 60,
+      "memory": 1024
     }
   }
 }

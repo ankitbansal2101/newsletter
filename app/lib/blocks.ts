@@ -1,4 +1,5 @@
 import type { Flourish } from "./flourishes";
+import { buildInteractiveFromFlourish, detectInteractionHint } from "./interaction";
 import type { DraftSection, MemeAttachment, SectionBlock } from "../templates/types";
 
 const LOCAL_MEME_BASES = [
@@ -88,6 +89,19 @@ export function normalizeSectionBlocks(raw: unknown): SectionBlock[] {
         points: Array.isArray(block.points)
           ? block.points.map((point) => String(point).trim()).filter(Boolean).slice(0, 6)
           : undefined,
+      });
+      continue;
+    }
+    if (type === "interactive") {
+      const payload = block.payload;
+      if (!payload || typeof payload !== "object") continue;
+      const kind = String((payload as { kind?: unknown }).kind || "");
+      if (!["timeline", "network", "conditional", "garden"].includes(kind)) continue;
+      blocks.push({
+        type: "interactive",
+        id: String(block.id || `interactive-${blocks.length + 1}`),
+        payload: payload as import("../templates/types").InteractivePayload,
+        locked: block.locked === true,
       });
     }
   }
@@ -229,10 +243,36 @@ export function attachBlocksToSections(args: {
       sectionIndex: index,
       totalSections: sections.length,
     });
+
+    const interactiveBlocks: Extract<SectionBlock, { type: "interactive" }>[] = [];
+    const usedHints = new Set<string>();
+    for (const flourish of flourishes.filter((item) => item.sectionId === section.id)) {
+      const text = [flourish.title, flourish.body, flourish.caption, flourish.signalLabel].filter(Boolean).join("\n");
+      const hint = flourish.interactionHint || detectInteractionHint(text);
+      if (!hint || usedHints.has(hint)) continue;
+      const payload = buildInteractiveFromFlourish({ ...flourish, interactionHint: hint });
+      if (!payload) continue;
+      usedHints.add(hint);
+      interactiveBlocks.push({
+        type: "interactive",
+        id: `play-${flourish.id}`,
+        payload: hint === "garden" ? { ...payload, kind: "garden" } : payload,
+      });
+    }
+
+    const mergedBlocks = [...blocks];
+    for (const play of interactiveBlocks) {
+      const already = mergedBlocks.some((block) => block.type === "interactive" && block.id === play.id);
+      if (!already) {
+        const insertAt = Math.min(mergedBlocks.length, Math.max(2, Math.floor(mergedBlocks.length * 0.6)));
+        mergedBlocks.splice(insertAt, 0, play);
+      }
+    }
+
     return {
       ...section,
-      blocks,
-      paragraphs: paragraphsFromBlocks(blocks, section.paragraphs),
+      blocks: mergedBlocks,
+      paragraphs: paragraphsFromBlocks(mergedBlocks, section.paragraphs),
     };
   });
 }

@@ -1,6 +1,10 @@
 /** Shared flourish types — the structured research ingredients that decorate
  *  the human draft without ever rewriting it. */
 
+import type { InteractionHint } from "./interaction";
+
+export type { InteractionHint };
+
 export type FlourishSource = { title: string; url: string };
 
 export type FlourishType = "story" | "viz" | "stat-cluster" | "trend" | "quote" | "table";
@@ -31,6 +35,7 @@ export type Flourish = {
   sources: FlourishSource[];
   /** true when the model could not verify enough evidence — needs human resolution */
   unresolved?: boolean;
+  interactionHint?: InteractionHint;
 };
 
 export const flourishTypeLabels: Record<FlourishType, string> = {
@@ -105,6 +110,9 @@ function normalizeFlourish(f: Record<string, unknown>, index: number): Flourish 
     caption: typeof f.caption === "string" ? f.caption : undefined,
     sources,
     unresolved: f.unresolved === true,
+    interactionHint: ["timeline", "network", "conditional", "garden"].includes(String(f.interactionHint || ""))
+      ? (f.interactionHint as InteractionHint)
+      : undefined,
   };
 }
 

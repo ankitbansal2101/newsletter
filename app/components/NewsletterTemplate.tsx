@@ -2,14 +2,23 @@
 
 import { useState } from "react";
 
+import NarrationControls from "./NarrationControls";
 import SectionBlocks from "./SectionBlocks";
+import type { NarrationCue } from "../lib/narration";
 import type { NewsletterTemplateProps, PublishedIssue } from "../templates/types";
 
 export type { DraftSection, MemeAttachment, IssueCitation, PublishedIssue } from "../templates/types";
 
-export default function NewsletterTemplate({ issue, mode, initialLanguage = "EN", initialSize = "desktop" }: NewsletterTemplateProps) {
+export default function NewsletterTemplate({
+  issue,
+  mode,
+  initialLanguage = "EN",
+  initialSize = "desktop",
+  focusedSectionId = null,
+}: NewsletterTemplateProps) {
   const [language, setLanguage] = useState<"EN" | "JA">(initialLanguage);
   const [size, setSize] = useState<"desktop" | "mobile">(initialSize);
+  const [narratingSectionId, setNarratingSectionId] = useState<string | null>(null);
 
   const sections = language === "EN" ? issue.sectionsEn : issue.sectionsJa;
   const title = language === "EN" ? issue.title.en : issue.title.ja;
@@ -19,6 +28,13 @@ export default function NewsletterTemplate({ issue, mode, initialLanguage = "EN"
     ? "Draft preview"
     : new Date(issue.meta.publishedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" });
 
+  function handleNarrationCue(cue: NarrationCue | null) {
+    setNarratingSectionId(cue?.sectionId || null);
+    if (!cue?.sectionId) return;
+    const target = document.getElementById(`issue-section-${cue.sectionId}`);
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   return (
     <section className={`issue-preview-shell ${mode === "public" ? "newsletter-public" : ""}`}>
       <div className="preview-toolbar preview-toolbar-minimal">
@@ -27,7 +43,12 @@ export default function NewsletterTemplate({ issue, mode, initialLanguage = "EN"
             <button className={size === "desktop" ? "active" : ""} type="button" onClick={() => setSize("desktop")}>Desktop</button>
             <button className={size === "mobile" ? "active" : ""} type="button" onClick={() => setSize("mobile")}>Mobile</button>
           </div>
+          <div>
+            <button className={language === "EN" ? "active" : ""} type="button" onClick={() => setLanguage("EN")}>EN</button>
+            <button className={language === "JA" ? "active" : ""} type="button" onClick={() => setLanguage("JA")}>JA</button>
+          </div>
         </div>
+        <NarrationControls issue={issue} language={language} onCueChange={handleNarrationCue} />
         {mode === "studio" && (
           <button className="quiet-button pdf-download" type="button" onClick={() => window.print()}>Download PDF</button>
         )}
@@ -56,12 +77,20 @@ export default function NewsletterTemplate({ issue, mode, initialLanguage = "EN"
           </header>
 
           <div className="newsletter-body">
-            {sections.map((section) => (
-              <div className="preview-chapter-group" key={`${language}-${section.id}`}>
-                <section className="preview-chapter">
+            {sections.map((section) => {
+              const focused = focusedSectionId === section.id;
+              return (
+              <div
+                className={`preview-chapter-group ${focused ? "is-section-focused" : ""} ${narratingSectionId === section.id ? "is-narrating" : ""}`}
+                key={`${language}-${section.id}`}
+                data-section-id={section.id}
+                id={`issue-section-${section.id}`}
+              >
+                <section className={`preview-chapter ${section.locked ? "passage-locked" : ""}`}>
+                  {focused && <div className="section-focus-badge" aria-hidden="true">Editing this chapter</div>}
                   <p className="chapter-kicker">
                     {section.eyebrow}
-                    {mode === "studio" && ` · ${language === "EN" ? "Human original" : "Source translation"}`}
+                    {section.locked && " · locked"}
                   </p>
                   {section.id !== "opening" && <h2>{section.title}</h2>}
                   {section.subtitle && <p className="chapter-subtitle">{section.subtitle}</p>}
@@ -75,7 +104,8 @@ export default function NewsletterTemplate({ issue, mode, initialLanguage = "EN"
                   />
                 </section>
               </div>
-            ))}
+              );
+            })}
 
             {issue.research && (
               <details className="generated-research-preview research-appendix">
