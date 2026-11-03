@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
 
 import MemeCard from "../components/MemeCard";
 import NarrationControls from "../components/NarrationControls";
+import AskIssue from "../components/AskIssue";
+import IssueFeedback from "../components/IssueFeedback";
 import SectionBlocks from "../components/SectionBlocks";
 import { FlourishChart, formatChartValue } from "../components/charts";
 import type { Flourish } from "../lib/flourishes";
@@ -30,7 +32,7 @@ function useReveal(enabled: boolean, rootRef: RefObject<HTMLElement | null>, dep
   }, [enabled, rootRef, ...deps]);
 }
 
-function PulseLab({ flourishes }: { flourishes: Flourish[] }) {
+function PulseLab({ flourishes, onSelect }: { flourishes: Flourish[]; onSelect: () => void }) {
   const options = useMemo(() => {
     const stats = flourishes
       .filter((f) => f.type === "stat-cluster" && f.stats?.length)
@@ -58,7 +60,7 @@ function PulseLab({ flourishes }: { flourishes: Flourish[] }) {
               key={`${option.label}-${index}`}
               type="button"
               className={active ? "picked" : ""}
-              onClick={() => setPicked(index)}
+              onClick={() => { setPicked(index); onSelect(); }}
             >
               <b>{option.value === "quote" ? "❝" : option.value}</b>
               <span>{option.label}</span>
@@ -72,7 +74,7 @@ function PulseLab({ flourishes }: { flourishes: Flourish[] }) {
   );
 }
 
-function DataObservatory({ flourishes }: { flourishes: Flourish[] }) {
+function DataObservatory({ flourishes, onExplore }: { flourishes: Flourish[]; onExplore: () => void }) {
   const charts = flourishes.filter((item) => item.type === "viz" && item.chart);
   const stats = flourishes
     .filter((item) => item.type === "stat-cluster" && item.stats?.length)
@@ -121,7 +123,7 @@ function DataObservatory({ flourishes }: { flourishes: Flourish[] }) {
           <ol>
             {series.slice(0, 6).map((point, index) => (
               <li key={`${point.label}-${index}`}>
-                <button type="button" className={activeRank === index ? "on" : ""} onClick={() => setActiveRank(index)}>
+                <button type="button" className={activeRank === index ? "on" : ""} onClick={() => { setActiveRank(index); onExplore(); }}>
                   <em>{String(index + 1).padStart(2, "0")}</em>
                   <span>{point.label}</span>
                   <b>{formatChartValue(point.value)}</b>
@@ -162,6 +164,17 @@ export default function InteractiveNewsletter({
   const [progress, setProgress] = useState(0);
   const [jaOpen, setJaOpen] = useState(false);
   const [activeChapter, setActiveChapter] = useState(0);
+  const [visitedChapters, setVisitedChapters] = useState<string[]>([]);
+  const [pickedSignal, setPickedSignal] = useState(false);
+  const [exploredChart, setExploredChart] = useState(false);
+  const [bookmarkIds, setBookmarkIds] = useState<string[]>([]);
+  const [resumeSectionId, setResumeSectionId] = useState<string | null>(null);
+  const [resumeProgress, setResumeProgress] = useState(0);
+  const [resumeAvailable, setResumeAvailable] = useState(false);
+  const [readingLoaded, setReadingLoaded] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const [savedDrawerOpen, setSavedDrawerOpen] = useState(false);
   const [narratingSectionId, setNarratingSectionId] = useState<string | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const articleRef = useRef<HTMLElement>(null);
@@ -174,6 +187,58 @@ export default function InteractiveNewsletter({
   const dateLabel = mode === "studio"
     ? "Draft preview"
     : new Date(issue.meta.publishedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" });
+  const issueStorageKey = useMemo(
+    () => `sunday-data:reader:${issue.meta.cycle}-${issue.meta.week}:${encodeURIComponent(issue.title.en)}`,
+    [issue.meta.cycle, issue.meta.week, issue.title.en],
+  );
+  const chapterGoal = Math.min(3, sections.length);
+  const hasRankableChart = flourishes.some((item) => item.type === "viz" && item.chart && item.chart.series.length >= 2
+    && (item.chart.kind === "bar" || item.chart.kind === "column"));
+  const fieldQuests = [
+    { label: `Visit ${chapterGoal} chapter${chapterGoal === 1 ? "" : "s"}`, complete: visitedChapters.length >= chapterGoal, points: 20 },
+    { label: "Choose a field signal", complete: pickedSignal, points: 10 },
+    ...(hasRankableChart ? [{ label: "Explore the data", complete: exploredChart, points: 10 }] : []),
+  ];
+  const questPoints = fieldQuests.reduce((total, quest) => total + (quest.complete ? quest.points : 0), 0);
+  const questProgress = fieldQuests.length ? Math.round((fieldQuests.filter((quest) => quest.complete).length / fieldQuests.length) * 100) : 0;
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(issueStorageKey);
+      if (saved) {
+        const parsed = JSON.parse(saved) as { sectionId?: string; progress?: number; bookmarks?: unknown };
+        const bookmarks = Array.isArray(parsed.bookmarks)
+          ? parsed.bookmarks.filter((id): id is string => typeof id === "string")
+          : [];
+        setBookmarkIds(bookmarks);
+        const savedId = typeof parsed.sectionId === "string" ? parsed.sectionId : null;
+        const savedProgress = typeof parsed.progress === "number" ? parsed.progress : 0;
+        setResumeSectionId(savedId);
+        setResumeProgress(savedProgress);
+        setResumeAvailable(Boolean(savedId && savedProgress > 3));
+      }
+    } catch {
+      // Ignore malformed or unavailable local reading data.
+    }
+    setReadingLoaded(true);
+  }, [issueStorageKey]);
+
+  useEffect(() => {
+    if (!readingLoaded || !hasInteracted) return;
+    const timer = window.setTimeout(() => {
+      try {
+        localStorage.setItem(issueStorageKey, JSON.stringify({
+          sectionId: hasScrolled ? sections[activeChapter]?.id || resumeSectionId : resumeSectionId,
+          progress: hasScrolled ? progress : resumeProgress,
+          bookmarks: bookmarkIds,
+          updatedAt: new Date().toISOString(),
+        }));
+      } catch {
+        // Reading progress remains usable for this visit if storage is unavailable.
+      }
+    }, 350);
+    return () => window.clearTimeout(timer);
+  }, [activeChapter, bookmarkIds, hasInteracted, hasScrolled, issueStorageKey, progress, readingLoaded, resumeProgress, resumeSectionId, sections]);
 
   useReveal(opened, articleRef, [language, sections.length]);
   useEffect(() => {
@@ -181,6 +246,14 @@ export default function InteractiveNewsletter({
     window.addEventListener("beforeprint", openForPrint);
     return () => window.removeEventListener("beforeprint", openForPrint);
   }, []);
+  useEffect(() => {
+    if (!savedDrawerOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSavedDrawerOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [savedDrawerOpen]);
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage || !opened) return;
@@ -193,10 +266,22 @@ export default function InteractiveNewsletter({
         if (node.offsetTop - stage.scrollTop < stage.clientHeight * 0.35) current = index;
       });
       setActiveChapter(current);
+      const threshold = stage.getBoundingClientRect().top + stage.clientHeight * 0.72;
+      const reached = Array.from(chapters)
+        .filter((node) => node.getBoundingClientRect().top < threshold)
+        .map((node) => node.dataset.sectionId)
+        .filter((id): id is string => !!id);
+      if (reached.length) setVisitedChapters((previous) => [...new Set([...previous, ...reached])]);
     };
-    stage.addEventListener("scroll", onScroll, { passive: true });
+    const handleScroll = () => {
+      setHasInteracted(true);
+      setHasScrolled(true);
+      setResumeAvailable(false);
+      onScroll();
+    };
+    stage.addEventListener("scroll", handleScroll, { passive: true });
     onScroll();
-    return () => stage.removeEventListener("scroll", onScroll);
+    return () => stage.removeEventListener("scroll", handleScroll);
   }, [opened, language, sections.length]);
 
   function jumpTo(index: number) {
@@ -204,6 +289,22 @@ export default function InteractiveNewsletter({
     const target = stage?.querySelectorAll<HTMLElement>("[data-chapter]")[index];
     if (!stage || !target) return;
     stage.scrollTo({ top: target.offsetTop - 24, behavior: "smooth" });
+  }
+
+  function toggleBookmark(sectionId: string) {
+    setHasInteracted(true);
+    setBookmarkIds((current) => current.includes(sectionId)
+      ? current.filter((id) => id !== sectionId)
+      : [...current, sectionId]);
+  }
+
+  function continueReading() {
+    if (!resumeSectionId) return;
+    const index = sections.findIndex((section) => section.id === resumeSectionId);
+    if (index >= 0) jumpTo(index);
+    setHasInteracted(true);
+    setHasScrolled(true);
+    setResumeAvailable(false);
   }
 
   function handleNarrationCue(cue: NarrationCue | null) {
@@ -230,6 +331,15 @@ export default function InteractiveNewsletter({
           </div>
         </div>
         <NarrationControls issue={issue} language={language} onCueChange={handleNarrationCue} />
+        <button
+          className="saved-chapters-trigger"
+          type="button"
+          onClick={() => setSavedDrawerOpen(true)}
+          aria-expanded={savedDrawerOpen}
+          aria-label={language === "JA" ? `保存済み (${bookmarkIds.length})` : `Bookmarked (${bookmarkIds.length})`}
+        >
+          {language === "JA" ? `保存済み (${bookmarkIds.length})` : `Bookmarked (${bookmarkIds.length})`}
+        </button>
         {mode === "studio" && (
           <button className="quiet-button pdf-download" type="button" onClick={() => { setOpened(true); window.setTimeout(() => window.print(), 80); }}>Download PDF</button>
         )}
@@ -280,6 +390,25 @@ export default function InteractiveNewsletter({
               </button>
             </nav>
 
+            <section className="reader-quest" aria-label="Reader field quest">
+              <div className="reader-quest-heading">
+                <div><span>Field quest</span><strong>{questPoints} points</strong></div>
+                <p>{fieldQuests.every((quest) => quest.complete) ? "All signals collected. Nice reading." : "Explore the issue to collect reading badges."}</p>
+              </div>
+              <div className="reader-quest-track" role="progressbar" aria-label="Field quest progress" aria-valuenow={questProgress} aria-valuemin={0} aria-valuemax={100}>
+                <i style={{ width: `${questProgress}%` }} />
+              </div>
+              <ul>
+                {fieldQuests.map((quest) => (
+                  <li className={quest.complete ? "complete" : ""} key={quest.label}>
+                    <span aria-hidden="true">{quest.complete ? "✓" : "○"}</span>
+                    <span>{quest.label}</span>
+                    <b>+{quest.points}</b>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
             <header className="living-hero" data-reveal>
               {hero && (
                 <div className="living-hero-media living-hero-meme">
@@ -304,8 +433,8 @@ export default function InteractiveNewsletter({
               </div>
             </header>
 
-            <PulseLab flourishes={flourishes} />
-            <DataObservatory flourishes={flourishes} />
+            <PulseLab flourishes={flourishes} onSelect={() => setPickedSignal(true)} />
+            <DataObservatory flourishes={flourishes} onExplore={() => setExploredChart(true)} />
 
             {sections.map((section, index) => {
               const heroMemeId = index === 0 && hero?.id ? hero.id : undefined;
@@ -321,7 +450,18 @@ export default function InteractiveNewsletter({
                 >
                   {focused && <div className="section-focus-badge" aria-hidden="true">Editing this chapter</div>}
                   <p className="living-kicker">{section.eyebrow}{section.locked ? " · locked" : ""}</p>
-                  <h2>{section.title}</h2>
+                  <div className="living-chapter-heading">
+                    <h2>{section.title}</h2>
+                    <button
+                      type="button"
+                      className={`living-bookmark ${bookmarkIds.includes(section.id) ? "saved" : ""}`}
+                      aria-pressed={bookmarkIds.includes(section.id)}
+                      onClick={() => toggleBookmark(section.id)}
+                    >
+                      <span aria-hidden="true">{bookmarkIds.includes(section.id) ? "◆" : "◇"}</span>
+                      {bookmarkIds.includes(section.id) ? (language === "JA" ? "保存済み" : "Saved") : (language === "JA" ? "章を保存" : "Save chapter")}
+                    </button>
+                  </div>
                   {section.subtitle && <p className="living-sub">{section.subtitle}</p>}
                   <SectionBlocks
                     section={section}
@@ -362,9 +502,57 @@ export default function InteractiveNewsletter({
                   : "Published by Pendle.AI. Human-authored. Research-supported."}
               </p>
             </footer>
+            <IssueFeedback issue={issue} language={language} />
           </article>
         )}
       </div>
+
+      <AskIssue issue={issue} sections={sections} language={language} />
+
+      {savedDrawerOpen && (
+        <div className="saved-drawer-layer">
+          <button className="saved-drawer-backdrop" type="button" aria-label={language === "JA" ? "閉じる" : "Close bookmarks"} onClick={() => setSavedDrawerOpen(false)} />
+          <aside className="saved-chapters-drawer" role="dialog" aria-modal="true" aria-labelledby="saved-drawer-title">
+            <header>
+              <div>
+                <span>{language === "JA" ? "読書メモ" : "YOUR READING LIST"}</span>
+                <h2 id="saved-drawer-title">{language === "JA" ? "保存した章" : "Saved chapters"}</h2>
+              </div>
+              <button type="button" onClick={() => setSavedDrawerOpen(false)} aria-label={language === "JA" ? "閉じる" : "Close drawer"}>×</button>
+            </header>
+            {resumeAvailable && (
+              <button className="saved-drawer-resume" type="button" onClick={() => { setSavedDrawerOpen(false); continueReading(); }}>
+                <span>{language === "JA" ? "前回の続き" : "CONTINUE READING"}</span>
+                <strong>{language === "JA" ? "前回の位置から再開" : "Pick up where you left off"} <b>→</b></strong>
+              </button>
+            )}
+            {bookmarkIds.length ? (
+              <ul className="saved-drawer-list">
+                {bookmarkIds.map((id) => {
+                  const index = sections.findIndex((section) => section.id === id);
+                  const section = sections[index];
+                  if (!section) return null;
+                  return (
+                    <li key={id}>
+                      <button type="button" onClick={() => { setSavedDrawerOpen(false); jumpTo(index); }}>
+                        <span>◆</span><em>{section.eyebrow || `Chapter ${index + 1}`}</em><strong>{section.title}</strong>
+                      </button>
+                      <button className="saved-drawer-remove" type="button" onClick={() => toggleBookmark(id)} aria-label={`${language === "JA" ? "削除" : "Remove bookmark"}: ${section.title}`}>×</button>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <div className="saved-drawer-empty">
+                <span aria-hidden="true">◇</span>
+                <strong>{language === "JA" ? "保存した章はまだありません" : "No bookmarked chapters yet"}</strong>
+                <p>{language === "JA" ? "章の見出しにある保存ボタンで、あとで読み返したい章を追加できます。" : "Use Save chapter beside any chapter heading to keep it here for later."}</p>
+              </div>
+            )}
+            <p className="saved-drawer-note">{language === "JA" ? "ブックマークと読書位置はこのブラウザーに保存されます。" : "Bookmarks and reading progress are saved in this browser."}</p>
+          </aside>
+        </div>
+      )}
 
       {jaOpen && (
         <aside className="living-ja-drawer" role="dialog" aria-modal="true" aria-label="Japanese edition">

@@ -72,6 +72,84 @@ type BriefFile = {
   preview?: string;
 };
 
+type ReviewCheck = { label: string; detail: string; state: "ready" | "review" };
+
+function editorialReview(issue: PublishedIssue): ReviewCheck[] {
+  const allSections = [...issue.sectionsEn, ...issue.sectionsJa];
+  const prose = allSections.flatMap((section) => [
+    section.title,
+    section.subtitle || "",
+    ...section.paragraphs,
+    ...(section.blocks || []).flatMap((block) => block.type === "prose"
+      ? block.paragraphs
+      : block.type === "quote" || block.type === "callout"
+        ? [block.type === "quote" ? block.text : `${block.title} ${block.body}`]
+        : []),
+  ]).join(" ");
+  const citations = issue.research?.citations || [];
+  const hasNumbers = /(?:\b\d[\d,.]*\s?(?:%|percent|million|billion|thousand|年|人|件|億|万)?\b)/i.test(prose);
+  const imageBlocks = allSections.flatMap((section) => section.blocks || []).filter((block) => block.type === "image");
+  const missingImageDetails = imageBlocks.filter((block) => block.type === "image" && !block.title?.trim() && !block.caption?.trim()).length;
+  const missingMemeAlt = issue.memes.filter((meme) => meme.src && !meme.alt.trim()).length;
+
+  return [
+    {
+      label: "Story structure",
+      detail: issue.title.en.trim() && issue.dek.en.trim() && issue.sectionsEn.length
+        ? `${issue.sectionsEn.length} English chapters with a headline and summary.`
+        : "Add a headline, summary, and at least one English chapter.",
+      state: issue.title.en.trim() && issue.dek.en.trim() && issue.sectionsEn.length ? "ready" : "review",
+    },
+    {
+      label: "Japanese edition",
+      detail: issue.title.ja.trim() && issue.dek.ja.trim() && issue.sectionsJa.length
+        ? `${issue.sectionsJa.length} Japanese chapters are present.`
+        : "The Japanese edition is incomplete or missing chapters.",
+      state: issue.title.ja.trim() && issue.dek.ja.trim() && issue.sectionsJa.length ? "ready" : "review",
+    },
+    {
+      label: "Sources and numbers",
+      detail: citations.length
+        ? `${citations.length} source links attached. Check that each number and quotation matches its source.`
+        : hasNumbers
+          ? "Numbers appear in the copy, but no source links are attached. Verify them before publishing."
+          : "No source links are attached. Add citations or confirm the manuscript is the source of record.",
+      state: citations.length ? "ready" : "review",
+    },
+    {
+      label: "Image descriptions",
+      detail: missingImageDetails || missingMemeAlt
+        ? `${missingImageDetails + missingMemeAlt} image${missingImageDetails + missingMemeAlt === 1 ? "" : "s"} need a title, caption, or alt description.`
+        : "Newsletter images have descriptions for readers and assistive technology.",
+      state: missingImageDetails || missingMemeAlt ? "review" : "ready",
+    },
+  ];
+}
+
+function EditorialReviewPanel({ issue }: { issue: PublishedIssue }) {
+  const checks = editorialReview(issue);
+  const ready = checks.filter((check) => check.state === "ready").length;
+  return (
+    <section className="editorial-review" aria-label="Pre-publish review">
+      <div className="editorial-review-heading">
+        <div>
+          <span>Pre-publish review</span>
+          <strong>{ready} of {checks.length} checks ready</strong>
+        </div>
+        <p>Quick quality pass before this issue goes live</p>
+      </div>
+      <div className="editorial-review-grid">
+        {checks.map((check) => (
+          <article className={`editorial-review-item ${check.state}`} key={check.label}>
+            <span aria-hidden="true">{check.state === "ready" ? "✓" : "!"}</span>
+            <div><strong>{check.label}</strong><p>{check.detail}</p></div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function classifyLink(url: string): BriefLink["kind"] {
   return /docs\.google\.com|drive\.google\.com/i.test(url) ? "google-doc" : "website";
 }
@@ -769,6 +847,7 @@ export default function Studio() {
 
       {viewMode === "preview" && previewIssue && (
         <div className="quest-preview-desk-host">
+          <EditorialReviewPanel issue={previewIssue} />
           {editorial ? (
             <EditorialRail
               issue={previewIssue}

@@ -3,6 +3,8 @@
 import { useState } from "react";
 
 import NarrationControls from "./NarrationControls";
+import AskIssue from "./AskIssue";
+import IssueFeedback from "./IssueFeedback";
 import SectionBlocks from "./SectionBlocks";
 import type { NarrationCue } from "../lib/narration";
 import type { NewsletterTemplateProps, PublishedIssue } from "../templates/types";
@@ -134,9 +136,11 @@ export default function NewsletterTemplate({
                 ? "Draft preview. Human-authored wording remains canonical. Generated additions, evidence, and visuals require review."
                 : "Published by Pendle.AI. Human-authored. Research-supported."}</p>
             </footer>
+            <IssueFeedback issue={issue} language={language} />
           </div>
         </article>
       </div>
+      <AskIssue issue={issue} sections={sections} language={language} />
     </section>
   );
 }
